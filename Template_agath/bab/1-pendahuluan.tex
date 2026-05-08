@@ -1,0 +1,97 @@
+\chapter{PENDAHULUAN}
+\label{chap:pendahuluan}
+
+\section{Latar Belakang}
+\label{sec:latarbelakang}
+
+anjai mabar we we we memberikan hahah hihih Perkembangan teknologi robotika terus mengalami kemajuan pesat seiring meningkatnya 
+kebutuhan akan sistem otomasi yang mampu bekerja dalam lingkungan yang beragam dan 
+tidak terstruktur. Salah satu jenis robot yang menarik perhatian adalah robot 
+\emph{hexapod}. Dengan keungulan dalam hal stabilitas dan kemampuan mobilitas 
+dalamn medan yang sulit, robot berkaki enam memiliki potensi besar untuk digunakan 
+dalam berberbagai aplikasi, mulai dari eksplorasi lingkungan yang sulit dijangkau
+hingga misi pencarian dan penyelamatan (SAR). 
+
+Dalam beberapa tahun terakhir, Tim ABINARA-1 ITS telah mengembangkan platform robot 
+hexapod sebagai bagian dari riset dan pengembangan teknologi robotika di lingkungan 
+kampus. Meskipun platform tersebut telah menunjukkan performa yang menjanjikan dalam 
+hal pergerakan dasar dan kestabilan, terdapat ruang untuk peningkatan, terutama pada 
+aspek kemampuan menjangkau objek dan perangkat keras (hardware). Versi sebelumnya dari 
+platform ini telah dilengkapi dengan lengan robotik 3 derajat kebebasan (3-DOF), namun 
+masih memiliki keterbatasan dalam menjangkau dan memanipulasi objek secara presisi, 
+terutama dalam tugas-tugas yang memerlukan koordinasi gerak kompleks.
+
+Selain itu, dari sisi perangkat keras, desain sistem elektronik masih
+menggunakan dua papan sirkuit terpisah, yaitu satu PCB untuk mikrokontroler
+STM32 dan satu lagi untuk Jetson Nano, yang menyebabkan ukuran sistem menjadi
+lebih besar. Di sisi lain, penggunaan media penyimpanan berupa microSD card pada
+Jetson Nano berdampak pada waktu booting yang relatif lama, yang kurang
+mendukung kebutuhan aplikasi robotik yang bersifat responsif dan real-time.
+
+Salah satu cara untuk meningkatkan Kemampuan menjangkau dan memanipulasi objek
+robot adalah dengan menambahkan lengan robotik (\emph{robotic arm}) yang
+memiliki 6 derajat kebebasan (6-DOF). Dengan lengan tersebut, robot tidak hanya
+mampu bergerak dan menjaga keseimbangan, tetapi juga dapat melakukan manipulasi
+objek secara presisi, seperti mengambil, memindahkan, atau menyusun objek di
+sekitarnya. Integrasi antara sistem pergerakan hexapod dan lengan robotik
+memerlukan desain kontroller yang canggih, agar kedua sistem dapat bekerja
+secara terkoordinasi dan responsif terhadap kondisi lingkungan.
+
+Melalui tugas akhir ini, penulis berupaya merancang dan membangun sebuah
+kontroler terintegrasi untuk platform robot hexapod yang sebelumnya telah
+dikembangkan oleh tim Abinara-1 ITS, dengan penambahan lengan robotik 6-DOF
+sebagai upaya untuk meningkatkan jangkauan serta kemampuan manipulasi objek.
+Penelitian ini diharapkan dapat menjadi landasan awal dalam pengembangan sistem
+robotik berkaki yang lebih adaptif dan multifungsi, khususnya untuk aplikasi di
+lingkungan nyata yang dinamis dan tidak terstruktur.
+\par\vspace{1.2cm}
+
+\section{Rumusan Masalah}
+\label{sec:Rumusan Masalah}
+
+Berdasarkan hal yang telah dipaparkan pada latar belakang, terdapat beberapa permasalahan 
+yang mendasari penelitian ini, antara lain: 
+\begin{enumerate}
+  %revisi : ganti kata fleksibilitas karena parameternya tidak bisa dijelaskan pakai angka
+  \item Bagaimana merancang robot hexapod yang dilengkapi dengan
+  lengan robotik 6 derajat kebebasan (6-DOF) sebagai pengembangan dari versi
+  sebelumnya yang hanya memiliki 3 derajat kebebasan (3-DOF), untuk
+  meningkatkan jangkauan dan manipulasi objek ?
+  % : Langsung to the point (Bagaimana mengurangi ukuran PCB, waktu booting, dlll)
+  \item Bagaimana merancang sistem elektronik robot hexapod yang lebih kecil dan mampu mempercepat 
+  waktu booting dengan mengintegrasikan mikrokontroler STM32 dan Jetson Nano ke dalam satu PCB ?
+\end{enumerate}
+
+\section{Batasan Masalah}
+\label{sec:batasanmasalah}
+
+Batasan masalah dalam penelitian ini adalah sebagai berikut : 
+\begin {enumerate}
+  \item Penelitian ini tidak mencakup perancangan ulang mekanisme kaki hexapod
+  atau algoritma navigasi otonom secara menyeluruh, melainkan menggunakan sistem
+  gerak dasar yang telah ada.
+  \item Mikrokontroler yang digunakan hanya STM32F407 dengan prosesor yang digunakan adalah 
+  Jetson Nano.
+  \item Evaluasi performa robot hanya dilakukan dengan membandingkan versi robot hexapod dengan lengan
+  6-DOF yang dikembangkan dalam penelitian ini dengan versi robot hexapod dengan lengan 3-DOF sebelumnya
+  yang dimiliki oleh tim ABINARA-1 ITS.
+  \item Lingkup pengujian terbatas pada arena lomba Kontes Robot SAR Indonesia (KRSI) 2024.
+\end{enumerate}
+
+
+\section{Tujuan}
+\label{sec:Tujuan}
+
+Penelitian ini memiliki tujuan sebagai berikut : 
+\begin{enumerate}
+	\item Merancang dan mengimplementasikan sistem lengan robotik 6 derajat kebebasan (6-DOF) pada platform robot hexapod sebagai pengembangan dari versi sebelumnya yang hanya memiliki 3 derajat kebebasan (3-DOF) guna meningkatkan kemampuan manipulasi objek dan jangkauan gerak. 
+	\item Mengembangkan sistem elektronik terintegrasi yang lebih ringkas dan efisien dengan menggabungkan mikrokontroler STM32 dan Jetson Nano dalam satu PCB untuk mengurangi ukuran fisik sistem dan mempercepat waktu booting. 
+\end{enumerate}
+
+\section{Manfaat}
+Manfaat dari penelitian ini adalah :
+\begin{enumerate}
+    \item Melakukan peningkatan pada platform robot hexapod yang telah ada sebelumnya.
+    \item Memperoleh sistem kontroler yang lebih baik untuk robot hexapod.
+    \item Mendorong inovasi dalam desain dan pengembangan robot hexapod yang lebih kompleks.
+\end{enumerate}
