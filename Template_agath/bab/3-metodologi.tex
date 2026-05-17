@@ -5,8 +5,9 @@
 
 \section{Metode Pelaksanaan Penelitian Tugas Akhir}
 
-Metode pelaksanaan dalam penelitian tugas akhir ini disusun untuk menjawab rumusan masalah serta mencapai tujuan yang telah dijelaskan pada bab pendahuluan. Rincian metode pelaksanaan penelitian tugas
-akhir adalah sebagai berikut.
+Metode pelaksanaan dalam penelitian tugas akhir ini disusun untuk menjawab rumusan
+masalah serta mencapai tujuan yang telah dijelaskan pada bab pendahuluan. Rincian metode
+pelaksanaan penelitian tugas akhir adalah sebagai berikut.
 
 \subsection{Metode Desain Rangkaian Sistem Alat}
 % Contoh input gambar dengan format *.jpg
@@ -30,7 +31,13 @@ akhir adalah sebagai berikut.
 \end{figure}
 
 % Contoh penggunaan referensi dari gambar yang diinputkan
-Pada skema kontrol sistem yang ditunjukkan pada Gambar \ref{fig:skema_sistem}, sensor tekanan air berfungsi memberi umpan balik terhadap sistem. Sensor ini akan mengirimkan data tekanan aktual ke mikrokontroler, yang membandingkannya dengan nilai \emph{setpoint} yang telah ditentukan. Mikrokontroler akan menghasilkan sinyal PWM yang digunakan untuk mengatur kerja dari rangkaian kontrol PWM yang akan ditujukan kepada Rangkaian PWM AC \emph{choppers}. Tujuannya adalah agar dapat mengatur tegangan input ke motor sesuai kebutuhan.
+Pada skema kontrol sistem yang ditunjukkan pada Gambar \ref{fig:skema_sistem}, sensor
+tekanan air berfungsi memberi umpan balik terhadap sistem. Sensor ini akan mengirimkan
+data tekanan aktual ke mikrokontroler, yang membandingkannya dengan nilai
+\emph{setpoint} yang telah ditentukan. Mikrokontroler akan menghasilkan sinyal PWM yang
+digunakan untuk mengatur kerja dari rangkaian kontrol PWM yang akan ditujukan kepada
+Rangkaian PWM AC \emph{choppers}. Tujuannya adalah agar dapat mengatur tegangan input ke
+motor sesuai kebutuhan.
 
 \subsection{Metode Desain Rangkaian Kontrol PWM AC \emph{Chopper}}
 
@@ -43,11 +50,26 @@ Pada skema kontrol sistem yang ditunjukkan pada Gambar \ref{fig:skema_sistem}, s
   \label{fig:Kontrol NN}
 \end{figure}
 
-Pada desain rangkaian kontrol PWM AC \emph{chopper} ini, akan dilakukan pencacahan terhadap tegangan RMS dari keluaran inverter. Pengendali \emph{neural network} memungkinkan penyesuaian secara dinamis terhadap {duty ratio} sebagai respons terhadap fluktuasi tekanan pada pompa air, sehingga memastikan kontrol dan kinerja sistem yang optimal. Pada sistem kontrol ini akan diinputkan beberapa parameter ke dalam \emph{input layer}, Kemudian akan dihasilkan output berupa \emph{duty ratio}.
+Pada desain rangkaian kontrol PWM AC \emph{chopper} ini, akan dilakukan pencacahan
+terhadap tegangan RMS dari keluaran inverter. Pengendali \emph{neural network}
+memungkinkan penyesuaian secara dinamis terhadap {duty ratio} sebagai respons terhadap
+fluktuasi tekanan pada pompa air, sehingga memastikan kontrol dan kinerja sistem yang
+optimal. Pada sistem kontrol ini akan diinputkan beberapa parameter ke dalam \emph{input
+layer}, Kemudian akan dihasilkan output berupa \emph{duty ratio}.
 
 \subsection{Metode Pengambilan Data Sensor Tekanan Air}
 
-Pengambilan data dilakukan untuk memperoleh dataset yang digunakan dalam pelatihan model \emph{neural network}, dengan tujuan mengembangkan sistem kontrol tekanan berbasis kendali PWM pada inverter. Data yang dikumpulkan mencakup nilai tekanan air yang diukur menggunakan sensor tekanan, nilai \emph{duty cycle} PWM yang diberikan ke inverter, serta tegangan output yang diterima oleh motor pompa. Sensor tekanan terpasang pada pipa output pompa untuk memantau variasi tekanan air saat beban berubah (misalnya jumlah keran yang dibuka/tutup). Sinyal dari sensor dibaca menggunakan mikrokontroler STM32 yang juga digunakan untuk mengatur \emph{duty cycle} PWM ke driver inverter. Proses pengambilan data dilakukan dengan membuka dan menutup keran secara bertahap, lalu mencatat tekanan air yang terbaca, \emph{duty cycle} PWM yang digunakan, serta tegangan output yang dihasilkan. Setiap kondisi diuji untuk memastikan kestabilan data.
+Pengambilan data dilakukan untuk memperoleh dataset yang digunakan dalam pelatihan model
+\emph{neural network}, dengan tujuan mengembangkan sistem kontrol tekanan berbasis
+kendali PWM pada inverter. Data yang dikumpulkan mencakup nilai tekanan air yang diukur
+menggunakan sensor tekanan, nilai \emph{duty cycle} PWM yang diberikan ke inverter,
+serta tegangan output yang diterima oleh motor pompa. Sensor tekanan terpasang pada pipa
+output pompa untuk memantau variasi tekanan air saat beban berubah (misalnya jumlah
+keran yang dibuka/tutup). Sinyal dari sensor dibaca menggunakan mikrokontroler STM32
+yang juga digunakan untuk mengatur \emph{duty cycle} PWM ke driver inverter. Proses
+pengambilan data dilakukan dengan membuka dan menutup keran secara bertahap, lalu
+mencatat tekanan air yang terbaca, \emph{duty cycle} PWM yang digunakan, serta tegangan
+output yang dihasilkan. Setiap kondisi diuji untuk memastikan kestabilan data.
 
 \begin{table}[H]
 \centering
@@ -78,25 +100,50 @@ Pengambilan data dilakukan untuk memperoleh dataset yang digunakan dalam pelatih
 \section{Bahan dan peralatan yang digunakan}
 
 \subsection{Perangkat Lunak Simulasi}
-Perangkat lunak yang digunakan dalam proses perancangan skematik rangkaian inverter pada penelitian ini adalah Simulink dan PSIM. Simulink digunakan untuk memodelkan sistem inverter. Sementara itu, sebagai pembanding PSIM juga dimanfaatkan untuk simulasi rangkaian daya, khususnya dalam menganalisis performa switching inverter, bentuk gelombang tegangan dan arus, serta efisiensi sistem.
+Perangkat lunak yang digunakan dalam proses perancangan skematik rangkaian inverter pada
+penelitian ini adalah Simulink dan PSIM. Simulink digunakan untuk memodelkan sistem
+inverter. Sementara itu, sebagai pembanding PSIM juga dimanfaatkan untuk simulasi
+rangkaian daya, khususnya dalam menganalisis performa switching inverter, bentuk
+gelombang tegangan dan arus, serta efisiensi sistem.
 
 \subsection{Perangkat Lunak Desain PCB}
-Perangkat lunak yang digunakan dalam proses perancangan \emph{printed circuit board}/PCB adalah \emph{EasyEDA}. \emph{EasyEDA} dipilih karena menyediakan antarmuka  yang intuitif serta mendukung integrasi antara desain skematik dan layout PCB secara langsung. Selain itu, perangkat lunak ini memungkinkan simulasi dasar rangkaian, pemilihan komponen dari pustaka yang luas, serta kemudahan dalam menghasilkan file produksi seperti file Gerber yang diperlukan untuk proses pencetakan PCB.
+Perangkat lunak yang digunakan dalam proses perancangan \emph{printed circuit board}/PCB
+adalah \emph{EasyEDA}. \emph{EasyEDA} dipilih karena menyediakan antarmuka yang intuitif
+serta mendukung integrasi antara desain skematik dan layout PCB secara langsung. Selain
+itu, perangkat lunak ini memungkinkan simulasi dasar rangkaian, pemilihan komponen dari
+pustaka yang luas, serta kemudahan dalam menghasilkan file produksi seperti file Gerber
+yang diperlukan untuk proses pencetakan PCB.
 
 \subsection{MOSFET}
-Dalam sistem inverter, MOSFET berperan sebagai komponen utama dalam proses switching daya. MOSFET digunakan untuk mengatur aliran arus dari sumber tegangan DC menuju beban, dengan cara membuka dan menutup secara cepat sesuai dengan sinyal PWM (Pulse Width Modulation) yang diterima dari mikrokontroler.
+Dalam sistem inverter, MOSFET berperan sebagai komponen utama dalam proses switching
+daya. MOSFET digunakan untuk mengatur aliran arus dari sumber tegangan DC menuju beban,
+dengan cara membuka dan menutup secara cepat sesuai dengan sinyal PWM (Pulse Width
+Modulation) yang diterima dari mikrokontroler.
 
 \subsection{\emph{DF Robot Analog Water Pressure}}
-DFRobot Analog Water Pressure Sensor adalah sensor tekanan air yang dirancang untuk mengukur tekanan fluida (terutama air) dalam sistem tertutup, seperti pipa atau tangki. Sensor ini bekerja dalam rentang tekanan 0 hingga 1.6 MPa (sekitar 232 psi) dan menghasilkan sinyal analog sebanding dengan tekanan yang diterima. 
+DFRobot Analog Water Pressure Sensor adalah sensor tekanan air yang dirancang untuk
+mengukur tekanan fluida (terutama air) dalam sistem tertutup, seperti pipa atau tangki.
+Sensor ini bekerja dalam rentang tekanan 0 hingga 1.6 MPa (sekitar 232 psi) dan
+menghasilkan sinyal analog sebanding dengan tekanan yang diterima.
 
 \subsection{Mikrokontroler STM32}
-Mikrokontroler dalam sistem ini berperan sebagai unit kendali utama yang memiliki dua fungsi utama. Pertama, mikrokontroler digunakan untuk menghasilkan sinyal PWM (Pulse Width Modulation) yang akan mengatur kerja inverter dalam mengendalikan tegangan dan frekuensi output ke motor pompa air. Kedua, mikrokontroler juga berfungsi sebagai penerima sinyal dari sensor tekanan yang terpasang pada sistem pompa. 
+Mikrokontroler dalam sistem ini berperan sebagai unit kendali utama yang memiliki dua
+fungsi utama. Pertama, mikrokontroler digunakan untuk menghasilkan sinyal PWM (Pulse
+Width Modulation) yang akan mengatur kerja inverter dalam mengendalikan tegangan dan
+frekuensi output ke motor pompa air. Kedua, mikrokontroler juga berfungsi sebagai
+penerima sinyal dari sensor tekanan yang terpasang pada sistem pompa.
 
 \subsection{Pompa Air GP125}
-Dalam penelitian ini, pompa GP125 memiliki daya 125 watt digunakan sebagai beban utama dari sistem inverter yang dirancang. Kinerja pompa sangat dipengaruhi oleh tegangan dan frekuensi input yang diberikan, sehingga pengaturan inverter menjadi krusial untuk menjaga tekanan air tetap sesuai dengan kebutuhan.
+Dalam penelitian ini, pompa GP125 memiliki daya 125 watt digunakan sebagai beban utama
+dari sistem inverter yang dirancang. Kinerja pompa sangat dipengaruhi oleh tegangan dan
+frekuensi input yang diberikan, sehingga pengaturan inverter menjadi krusial untuk
+menjaga tekanan air tetap sesuai dengan kebutuhan.
 
 \section{Urutan Pelaksanaan Penelitian}
-Berikut ini adalah diagram alir dalam pelaksanaan penelitian tugas akhir yang dilaksanakan selama lima bulan. Tempat pelaksanaan penelitian ini dilakukan di Laboratorium Mikroelektronika dan Sistem Tertanam Departemen Teknik Elektro Institut Teknologi Sepuluh Nopember.
+Berikut ini adalah diagram alir dalam pelaksanaan penelitian tugas akhir yang
+dilaksanakan selama lima bulan. Tempat pelaksanaan penelitian ini dilakukan di
+Laboratorium Mikroelektronika dan Sistem Tertanam Departemen Teknik Elektro Institut
+Teknologi Sepuluh Nopember.
 % Contoh input gambar dengan format *.jpg
 \begin{figure} [H] \centering
   % Nama dari file gambar yang diinputkan
@@ -118,38 +165,47 @@ Berikut ini adalah diagram alir dalam pelaksanaan penelitian tugas akhir yang di
   \begin{tabular}{|p{3.5cm}|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 
     \hline
-    \multirow{2}{*}{Kegiatan} & \multicolumn{16}{|c|}{Minggu}                                                                       \\
+    \multirow{2}{*}{Kegiatan} &
+    \multicolumn{16}{|c|}{Minggu} \\
     \cline{2-17}              &
-    1                         & 2                             & 3  & 4  & 5  & 6  & 7  & 8  & 9  & 10 & 11 & 12 & 13 & 14 & 15 & 16 \\
+    1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 &
+    9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 \\
     \hline
 
     % Gunakan \G untuk mengisi sel dan \w untuk mengosongkan sel
     Studi Literatur          &
-    \G                        & \G                            & \w & \w & \w & \w & \w & \w & \w & \w & \w & \w & \w & \w & \w & \w \\
+    \G & \G & \w & \w & \w & \w & \w & \w &
+    \w & \w & \w & \w & \w & \w & \w & \w \\
     \hline
 
     Desain Rangkaian PWM AC \emph{chopper}           &
-    \w                        & \w                            & \G & \G & \G & \w & \w & \w & \w & \w & \w & \w & \w & \w & \w & \w \\
+    \w & \w & \G & \G & \G & \w & \w & \w &
+    \w & \w & \w & \w & \w & \w & \w & \w \\
     \hline
 
     Simulasi Rangkaian PWM AC \emph{chopper}             &
-    \w                        & \w                            & \w & \w & \w & \G & \G & \w & \w & \w & \w & \w & \w & \w & \w & \w \\
+    \w & \w & \w & \w & \w & \G & \G & \w &
+    \w & \w & \w & \w & \w & \w & \w & \w \\
     \hline
 
     Pembuatan Rangkaian dan Instalasi Sistem Pompa Air      &
-    \w                        & \w                            & \w & \w & \w & \w & \w & \G & \G & \G & \G & \w & \w & \w & \w & \w \\
+    \w & \w & \w & \w & \w & \w & \w & \G &
+    \G & \G & \G & \w & \w & \w & \w & \w \\
     \hline
 
     Implementasi \emph{Neural Network}       &
-    \w                        & \w                            & \w & \w & \w & \w & \w & \w & \w & \G & \G & \G & \G & \w & \w & \w \\
+    \w & \w & \w & \w & \w & \w & \w & \w &
+    \w & \G & \G & \G & \G & \w & \w & \w \\
     \hline
 
     Pengujian Rangkaian       &
-    \w                        & \w                            & \w & \w & \w & \w & \w & \w & \w & \w & \w & \G & \G & \G & \G & \G \\
+    \w & \w & \w & \w & \w & \w & \w & \w &
+    \w & \w & \w & \G & \G & \G & \G & \G \\
     \hline
 
     Penulisan Buku Tugas Akhir      &
-    \w                        & \w                            & \w & \w & \w & \w & \w & \w & \w & \w & \w & \w & \w & \G & \G & \G \\
+    \w & \w & \w & \w & \w & \w & \w & \w &
+    \w & \w & \w & \w & \w & \G & \G & \G \\
     \hline
 
 

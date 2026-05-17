@@ -1,13 +1,29 @@
 \chapter{TINJAUAN PUSTAKA}
 
 \section{Hasil Riset Terdahulu}
-Penelitian mengenai pengaturan kecepatan motor untuk mengontrol tekanan pada pompa air telah dilakukan sebelumnya oleh \parencite{anakits} dan \parencite{anakub}. Kevin Rosada (2017) menggunakan driver berbasis TRIAC yang dikontrol dengan algoritma PID, di mana parameter yang diamati adalah debit aliran air. Sementara itu, penelitian dari Hari (2015) menggunakan metode PWM berbasis MOSFET dalam bentuk AC chopper tanpa pengendali aktif (hanya menggunakan logika \textit{if-else}), dengan parameter keluaran yang diamati berupa tekanan. Berdasarkan keterbatasan pada kedua pendekatan tersebut, penelitian ini mengusulkan sistem pengaturan tekanan air berbasis PWM AC \emph{chopper} dengan pengontrol berbasis neural network (NN), dengan keluaran berasal dari inverter, bertujuan untuk memperoleh tekanan air yang konstan dan adaptif terhadap perubahan beban.
+ANJAII MABAR Penelitian mengenai pengaturan kecepatan motor untuk mengontrol tekanan pada pompa air
+telah dilakukan sebelumnya oleh \parencite{anakits} dan \parencite{anakub}. Kevin Rosada
+(2017) menggunakan driver berbasis TRIAC yang dikontrol dengan algoritma PID, di mana
+parameter yang diamati adalah debit aliran air. Sementara itu, penelitian dari Hari
+(2015) menggunakan metode PWM berbasis MOSFET dalam bentuk AC chopper tanpa pengendali
+aktif (hanya menggunakan logika \textit{if-else}), dengan parameter keluaran yang
+diamati berupa tekanan. Berdasarkan keterbatasan pada kedua pendekatan tersebut,
+penelitian ini mengusulkan sistem pengaturan tekanan air berbasis PWM AC \emph{chopper}
+dengan pengontrol berbasis neural network (NN), dengan keluaran berasal dari inverter,
+bertujuan untuk memperoleh tekanan air yang konstan dan adaptif terhadap perubahan
+beban.
 
 \section{Dasar Teori}
 
 \subsection{Inverter Satu Fasa}
 
-Inverter adalah perangkat elektronika yang berfungsi mengubah energi listrik dari arus searah (DC) menjadi arus bolak-balik (AC). Pada gambar \ref{fig:Inverter1} ditunjukkan sebuah rangkaian inverter \emph{full-bridge}. Inverter bekerja dengan prinsip \emph{switching}. Pada saat $S_{\text{1}}$ dan $S_{\text{2}}$ dalam kondisi tertutup maka $+V_{\text{dc}}$ akan terhubung ke beban. dan terhubung ke $-V_{\text{dc}}$ pada saat $S_{\text{3}}$ dan $S_{\text{4}}$ tertutup. Penyaklaran secara periodik ini menghasilkan tegangan berbentuk gelombang kotak \parencite{hart}.
+Inverter adalah perangkat elektronika yang berfungsi mengubah energi listrik dari arus
+searah (DC) menjadi arus bolak-balik (AC). Pada gambar \ref{fig:Inverter1} ditunjukkan
+sebuah rangkaian inverter \emph{full-bridge}. Inverter bekerja dengan prinsip
+\emph{switching}. Pada saat $S_{\text{1}}$ dan $S_{\text{2}}$ dalam kondisi tertutup
+maka $+V_{\text{dc}}$ akan terhubung ke beban. dan terhubung ke $-V_{\text{dc}}$ pada
+saat $S_{\text{3}}$ dan $S_{\text{4}}$ tertutup. Penyaklaran secara periodik ini
+menghasilkan tegangan berbentuk gelombang kotak \parencite{hart}.
 
 \begin{figure} [H] \centering
   % Nama dari file gambar yang diinputkan
@@ -27,7 +43,9 @@ Inverter adalah perangkat elektronika yang berfungsi mengubah energi listrik dar
   \label{fig:Inverter}
 \end{figure}
 
-Asumsikan $S_{\text{1}}$ dan $S_{\text{2}}$ tertutup pada $t=0$. Maka diperoleh persamaan arus pada beban dalam kondisi \emph{steady state} adalah sebagai berikut \parencite{hart}. 
+Asumsikan $S_{\text{1}}$ dan $S_{\text{2}}$ tertutup pada $t=0$. Maka diperoleh
+persamaan arus pada beban dalam kondisi \emph{steady state} adalah sebagai berikut
+\parencite{hart}.
 
 \begin{equation}
 i_o(t) =
@@ -38,13 +56,21 @@ i_o(t) =
 \end{cases}
 \end{equation}
 
-Setelah itu dengan menggunakan analisis fourier, maka diperoleh persamaan tegangan keluaran dari inverter yaitu. 
+Setelah itu dengan menggunakan analisis fourier, maka diperoleh persamaan tegangan
+keluaran dari inverter yaitu.
 
 \begin{equation}
     v_o(t) = \sum_{\substack{n \\ \text{odd}}} \frac{4V_{dc}}{n\pi} \sin(n \omega_0 t)
 \end{equation}
 
-Salah satu teknik penyaklaran dalam inverter satu fasa adalah dengan menggunakan \emph{Pulse Width Modulation} (PWM). Dimana pada saat menggunakan PWM maka dapat mengurangi total harmonisa pada arus beban. Dalam teknik PWM, amplitudo tegangan yang dikeluarkan dapat diatur dengan sinyal gelombang yang termodulasi. Teknik ini memerlukan sinyal referensi (sinyal yang termodulasi) yang berupa sinyal sinusoidal, dan sinyal \emph{carrier}, yaitu sinyal triangular yang mengkontrol frekuensi \emph{switching} \parencite{hart}. Salah satu teknik dalam PWM adalah \emph{bipolar switching} \parencite{bipolar}.
+Salah satu teknik penyaklaran dalam inverter satu fasa adalah dengan menggunakan
+\emph{Pulse Width Modulation} (PWM). Dimana pada saat menggunakan PWM maka dapat
+mengurangi total harmonisa pada arus beban. Dalam teknik PWM, amplitudo tegangan yang
+dikeluarkan dapat diatur dengan sinyal gelombang yang termodulasi. Teknik ini memerlukan
+sinyal referensi (sinyal yang termodulasi) yang berupa sinyal sinusoidal, dan sinyal
+\emph{carrier}, yaitu sinyal triangular yang mengkontrol frekuensi \emph{switching}
+\parencite{hart}. Salah satu teknik dalam PWM adalah \emph{bipolar switching}
+\parencite{bipolar}.
 
 \[
 \begin{aligned}
@@ -72,7 +98,11 @@ S_3 \text{ dan } S_4 \text{ ON ketika } v_{\text{sine}} < v_{\text{tri}} \quad &
 
 \subsection{Karakteristik Pompa Air}
 
-Pompa merupakan perangkat yang berfungsi untuk memindahkan cairan dari satu lokasi ke lokasi lainnya dengan meningkatkan tekanan pada cairan tersebut. Pompa sanggup menaikkan air dalam pipa vertikal sampai pada ketinggian di mana berat air dan gravitasi menahan air untuk tidak naik lebih tinggi dari itu, ketinggian ini disebut \emph{head}. Persamaan \emph{head} adalah sebagai berikut.
+Pompa merupakan perangkat yang berfungsi untuk memindahkan cairan dari satu lokasi ke
+lokasi lainnya dengan meningkatkan tekanan pada cairan tersebut. Pompa sanggup menaikkan
+air dalam pipa vertikal sampai pada ketinggian di mana berat air dan gravitasi menahan
+air untuk tidak naik lebih tinggi dari itu, ketinggian ini disebut \emph{head}.
+Persamaan \emph{head} adalah sebagai berikut.
 \begin{equation}
 H_m = \frac{(P_d - P_s) \times 10}{\rho}
 \end{equation}
@@ -86,29 +116,43 @@ H_m = \frac{(P_d - P_s) \times 10}{\rho}
   \label{fig:Kurva}
 \end{figure}
 
-Pada kurva tersebut dapat dilihat hubungan antara debit dengan \emph{debit} dan kurva tersebut menunjukkan titik potong yang merupakan titik kerja pompa. Kemudian, daya poros motor (\(P_{Sh}\)) dapat dihitung dengan mengalikan torsi (\(\tau\)) yang dihasilkan motor dengan kecepatan sudut (\(\omega\)) poros motor. Persamaannya adalah sebagai berikut. Persamaan ini menunjukkan bahwa semakin besar torsi atau kecepatan putar motor, maka daya yang disalurkan melalui poros motor juga akan semakin besar. Daya poros ini merupakan salah satu komponen penting dalam perhitungan efisiensi motor maupun sistem pompa secara keseluruhan \parencite{MANSOUR2025342}.
+Pada kurva tersebut dapat dilihat hubungan antara debit dengan \emph{debit} dan kurva
+tersebut menunjukkan titik potong yang merupakan titik kerja pompa. Kemudian, daya poros
+motor (\(P_{Sh}\)) dapat dihitung dengan mengalikan torsi (\(\tau\)) yang dihasilkan
+motor dengan kecepatan sudut (\(\omega\)) poros motor. Persamaannya adalah sebagai
+berikut. Persamaan ini menunjukkan bahwa semakin besar torsi atau kecepatan putar motor,
+maka daya yang disalurkan melalui poros motor juga akan semakin besar. Daya poros ini
+merupakan salah satu komponen penting dalam perhitungan efisiensi motor maupun sistem
+pompa secara keseluruhan \parencite{MANSOUR2025342}.
 
 \begin{equation}
 P_{Sh} = \tau \times \omega = \tau \times \frac{2\pi n}{60}
 \end{equation}
 
-Berdasarkan hukum afinitas, debit aliran $Q$ berbanding lurus dengan kecepatan putar pompa. Artinya, jika kecepatan meningkat, maka debit aliran juga meningkat secara proporsional.
+Berdasarkan hukum afinitas, debit aliran $Q$ berbanding lurus dengan kecepatan putar
+pompa. Artinya, jika kecepatan meningkat, maka debit aliran juga meningkat secara
+proporsional.
 
 \begin{equation}
 Q_2 = Q_1 \times \left( \frac{N_2}{N_1} \right)
 \end{equation}
 
-\emph{Head} $H$ berbanding lurus dengan kuadrat dari perubahan kecepatan pompa. Artinya, peningkatan kecepatan putar akan menaikkan head secara eksponensial.
+\emph{Head} $H$ berbanding lurus dengan kuadrat dari perubahan kecepatan pompa. Artinya,
+peningkatan kecepatan putar akan menaikkan head secara eksponensial.
 \begin{equation}
 H_2 = H_1 \times \left( \frac{N_2}{N_1} \right)^2
 \end{equation}
 
-Daya $P$ yang dibutuhkan oleh pompa berbanding lurus dengan pangkat tiga dari kecepatan. Oleh karena itu, sedikit peningkatan kecepatan akan menyebabkan kenaikan daya yang cukup signifikan.
+Daya $P$ yang dibutuhkan oleh pompa berbanding lurus dengan pangkat tiga dari kecepatan.
+Oleh karena itu, sedikit peningkatan kecepatan akan menyebabkan kenaikan daya yang cukup
+signifikan.
 \begin{equation}
 P_2 = P_1 \times \left( \frac{N_2}{N_1} \right)^3
 \end{equation}
 
-Daya hidraulik yang dihasilkan oleh pompa $P_{\text{H}}$ bergantung pada debit aliran, densitas fluida, percepatan gravitasi, dan \emph{H} (tekanan fluida). Persamaan untuk menghitung daya hidraulik adalah sebagai berikut
+Daya hidraulik yang dihasilkan oleh pompa $P_{\text{H}}$ bergantung pada debit aliran,
+densitas fluida, percepatan gravitasi, dan \emph{H} (tekanan fluida). Persamaan untuk
+menghitung daya hidraulik adalah sebagai berikut
 \begin{equation}
 P_H (\text{kW}) = \frac{Q \times \delta \times g \times H}{3.6 \times 10^6}
 \end{equation}
@@ -118,27 +162,41 @@ Daya listrik yang disuplai ke motor (\(P_M\)) dapat dihitung dengan persamaan be
 P_M = \frac{\sqrt{3} \times V \times I \times \cos\phi}{1000 \times \eta_e}
 \end{equation}
 
-Dapat disimpulkan bahwa tegangan $V$ memengaruhi kecepatan motor dan tekanan motor \parencite{GIRDHAR200548}. 
+Dapat disimpulkan bahwa tegangan $V$ memengaruhi kecepatan motor dan tekanan motor
+\parencite{GIRDHAR200548}.
 
 
 \subsection{Motor Induksi Satu Fasa}
 
-Motor induksi satu fasa banyak digunakan dalam aplikasi rumah tangga karena strukturnya yang sederhana, biaya yang rendah, dan daya tahan yang tinggi. Prinsip kerja motor induksi satu fasa didasarkan pada medan magnet berputar yang dihasilkan oleh arus bolak-balik di stator, yang kemudian menginduksi arus pada rotor dan menghasilkan torsi putar.
-Kecepatan medan magnet berputar dalam motor induksi, atau dikenal sebagai kecepatan sinkron $n_{\text{sync}}$, bergantung pada frekuensi sumber $f_{\text{e}}$,dan jumlah kutub P dari motor. sebagaimana ditunjukkan persamaan \ref{eq:Persamaandas}
+Motor induksi satu fasa banyak digunakan dalam aplikasi rumah tangga karena strukturnya
+yang sederhana, biaya yang rendah, dan daya tahan yang tinggi. Prinsip kerja motor
+induksi satu fasa didasarkan pada medan magnet berputar yang dihasilkan oleh arus
+bolak-balik di stator, yang kemudian menginduksi arus pada rotor dan menghasilkan torsi
+putar. Kecepatan medan magnet berputar dalam motor induksi, atau dikenal sebagai
+kecepatan sinkron $n_{\text{sync}}$, bergantung pada frekuensi sumber $f_{\text{e}}$,dan
+jumlah kutub P dari motor. sebagaimana ditunjukkan persamaan \ref{eq:Persamaandas}
 
 \begin{equation}
 \label{eq:Persamaandas}
 n_{\text{sync}} = \frac{120 f_e}{P}
 \end{equation}
 
-Dalam praktiknya, kecepatan aktual motor $n_{\text{m}}$ akan selalu sedikit lebih lambat dari $n_{\text{sync}}$,  selisihnya dinyatakan sebagai slip \text{s}. Slip menggambarkan rasio perbedaan antara kecepatan sinkron dan kecepatan rotor terhadap kecepatan sinkron, sebagaimana ditunjukkan oleh persamaan \ref{eq:perss}
+Dalam praktiknya, kecepatan aktual motor $n_{\text{m}}$ akan selalu sedikit lebih lambat
+dari $n_{\text{sync}}$, selisihnya dinyatakan sebagai slip \text{s}. Slip menggambarkan
+rasio perbedaan antara kecepatan sinkron dan kecepatan rotor terhadap kecepatan sinkron,
+sebagaimana ditunjukkan oleh persamaan \ref{eq:perss}
 
 \begin{equation}
 \label{eq:perss}
 s = \frac{n_{\text{sync}} - n_m}{n_{\text{sync}}} \times 100\%
 \end{equation}
 
-Salah satu metode umum untuk mengatur kecepatan motor induksi adalah dengan memodifikasi slip. Hal ini dapat dicapai baik dengan menambahkan resistansi rotor atau dengan mengatur tegangan terminal motor \parencite{chapman}. Pada motor induksi satu fasa, metode pengaturan tegangan terminal lebih umum digunakan.Dengan menurunkan tegangan RMS terminal $V_{\text{T}}$ kecepatan motor dapat dikurangi karena slip meningkat. Persamaan torsi dari motor induksi ditunjukkan pada persamaan \ref{eq:perstorsi}.
+Salah satu metode umum untuk mengatur kecepatan motor induksi adalah dengan memodifikasi
+slip. Hal ini dapat dicapai baik dengan menambahkan resistansi rotor atau dengan
+mengatur tegangan terminal motor \parencite{chapman}. Pada motor induksi satu fasa,
+metode pengaturan tegangan terminal lebih umum digunakan.Dengan menurunkan tegangan RMS
+terminal $V_{\text{T}}$ kecepatan motor dapat dikurangi karena slip meningkat. Persamaan
+torsi dari motor induksi ditunjukkan pada persamaan \ref{eq:perstorsi}.
 
 \begin{equation}
 \label{eq:perstorsi}
@@ -152,11 +210,24 @@ Salah satu metode umum untuk mengatur kecepatan motor induksi adalah dengan memo
 \omega_{\text{sync}} \left[ \left( R_{\text{TH}} + \frac{R_2}{s} \right)^2 + (X_{\text{TH}} + X_2)^2 \right]}
 \end{equation}
 
-Dari persamaan \ref{eq:perstor2} terlihat bahwa torsi sebanding dengan kuadrat tegangan terminal $V_{\text{TH}}$ \parencite{hart}. Oleh karena itu, penurunan tegangan RMS secara langsung mengurangi torsi output motor. Ini menunjukkan bahwa pengaturan tegangan terminal tidak hanya berdampak pada slip dan kecepatan motor, tetapi juga mempengaruhi kemampuan motor untuk menghasilkan torsi. Dengan demikian, pendekatan pengaturan kecepatan menggunakan pengendalian tegangan terminal dapat dilakukan.
+Dari persamaan \ref{eq:perstor2} terlihat bahwa torsi sebanding dengan kuadrat tegangan
+terminal $V_{\text{TH}}$ \parencite{hart}. Oleh karena itu, penurunan tegangan RMS
+secara langsung mengurangi torsi output motor. Ini menunjukkan bahwa pengaturan tegangan
+terminal tidak hanya berdampak pada slip dan kecepatan motor, tetapi juga mempengaruhi
+kemampuan motor untuk menghasilkan torsi. Dengan demikian, pendekatan pengaturan
+kecepatan menggunakan pengendalian tegangan terminal dapat dilakukan.
 
 \subsection{Rangkaian PWM AC \emph{Chopper}}
 
-PWM AC \emph{chopper} merupakan metode pengaturan tegangan AC menggunakan \emph{pulse width modulation}.  Sebagai pengatur tegangan pada motor, PWM AC chopper mampu memberikan kontrol tegangan yang lebih linear saat \emph{starting}, menghasilkan torsi awal yang lebih halus. Selain itu, pengoperasian pada frekuensi \emph{switching} tinggi memungkinkan bentuk gelombang arus yang lebih mendekati sinusoidal dibandingkan dengan pengontrol berbasis thyristor \parencite{pwmacchop2}. Rangkaian ini dikendalikan berdasarkan interval waktu $T_{\text{on}}$ dan $T_{\text{off}}$, yang menentukan karakteristik pensaklaran. Tegangan pada beban induktif selanjutnya dirumuskan dalam Persamaan \ref{eq:Tegangan Beban}.
+PWM AC \emph{chopper} merupakan metode pengaturan tegangan AC menggunakan \emph{pulse
+width modulation}. Sebagai pengatur tegangan pada motor, PWM AC chopper mampu memberikan
+kontrol tegangan yang lebih linear saat \emph{starting}, menghasilkan torsi awal yang
+lebih halus. Selain itu, pengoperasian pada frekuensi \emph{switching} tinggi
+memungkinkan bentuk gelombang arus yang lebih mendekati sinusoidal dibandingkan dengan
+pengontrol berbasis thyristor \parencite{pwmacchop2}. Rangkaian ini dikendalikan
+berdasarkan interval waktu $T_{\text{on}}$ dan $T_{\text{off}}$, yang menentukan
+karakteristik pensaklaran. Tegangan pada beban induktif selanjutnya dirumuskan dalam
+Persamaan \ref{eq:Tegangan Beban}.
 
 \begin{equation}
 % Label referensi dari persamaan yang dibuat
@@ -180,8 +251,11 @@ V_L(t) = D \cdot V_m \sin(\omega t)
   \label{fig:Saklar PWM AC}
 \end{figure}
 
-Saklar S1 berfungsi sebagai saklar utama PWM yang mengatur waktu pada saat beban menerima tegangan. Saklar S2 dan dioda berfungsi sebagai jalur bebas \emph{freewheeling} saat S1 dimatikan, untuk menjaga arus tetap kontinu dan mencegah gangguan pada beban induktif. 
-Dengan mengubah rasio ON dan OFF \emph{duty cycle} dari S1, tegangan rata-rata (RMS) yang diterima beban bisa diatur \parencite{pwmacchop}.
+Saklar S1 berfungsi sebagai saklar utama PWM yang mengatur waktu pada saat beban
+menerima tegangan. Saklar S2 dan dioda berfungsi sebagai jalur bebas \emph{freewheeling}
+saat S1 dimatikan, untuk menjaga arus tetap kontinu dan mencegah gangguan pada beban
+induktif. Dengan mengubah rasio ON dan OFF \emph{duty cycle} dari S1, tegangan rata-rata
+(RMS) yang diterima beban bisa diatur \parencite{pwmacchop}.
 
 \begin{table}[H]
 \caption{Cara Kerja Rangkaian}
@@ -203,8 +277,11 @@ Tegangan Setengah Fasa Negatif & D2, S1, D4 \newline Aktif & D6, S2, D8 \newline
 \end{table}
 
 \subsection{Kontrol \emph{Neural Network}}
-
-\emph{Neural Network} atau jaringan saraf tiruan merupakan sistem komputasi yang dikembangkan dengan meniru cara kerja otak manusia. Struktu dasar dari \emph{multilayer perceptron} (MLP) NN dapat dilihat pada gambar \ref{fig:NN}. $x_{\text{1}}$-$x_{\text{2}}$ adalah \emph{input} sedangkan $y$ adalah \emph{output}. Terdapat tiga buah \emph{layer} yaitu \emph{input layer}, \emph{hidden layer}, dan \emph{output layer} \parencite{ann}.
+\emph{Neural Network} atau jaringan saraf tiruan merupakan sistem komputasi yang
+dikembangkan dengan meniru cara kerja otak manusia. Struktu dasar dari \emph{multilayer
+perceptron} (MLP) NN dapat dilihat pada gambar \ref{fig:NN}. $x_{\text{1}}$-$x_{\text{2}}$
+adalah \emph{input} sedangkan $y$ adalah \emph{output}. Terdapat tiga buah \emph{layer}
+yaitu \emph{input layer}, \emph{hidden layer}, dan \emph{output layer} \parencite{ann}.
 
 \begin{figure} [H] \centering
   % Nama dari file gambar yang diinputkan
@@ -215,7 +292,11 @@ Tegangan Setengah Fasa Negatif & D2, S1, D4 \newline Aktif & D6, S2, D8 \newline
   \label{fig:NN}
 \end{figure}
 
-Input skalar $p$ ditransmisikan melalui suatu koneksi yang mengalikan besarannya dengan bobot skalar $w$, sehingga membentuk hasil kali $wp$, yang juga merupakan skalar. Dalam hal ini, input berbobot $wp$ menjadi satu-satunya argumen dari fungsi transfer $f$, yang menghasilkan output skalar $a$. Neuron pada sisi kanan memiliki suatu \textit{bias} skalar, yaitu $b$.
+Input skalar $p$ ditransmisikan melalui suatu koneksi yang mengalikan besarannya dengan
+bobot skalar $w$, sehingga membentuk hasil kali $wp$, yang juga merupakan skalar. Dalam
+hal ini, input berbobot $wp$ menjadi satu-satunya argumen dari fungsi transfer $f$, yang
+menghasilkan output skalar $a$. Neuron pada sisi kanan memiliki suatu \textit{bias}
+skalar, yaitu $b$.
 
 \begin{equation}
 a = f(wp + b)
@@ -230,13 +311,17 @@ a = f(wp + b)
   \label{fig:neuron}
 \end{figure}
 
-Perceptron dilatih berdasarkan contoh-contoh perilaku yang diinginkan. Perilaku yang diinginkan ini dapat dirangkum dalam bentuk pasangan input dan output sebagai berikut:
+Perceptron dilatih berdasarkan contoh-contoh perilaku yang diinginkan. Perilaku yang
+diinginkan ini dapat dirangkum dalam bentuk pasangan input dan output sebagai berikut:
 
 \[
 (p_1, t_1),\ (p_2, t_2),\ \ldots,\ (p_q, t_q)
 \]
 
-di mana $p$ merupakan input ke jaringan dan $t$ adalah output yang benar (target) yang sesuai. Tujuan dari pelatihan adalah untuk meminimalkan kesalahan $e$, yang merupakan selisih antara respons neuron $a$ dan vektor target $t$. \emph{Learning Rules} dari perseptron adalah sebagai berikut.
+di mana $p$ merupakan input ke jaringan dan $t$ adalah output yang benar (target) yang
+sesuai. Tujuan dari pelatihan adalah untuk meminimalkan kesalahan $e$, yang merupakan
+selisih antara respons neuron $a$ dan vektor target $t$. \emph{Learning Rules} dari
+perseptron adalah sebagai berikut.
 
 \begin{align*}
 \mathbf{e}(k) &= \mathbf{t}(k) - \mathbf{a}(k) \\
@@ -244,7 +329,10 @@ di mana $p$ merupakan input ke jaringan dan $t$ adalah output yang benar (target
 \mathbf{b}(k+1) &= \mathbf{b}(k) + \mathbf{e}(k)\,\mathbf{1}^T(k)
 \end{align*}
 
-\emph{Inference}  merupakan tahap penggunaan model neural network yang telah dilatih untuk menghasilkan \emph{output} berdasarkan \emph{input} baru. Pada fase ini, model tidak lagi mempelajari parameter \emph{weights} dan \emph{bias}, tetapi hanya melakukan perhitungan forward pass untuk memperoleh prediksi.
+\emph{Inference} merupakan tahap penggunaan model neural network yang telah dilatih
+untuk menghasilkan \emph{output} berdasarkan \emph{input} baru. Pada fase ini, model
+tidak lagi mempelajari parameter \emph{weights} dan \emph{bias}, tetapi hanya melakukan
+perhitungan forward pass untuk memperoleh prediksi.
 
 \begin{figure} [H] \centering
   % Nama dari file gambar yang diinputkan
@@ -255,7 +343,12 @@ di mana $p$ merupakan input ke jaringan dan $t$ adalah output yang benar (target
   \label{fig:learning}
 \end{figure}
 
-Proses pelatihan neural network terdiri dari dua fase utama yaitu \emph{forward propagation} dan \emph{backpropagation}. \emph{Forward propagation} merupakan proses dasar dalam jaringan saraf tiruan di mana data masukan melewati beberapa lapisan jaringan untuk menghasilkan keluaran. Pada tahap ini, setiap lapisan akan melakukan operasi matematis berupa perkalian bobot dan penambahan bias, lalu menerapkan fungsi aktivasi.
+Proses pelatihan neural network terdiri dari dua fase utama yaitu \emph{forward
+propagation} dan \emph{backpropagation}. \emph{Forward propagation} merupakan proses
+dasar dalam jaringan saraf tiruan di mana data masukan melewati beberapa lapisan
+jaringan untuk menghasilkan keluaran. Pada tahap ini, setiap lapisan akan melakukan
+operasi matematis berupa perkalian bobot dan penambahan bias, lalu menerapkan fungsi
+aktivasi.
 
 \begin{align}
 a^0 &= p \label{eq:input} \\
@@ -263,7 +356,10 @@ a^{m+1} &= f^{m+1}\left( \mathbf{w}^{m+1} a^m + b^{m+1} \right), \quad \text{unt
 a &= a^M \label{eq:output}
 \end{align}
 
-\emph{Backpropagation} adalah algoritma pelatihan pada jaringan saraf tiruan yang bekerja dengan menghitung kesalahan dari output dan menyebarkannya kembali ke lapisan sebelumnya untuk memperbarui bobot. Proses ini dilakukan secara iteratif menggunakan metode \emph{gradient descent} untuk meminimalkan kesalahan \parencite{backp}.
+\emph{Backpropagation} adalah algoritma pelatihan pada jaringan saraf tiruan yang bekerja
+dengan menghitung kesalahan dari output dan menyebarkannya kembali ke lapisan sebelumnya
+untuk memperbarui bobot. Proses ini dilakukan secara iteratif menggunakan metode
+\emph{gradient descent} untuk meminimalkan kesalahan \parencite{backp}.
 
 \begin{align}
 s^M &= -2 \, \dot{\bm{F}}^M \left( \bm{n}^M \right) (t - \bm{a}) \label{eq:sM} \\
@@ -272,7 +368,12 @@ s^m &= \dot{\bm{F}}^m \left( \bm{n}^m \right) \left( \bm{w}^{m+1} \right)^T s^{m
 
 \subsection{STM32F411CE}
 
-Mikrokontroler STM32F411CE berbasis ARM Cortex-M4 memiliki fitur \emph{timer} dan ADC \emph{Analog-to-Digital Converter}. STM32F411CE ini dilengkapi dengan  11 \emph{timer}, terdiri dari enam \emph{timer} 16-bit dan dua \emph{timer} 32-bit, yang mampu beroperasi pada frekuensi hingga 100 MHz. \emph{Timer} ini mendukung berbagai fungsi seperti \emph{Input Capture/Output Compare} (IC/OC), generasi sinyal PWM (\emph{Pulse Width Modulation}), serta \emph{decoder} untuk \emph{encoder quadrature}.
+Mikrokontroler STM32F411CE berbasis ARM Cortex-M4 memiliki fitur \emph{timer} dan ADC
+\emph{Analog-to-Digital Converter}. STM32F411CE ini dilengkapi dengan 11 \emph{timer},
+terdiri dari enam \emph{timer} 16-bit dan dua \emph{timer} 32-bit, yang mampu beroperasi
+pada frekuensi hingga 100 MHz. \emph{Timer} ini mendukung berbagai fungsi seperti
+\emph{Input Capture/Output Compare} (IC/OC), generasi sinyal PWM (\emph{Pulse Width
+Modulation}), serta \emph{decoder} untuk \emph{encoder quadrature}.
 
 \begin{figure} [H] \centering
   % Nama dari file gambar yang diinputkan
@@ -283,11 +384,21 @@ Mikrokontroler STM32F411CE berbasis ARM Cortex-M4 memiliki fitur \emph{timer} da
   \label{fig:stm}
 \end{figure}
 
-STM32F411CE juga memiliki ADC 12-bit dengan hingga 16 channel eksternal dan kecepatan konversi hingga 2.4 MSPS (\emph{Mega Samples Per Second}). ADC ini mendukung mode \emph{single-shot} dan \emph{continuous conversion}, serta dilengkapi dengan fitur DMA {\emph{Direct Memory Access} untuk transfer data yang efisien tanpa membebani CPU \parencite{stm32}.
+STM32F411CE juga memiliki ADC 12-bit dengan hingga 16 channel eksternal dan kecepatan
+konversi hingga 2.4 MSPS (\emph{Mega Samples Per Second}). ADC ini mendukung mode
+\emph{single-shot} dan \emph{continuous conversion}, serta dilengkapi dengan fitur DMA
+{\emph{Direct Memory Access} untuk transfer data yang efisien tanpa membebani CPU
+\parencite{stm32}.
 
 \subsection{Sensor Tekanan Air}
 
-Sensor tekanan air bekerja dengan mengubah tekanan fisik air melalui elemen seperti diafragma, strain gauge, atau kristal piezoelektrik menjadi sinyal listrik. Sinyal ini kemudian diproses melalui amplifikasi, penyaringan noise, dan konversi digital. Sensor umumnya memiliki tiga pin, VCC (biasanya 5V), GND, dan pin sinyal (keluaran 0.5–4.5V). Beberapa sensor memiliki output berbasis nol (misalnya 0–5V) dan lainnya tidak (misalnya 1–5V), di mana pembacaan nol pada sensor non-basis nol menandakan kegagalan sensor \parencite{waterpress}.
+Sensor tekanan air bekerja dengan mengubah tekanan fisik air melalui elemen seperti
+diafragma, strain gauge, atau kristal piezoelektrik menjadi sinyal listrik. Sinyal ini
+kemudian diproses melalui amplifikasi, penyaringan noise, dan konversi digital. Sensor
+umumnya memiliki tiga pin, VCC (biasanya 5V), GND, dan pin sinyal (keluaran 0.5–4.5V).
+Beberapa sensor memiliki output berbasis nol (misalnya 0–5V) dan lainnya tidak (misalnya
+1–5V), di mana pembacaan nol pada sensor non-basis nol menandakan kegagalan sensor
+\parencite{waterpress}.
 
 \begin{figure}[H]
   \centering

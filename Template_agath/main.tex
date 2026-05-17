@@ -137,6 +137,7 @@
 
 % Isi keseluruhan dokumen
 \begin{document}
+\raggedbottom
 
 % Sampul luar Bahasa Indonesia
 \newcommand\covercontents{sampul/konten-id.tex}
@@ -156,6 +157,10 @@
 \input{sampul/sampul-luar-tipis.tex}
 \cleardoublepage
 
+% Lembar pengesahan hasil scan
+\input{lainnya/lembar-pengesahan-scan.tex}
+\cleardoublepage
+
 % Label tabel dan gambar dalam bahasa indonesia
 \renewcommand{\figurename}{Gambar}
 \renewcommand{\tablename}{Tabel}
@@ -173,8 +178,8 @@
 % \cleardoublepage
 
 % Pernyataan keaslian
-% \input{lainnya/pernyataan-keaslian.tex}
-% \cleardoublepage
+\input{lainnya/pernyataan-keaslian.tex}
+\cleardoublepage
 % \input{lainnya/pernyataan-keaslian-en.tex}
 % \cleardoublepage
 

@@ -1,10 +1,562 @@
 \chapter{HASIL DAN PEMBAHASAN}
 \label{chap:hasil_dan_pembahasan}
 
-\section{Pengujian dan Hasil}
-\label{sec:hasil}
-\input{bab/Hasil_dan_pembahasan/hasil.tex}
+Bab ini membahas hasil pengujian sistem PWM AC \emph{chopper} yang telah
+dirancang. Pengujian dilakukan untuk mengetahui karakteristik sinyal PWM,
+hubungan \emph{duty cycle} terhadap tegangan RMS keluaran, respons tekanan
+air pada pompa, serta kelayakan data yang digunakan untuk pelatihan algoritma
+\emph{neural network}.
+
+\section{Skenario Pengujian}
+\label{sec:skenario-pengujian}
+
+Skenario pengujian disusun agar setiap bagian sistem dapat diamati secara
+bertahap. Pengujian dimulai dari keluaran PWM mikrokontroler, pengujian
+rangkaian PWM AC \emph{chopper}, pembacaan sensor tekanan air, pengambilan
+dataset, hingga pengujian model \emph{neural network}.
+
+\begin{table}[H]
+\centering
+\caption{Skenario Pengujian Sistem}
+\label{tab:skenario-pengujian}
+\begin{tabular}{|c|p{4.2cm}|p{4.2cm}|p{3.2cm}|}
+\hline
+\textbf{No.} &
+\textbf{Pengujian} &
+\textbf{Parameter yang Diamati} &
+\textbf{Tujuan Pengujian} \\
+\hline
+1 &
+Pengujian sinyal PWM STM32 &
+Frekuensi, \emph{duty cycle}, dan sinyal komplementer &
+Memastikan sinyal kendali sesuai perancangan \\
+\hline
+2 &
+Pengujian PWM AC \emph{chopper} tanpa beban pompa &
+Tegangan RMS keluaran dan bentuk gelombang &
+Mengetahui karakteristik dasar rangkaian daya \\
+\hline
+3 &
+Pengujian PWM AC \emph{chopper} dengan beban pompa &
+Tegangan RMS, arus, tekanan air, dan respons pompa &
+Mengetahui performa sistem saat diberi beban aktual \\
+\hline
+4 &
+Pengujian sensor tekanan air &
+ADC, tegangan sensor, dan tekanan air &
+Memastikan pembacaan sensor dapat digunakan sebagai umpan balik \\
+\hline
+5 &
+Pengambilan dataset \emph{neural network} &
+\emph{Duty cycle}, tekanan, tegangan, dan kondisi beban &
+Menyediakan data latih dan data uji model \\
+\hline
+6 &
+Pengujian model \emph{neural network} &
+\emph{Setpoint}, tekanan aktual, error, dan output \emph{duty cycle} &
+Menilai kemampuan model dalam mengatur tekanan \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Pengujian Sinyal PWM STM32}
+\label{sec:pengujian-pwm-stm32}
+
+Pengujian sinyal PWM dilakukan untuk memastikan bahwa mikrokontroler STM32
+menghasilkan dua sinyal kendali sesuai kebutuhan rangkaian PWM AC
+\emph{chopper}. Sinyal utama diamati pada pin PA8, sedangkan sinyal
+komplementer diamati pada pin PA7. Parameter yang diamati meliputi frekuensi,
+\emph{duty cycle}, beda fasa sinyal, dan keberadaan \emph{dead time}.
+
+\begin{table}[H]
+\centering
+\caption{Hasil Pengujian Sinyal PWM STM32}
+\label{tab:hasil-pwm-stm32}
+\begin{tabular}{|c|p{2.1cm}|p{2.1cm}|p{2.2cm}|p{2.2cm}|p{2cm}|}
+\hline
+\textbf{No.} &
+\textbf{Frekuensi Target (Hz)} &
+\textbf{Frekuensi Terukur (Hz)} &
+\textbf{\emph{Duty Cycle} Target (\%)} &
+\textbf{\emph{Duty Cycle} Terukur (\%)} &
+\textbf{Keterangan} \\
+\hline
+1 & 5000 &  & 10 &  &  \\
+\hline
+2 & 5000 &  & 20 &  &  \\
+\hline
+3 & 5000 &  & 30 &  &  \\
+\hline
+4 & 5000 &  & 40 &  &  \\
+\hline
+5 & 5000 &  & 50 &  &  \\
+\hline
+6 & 5000 &  & 60 &  &  \\
+\hline
+7 & 5000 &  & 70 &  &  \\
+\hline
+8 & 5000 &  & 80 &  &  \\
+\hline
+9 & 5000 &  & 90 &  &  \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Pengujian Sinyal PWM dan Sinyal Komplementer}
+\label{tab:pwm-komplementer}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{No.} &
+\textbf{Pin} &
+\textbf{Kondisi Sinyal} &
+\textbf{\emph{Dead Time}} &
+\textbf{Keterangan} \\
+\hline
+1 & PA8 & PWM utama &  &  \\
+\hline
+2 & PA7 & PWM komplementer &  &  \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Pengujian Rangkaian PWM AC \emph{Chopper}}
+\label{sec:pengujian-pwm-ac-chopper}
+
+Pengujian rangkaian PWM AC \emph{chopper} dilakukan untuk mengetahui hubungan
+antara \emph{duty cycle} PWM dengan tegangan RMS keluaran. Pada tahap ini,
+nilai tegangan input AC dijaga tetap, kemudian \emph{duty cycle} dinaikkan
+secara bertahap. Hasil pengujian dibandingkan dengan nilai teoritis untuk
+melihat selisih atau error dari sistem.
+
+\begin{table}[H]
+\centering
+\caption{Hubungan \emph{Duty Cycle} terhadap Tegangan RMS Keluaran}
+\label{tab:duty-tegangan-rms}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{No.} &
+\textbf{\emph{Duty Cycle} (\%)} &
+\textbf{V$_{in}$ RMS (V)} &
+\textbf{V$_{out}$ Teori (V)} &
+\textbf{V$_{out}$ Terukur (V)} \\
+\hline
+1 & 10 & 220 & 22  &  \\
+\hline
+2 & 20 & 220 & 44  &  \\
+\hline
+3 & 30 & 220 & 66  &  \\
+\hline
+4 & 40 & 220 & 88  &  \\
+\hline
+5 & 50 & 220 & 110 &  \\
+\hline
+6 & 60 & 220 & 132 &  \\
+\hline
+7 & 70 & 220 & 154 &  \\
+\hline
+8 & 80 & 220 & 176 &  \\
+\hline
+9 & 90 & 220 & 198 &  \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Persentase Error Tegangan RMS Keluaran}
+\label{tab:error-tegangan-rms}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{No.} &
+\textbf{\emph{Duty Cycle} (\%)} &
+\textbf{V$_{out}$ Teori (V)} &
+\textbf{V$_{out}$ Terukur (V)} &
+\textbf{Error (\%)} \\
+\hline
+1 & 10 & 22  &  &  \\
+\hline
+2 & 20 & 44  &  &  \\
+\hline
+3 & 30 & 66  &  &  \\
+\hline
+4 & 40 & 88  &  &  \\
+\hline
+5 & 50 & 110 &  &  \\
+\hline
+6 & 60 & 132 &  &  \\
+\hline
+7 & 70 & 154 &  &  \\
+\hline
+8 & 80 & 176 &  &  \\
+\hline
+9 & 90 & 198 &  &  \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Pengujian Sensor Tekanan Air}
+\label{sec:pengujian-sensor-tekanan}
+
+Pengujian sensor tekanan air dilakukan untuk memastikan pembacaan ADC pada
+STM32 dapat dikonversi menjadi nilai tekanan yang sesuai. Sensor yang digunakan
+memiliki rentang tegangan keluaran 0,5 V sampai 4,5 V untuk rentang tekanan
+0 bar sampai 12 bar. Karena tegangan maksimum sensor lebih besar dari tegangan
+masukan ADC STM32, digunakan rangkaian pembagi tegangan sebelum sinyal masuk
+ke pin ADC.
+
+\begin{table}[H]
+\centering
+\caption{Hasil Pembacaan Sensor Tekanan Air}
+\label{tab:hasil-sensor-tekanan}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{No.} &
+\textbf{ADC Terbaca} &
+\textbf{Tegangan ADC (V)} &
+\textbf{Tegangan Sensor (V)} &
+\textbf{Tekanan (bar)} \\
+\hline
+1 &  &  &  &  \\
+\hline
+2 &  &  &  &  \\
+\hline
+3 &  &  &  &  \\
+\hline
+4 &  &  &  &  \\
+\hline
+5 &  &  &  &  \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Perbandingan Tekanan Sensor dengan Alat Ukur Referensi}
+\label{tab:kalibrasi-sensor-tekanan}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{No.} &
+\textbf{Tekanan Referensi (bar)} &
+\textbf{Tekanan Sensor (bar)} &
+\textbf{Error (\%)} \\
+\hline
+1 &  &  &  \\
+\hline
+2 &  &  &  \\
+\hline
+3 &  &  &  \\
+\hline
+4 &  &  &  \\
+\hline
+5 &  &  &  \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Pengujian Sistem dengan Beban Pompa Air}
+\label{sec:pengujian-beban-pompa}
+
+Pengujian dengan beban pompa air dilakukan untuk mengetahui pengaruh perubahan
+tegangan RMS keluaran terhadap tekanan air yang dihasilkan. Pada pengujian ini,
+\emph{duty cycle} PWM diubah secara bertahap, kemudian tegangan keluaran,
+arus beban, dan tekanan air dicatat.
+
+\begin{table}[H]
+\centering
+\caption{Pengaruh \emph{Duty Cycle} terhadap Tekanan Pompa Air}
+\label{tab:duty-tekanan-pompa}
+\begin{tabular}{|c|p{2cm}|p{2cm}|p{1.8cm}|p{1.8cm}|p{2.5cm}|}
+\hline
+\textbf{No.} &
+\textbf{\emph{Duty Cycle} (\%)} &
+\textbf{V$_{out}$ RMS (V)} &
+\textbf{Arus Beban (A)} &
+\textbf{Tekanan (bar)} &
+\textbf{Kondisi Aliran} \\
+\hline
+1 & 10 &  &  &  &  \\
+\hline
+2 & 20 &  &  &  &  \\
+\hline
+3 & 30 &  &  &  &  \\
+\hline
+4 & 40 &  &  &  &  \\
+\hline
+5 & 50 &  &  &  &  \\
+\hline
+6 & 60 &  &  &  &  \\
+\hline
+7 & 70 &  &  &  &  \\
+\hline
+8 & 80 &  &  &  &  \\
+\hline
+9 & 90 &  &  &  &  \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Respons Tekanan terhadap Perubahan Beban Keran}
+\label{tab:respons-beban-keran}
+\begin{tabular}{|c|p{3.2cm}|p{2.2cm}|p{2.2cm}|p{2.2cm}|}
+\hline
+\textbf{No.} &
+\textbf{Kondisi Beban} &
+\textbf{\emph{Duty Cycle} (\%)} &
+\textbf{Tekanan Awal (bar)} &
+\textbf{Tekanan Akhir (bar)} \\
+\hline
+1 & Semua keran tertutup &  &  &  \\
+\hline
+2 & Satu keran terbuka sebagian &  &  &  \\
+\hline
+3 & Satu keran terbuka penuh &  &  &  \\
+\hline
+4 & Dua keran terbuka &  &  &  \\
+\hline
+5 & Beban berubah secara tiba-tiba &  &  &  \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Pengambilan Dataset untuk \emph{Neural Network}}
+\label{sec:dataset-neural-network}
+
+Dataset \emph{neural network} diperoleh dari hasil pembacaan sistem saat pompa
+diberi variasi \emph{duty cycle} dan variasi kondisi beban. Data yang direkam
+meliputi waktu pengambilan data, nilai ADC, tekanan air, tegangan RMS keluaran,
+\emph{duty cycle}, frekuensi PWM, dan kondisi beban. Dataset ini digunakan
+sebagai dasar pelatihan dan pengujian model.
+
+\begin{table}[H]
+\centering
+\caption{Format Dataset Hasil Akuisisi Data}
+\label{tab:format-dataset-akuisisi}
+\begin{tabular}{|c|p{3.4cm}|p{4.2cm}|p{3.2cm}|}
+\hline
+\textbf{No.} &
+\textbf{Nama Data} &
+\textbf{Keterangan} &
+\textbf{Satuan} \\
+\hline
+1 & Waktu pengambilan data & Waktu data diterima oleh komputer & detik \\
+\hline
+2 & ADC sensor tekanan & Nilai digital hasil pembacaan ADC STM32 & bit \\
+\hline
+3 & Tegangan sensor & Tegangan keluaran sensor setelah dikonversi & V \\
+\hline
+4 & Tekanan aktual & Tekanan air hasil pembacaan sensor & bar \\
+\hline
+5 & \emph{Duty cycle} & Nilai kendali PWM yang diberikan ke rangkaian & \% \\
+\hline
+6 & Frekuensi PWM & Frekuensi sinyal PWM dari STM32 & Hz \\
+\hline
+7 & Tegangan RMS keluaran & Tegangan keluaran PWM AC \emph{chopper} & V \\
+\hline
+8 & Kondisi beban & Kondisi bukaan keran saat data diambil & - \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Contoh Tabel Dataset untuk Pelatihan \emph{Neural Network}}
+\label{tab:dataset-nn}
+\begin{tabular}{|c|p{2cm}|p{2.2cm}|p{1.7cm}|p{2.1cm}|p{2cm}|}
+\hline
+\textbf{No.} &
+\textbf{Setpoint (bar)} &
+\textbf{Tekanan Aktual (bar)} &
+\textbf{Error (bar)} &
+\textbf{\emph{Duty Cycle} (\%)} &
+\textbf{Kondisi Beban} \\
+\hline
+1 &  &  &  &  &  \\
+\hline
+2 &  &  &  &  &  \\
+\hline
+3 &  &  &  &  &  \\
+\hline
+4 &  &  &  &  &  \\
+\hline
+5 &  &  &  &  &  \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Pembagian Dataset \emph{Neural Network}}
+\label{tab:pembagian-dataset}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{No.} &
+\textbf{Jenis Data} &
+\textbf{Persentase Data} &
+\textbf{Jumlah Data} \\
+\hline
+1 & Data latih & 70\% &  \\
+\hline
+2 & Data validasi & 15\% &  \\
+\hline
+3 & Data uji & 15\% &  \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Pengujian Model \emph{Neural Network}}
+\label{sec:pengujian-model-neural-network}
+
+Pengujian model \emph{neural network} dilakukan untuk menilai kemampuan model
+dalam menghasilkan nilai \emph{duty cycle} berdasarkan kondisi tekanan aktual
+dan nilai tekanan target. Hasil model dibandingkan dengan nilai target atau
+nilai hasil pengujian aktual untuk mengetahui besar error.
+
+\begin{table}[H]
+\centering
+\caption{Parameter Pelatihan Model \emph{Neural Network}}
+\label{tab:parameter-pelatihan-nn}
+\begin{tabular}{|c|p{5cm}|p{4cm}|}
+\hline
+\textbf{No.} &
+\textbf{Parameter} &
+\textbf{Nilai} \\
+\hline
+1 & Jumlah input &  \\
+\hline
+2 & Jumlah \emph{hidden layer} &  \\
+\hline
+3 & Jumlah neuron tiap \emph{hidden layer} &  \\
+\hline
+4 & Fungsi aktivasi &  \\
+\hline
+5 & Jumlah output &  \\
+\hline
+6 & Algoritma pelatihan &  \\
+\hline
+7 & Jumlah epoch &  \\
+\hline
+8 & \emph{Learning rate} &  \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Hasil Prediksi Model \emph{Neural Network}}
+\label{tab:hasil-prediksi-nn}
+\begin{tabular}{|c|p{1.8cm}|p{2cm}|p{2.2cm}|p{2.3cm}|p{1.5cm}|}
+\hline
+\textbf{No.} &
+\textbf{Setpoint (bar)} &
+\textbf{Tekanan Aktual (bar)} &
+\textbf{\emph{Duty Cycle} Target (\%)} &
+\textbf{\emph{Duty Cycle} Prediksi (\%)} &
+\textbf{Error (\%)} \\
+\hline
+1 &  &  &  &  &  \\
+\hline
+2 &  &  &  &  &  \\
+\hline
+3 &  &  &  &  &  \\
+\hline
+4 &  &  &  &  &  \\
+\hline
+5 &  &  &  &  &  \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Evaluasi Performa Model \emph{Neural Network}}
+\label{tab:evaluasi-nn}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{No.} &
+\textbf{Metrik Evaluasi} &
+\textbf{Nilai} \\
+\hline
+1 & MSE &  \\
+\hline
+2 & RMSE &  \\
+\hline
+3 & MAE &  \\
+\hline
+4 & MAPE &  \\
+\hline
+5 & Akurasi rata-rata &  \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Pengujian Sistem Kendali Tekanan}
+\label{sec:pengujian-sistem-kendali}
+
+Pengujian sistem kendali tekanan dilakukan untuk melihat kemampuan sistem dalam
+menjaga tekanan air agar mendekati nilai \emph{setpoint}. Pada pengujian ini,
+nilai \emph{setpoint} ditentukan, kemudian perubahan tekanan aktual dan respons
+\emph{duty cycle} diamati selama sistem bekerja.
+
+\begin{table}[H]
+\centering
+\caption{Respons Sistem terhadap Perubahan \emph{Setpoint}}
+\label{tab:respons-setpoint}
+\begin{tabular}{|c|p{1.8cm}|p{2cm}|p{2cm}|p{2cm}|p{1.8cm}|}
+\hline
+\textbf{No.} &
+\textbf{\emph{Setpoint} (bar)} &
+\textbf{Tekanan Awal (bar)} &
+\textbf{Tekanan Stabil (bar)} &
+\textbf{\emph{Settling Time} (s)} &
+\textbf{Error Stabil (bar)} \\
+\hline
+1 &  &  &  &  &  \\
+\hline
+2 &  &  &  &  &  \\
+\hline
+3 &  &  &  &  &  \\
+\hline
+4 &  &  &  &  &  \\
+\hline
+5 &  &  &  &  &  \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Respons Sistem terhadap Gangguan Beban}
+\label{tab:respons-gangguan-beban}
+\begin{tabular}{|c|p{3cm}|p{2.5cm}|p{2.5cm}|p{2cm}|}
+\hline
+\textbf{No.} &
+\textbf{Jenis Gangguan} &
+\textbf{Tekanan Sebelum Gangguan (bar)} &
+\textbf{Tekanan Setelah Gangguan (bar)} &
+\textbf{Waktu Pemulihan (s)} \\
+\hline
+1 & Keran dibuka sebagian &  &  &  \\
+\hline
+2 & Keran dibuka penuh &  &  &  \\
+\hline
+3 & Keran ditutup sebagian &  &  &  \\
+\hline
+4 & Keran ditutup penuh &  &  &  \\
+\hline
+\end{tabular}
+\end{table}
 
 \section{Pembahasan}
-\label{sec:pembahasan}
-% \input{bab/Hasil_dan_pembahasan/pembahasan.tex}
+\label{sec:pembahasan-bab-4}
+
+Berdasarkan hasil pengujian, pembahasan dapat diarahkan pada kesesuaian antara
+teori dan hasil pengukuran, pengaruh perubahan \emph{duty cycle} terhadap
+tegangan RMS keluaran, pengaruh tegangan keluaran terhadap tekanan pompa, serta
+kemampuan model \emph{neural network} dalam menghasilkan nilai kendali. Bagian
+ini juga dapat digunakan untuk menjelaskan penyebab error, keterbatasan alat
+ukur, pengaruh karakteristik beban pompa, serta kestabilan sistem saat terjadi
+perubahan beban.
