@@ -1,377 +1,309 @@
 \chapter{TINJAUAN PUSTAKA}
-\label{chap:tinjauanpustaka}
 
+\section{Hasil Riset Terdahulu}
+Penelitian mengenai pengaturan kecepatan motor untuk mengontrol tekanan pada pompa air telah dilakukan sebelumnya oleh \parencite{anakits} dan \parencite{anakub}. Kevin Rosada (2017) menggunakan driver berbasis TRIAC yang dikontrol dengan algoritma PID, di mana parameter yang diamati adalah debit aliran air. Sementara itu, penelitian dari Hari (2015) menggunakan metode PWM berbasis MOSFET dalam bentuk AC chopper tanpa pengendali aktif (hanya menggunakan logika \textit{if-else}), dengan parameter keluaran yang diamati berupa tekanan. Berdasarkan keterbatasan pada kedua pendekatan tersebut, penelitian ini mengusulkan sistem pengaturan tekanan air berbasis PWM AC \emph{chopper} dengan pengontrol berbasis neural network (NN), dengan keluaran berasal dari inverter, bertujuan untuk memperoleh tekanan air yang konstan dan adaptif terhadap perubahan beban.
 
-\section{Hasil penelitian/perancangan terdahulu}
-\label{Hasil penelitian/perancangan terdahulu}
-Dalam tesis yang dilakukan oleh Thilderkvist dan Svensson,
-platform \emph{PhantomX Hexapod Mark II} digunakan sebagai basis robot. Robot
-ini memiliki rangka berbahan aluminium dan dilengkapi dengan total delapan belas
-\emph{servo motor}—tiga buah pada setiap kaki—yang memungkinkan gerakan dalam
-tiga derajat kebebasan (\emph{3-DOF}) per kaki. Setiap sendi dikendalikan secara
-independen menggunakan aktuator servo tipe \emph{AX-12A} dari Dynamixel, yang
-terkenal akan presisi dan torsi yang tinggi. Di bagian pusat tubuh robot,
-dipasang sebuah mikrokontroler utama yang bertugas untuk mengeksekusi algoritma
-kendali gerak yang telah dikembangkan di lingkungan \emph{MATLAB/Simulink}.
-Selain itu, sistem dilengkapi dengan sensor \emph{IMU} (Inertial Measurement
-Unit) untuk mendeteksi orientasi dan kemiringan tubuh, yang sangat penting dalam
-menjaga keseimbangan saat robot bergerak di permukaan yang tidak rata
-\parencite{Thilderkvist2015}.
+\section{Dasar Teori}
 
-Pada penelitian yang dilakukan Xinan Wang dkk berfokus pada analisis kinematika robot 
-lengan humanoid dengan enam derajat kebebasan (6-DOF). Dalam studi tersebut, model 
-\emph{forward kinematic} dibentuk menggunakan metode Denavit-Hartenberg (D-H), sementara solusi 
-\emph{inverse kinematic} diselesaikan secara kombinasi antara metode numerik dan aljabar. 
-Penelitian ini juga mengembangkan simulasi berbasis MATLAB untuk memverifikasi 
-keakuratan solusi kinematika yang dihasilkan. Hasil verifikasi menunjukkan bahwa 
-deviasi maksimum antara pose target dan aktual hanya sebesar 0.0009 radian pada sumbu 
-roll, yang menunjukkan presisi tinggi dari model kinematika yang digunakan. Pendekatan 
-ini menunjukkan efektivitas integrasi antara metode analitik dan numerik dalam 
-menyelesaikan permasalahan kinematika lengan robot kompleks. \parencite{wang2024kinematics}
+\subsection{Inverter Satu Fasa}
 
-\sloppy
-Penelitian yang dilakukan Dologa dkk memperkenalkan platform robot hexapod
-biomimetik yang dirancang dengan fokus pada modularitas, efisiensi biaya, dan
-kesederhanaan struktur kontrol. Penelitian ini mencakup tiga fase utama: desain
-mekanik, pengembangan sistem elektronik, dan implementasi sistem kontrol
-berbasis \emph{forward kinematic} serta \emph{inverse kinematic}. Robot memiliki 3 derajat
-kebebasan per kaki dengan penggerak servo MG995 yang dikendalikan oleh
-Arduino Mega 2560 dan dikomunikasikan melalui Bluetooth. Model \emph{inverse kinematic}
-dikembangkan secara geometrik untuk memungkinkan gerakan spasial yang presisi.
-Melalui simulasi dan implementasi nyata menggunakan bagian-bagian hasil cetak 3D,
-platform ini terbukti mampu bergerak maju, mundur, dan berputar di titik tetap
-dengan kestabilan yang baik, serta mampu menanggung beban tambahan. \parencite{10554226}
-
-\section{Teori/Konsep Dasar}
-\label{sec:konsep dasar}
-
-\subsection{Robot \emph{Hexapod}}
-Robot berkaki enam atau \emph{hexapod} adalah jenis robot yang konfigurasi kakinya terinspirasi
-dari hewan-hewan berkaki enam seperti serangga atau laba-laba. Konfigruasi robot hexapod ini sangat
-popler pada robot mobile karena stabilitasnya yang tinggi pada saat bergerak, sehingga mengurangi 
-kompleksitas kontrol dan desain mekanik. \parencite{RobotHexapod}
-
-\subsection{\emph{Forward Kinematic} dan \emph{Inverse Kinematic}}
-\emph{Forward kinematic}  adalah metode yang digunakan untuk mengonversi nilai sudut pada 
-setiap joint menjadi koordinat kartesian di titik ujung \emph{end-effector}. Dengan menggunakan 
-metode ini, posisi dan orientasi \emph{end-effector} (dikenal sebagai robot pose) dapat dihitung 
-berdasarkan konfigurasi sudut pada masing-masing \emph{joint} serta struktur mekanik dari robot 
-tersebut.\parencite{ModernRobotics}
+Inverter adalah perangkat elektronika yang berfungsi mengubah energi listrik dari arus searah (DC) menjadi arus bolak-balik (AC). Pada gambar \ref{fig:Inverter1} ditunjukkan sebuah rangkaian inverter \emph{full-bridge}. Inverter bekerja dengan prinsip \emph{switching}. Pada saat $S_{\text{1}}$ dan $S_{\text{2}}$ dalam kondisi tertutup maka $+V_{\text{dc}}$ akan terhubung ke beban. dan terhubung ke $-V_{\text{dc}}$ pada saat $S_{\text{3}}$ dan $S_{\text{4}}$ tertutup. Penyaklaran secara periodik ini menghasilkan tegangan berbentuk gelombang kotak \parencite{hart}.
 
 \begin{figure} [H] \centering
   % Nama dari file gambar yang diinputkan
-  \includegraphics[scale=0.35]{gambar/Planar 3 DOF.png}
+  \includegraphics[scale=0.35]{gambar/square.jpg}
   % Keterangan gambar yang diinputkan
-  \caption{Contoh lengan robot 3 DOF \parencite{ModernRobotics}}
+  \caption{Rangkaian Inverter \emph{Full Bridge}}
   % Label referensi dari gambar yang diinputkan
-  \label{fig:Planar3DOF}
+  \label{fig:Inverter1}
 \end{figure}
 
-Dengan menggunakan \emph{forward kinematic} pada robot lengan 3 DOF seperti pada Gambar \ref{fig:Planar3DOF},
-dapat diperoleh persamaan posisi \emph{end-effector} sebagai berikut:
+\begin{figure} [H] \centering
+  % Nama dari file gambar yang diinputkan
+  \includegraphics[scale=0.40]{gambar/square_wave.jpg}
+  % Keterangan gambar yang diinputkan
+  \caption{Tegangan Keluaran Inverter}
+  % Label referensi dari gambar yang diinputkan
+  \label{fig:Inverter}
+\end{figure}
+
+Asumsikan $S_{\text{1}}$ dan $S_{\text{2}}$ tertutup pada $t=0$. Maka diperoleh persamaan arus pada beban dalam kondisi \emph{steady state} adalah sebagai berikut \parencite{hart}. 
 
 \begin{equation}
-  \label{eq:Forward Kinematic}
-  \begin{aligned}
-    x &= L_1 \cos \theta_1 + L_2 \cos(\theta_1 + \theta_2) + L_3 \cos(\theta_1 + \theta_2 + \theta_3), \\
-    y &= L_1 \sin \theta_1 + L_2 \sin(\theta_1 + \theta_2) + L_3 \sin(\theta_1 + \theta_2 + \theta_3).
-  \end{aligned}
+i_o(t) =
+\begin{cases}
+\displaystyle \frac{V_{dc}}{R} + \left( I_{\min} - \frac{V_{dc}}{R} \right) e^{-t/\tau} & \text{untuk } 0 < t < \frac{T}{2} \\
+\\
+\displaystyle -\frac{V_{dc}}{R} + \left( I_{\max} + \frac{V_{dc}}{R} \right) e^{-(t - T/2)/\tau} & \text{untuk } \frac{T}{2} < t < T
+\end{cases}
 \end{equation}
-Jika lengan robot hanya membutuhkan posisi (x,y) dari \emph{end-effector}, ruang gerak
-robot dianggap sebagai dua dimensi pada bidang x-y, maka \emph{forward kinematic} hanya
-menggunakan persamaan \ref{eq:Forward Kinematic}. Namun jike orientasi dari \emph{end-effector}
-dibutuhkan, maka diperlukan satu persamaan lagi untuk menghitung sudut orientasi
+
+Setelah itu dengan menggunakan analisis fourier, maka diperoleh persamaan tegangan keluaran dari inverter yaitu. 
 
 \begin{equation}
-  \label{eq:end-effector}
-  \phi = \theta_1 + \theta_2 + \theta_3.
+    v_o(t) = \sum_{\substack{n \\ \text{odd}}} \frac{4V_{dc}}{n\pi} \sin(n \omega_0 t)
 \end{equation}
 
-\emph{Inverse kinematic} adalah metode yang digunakan untuk menghitung sudut pada setiap
-\emph{joint} berdasarkan posisi dan orientasi yang diinginkan dari \emph{end-effector}.
-Posisi dan orientasi dari \emph{end-effector} yang diinginkan harus sesuai dengan kemampuan
-struktur mekanik yang ada. Untuk menyelesaikan \emph{inverse kinematic} pada sebuah robot,
-terdapat beberapa kemungkinan solusi yang dapat dihasilkan.\parencite{inverseKinematics}
+Salah satu teknik penyaklaran dalam inverter satu fasa adalah dengan menggunakan \emph{Pulse Width Modulation} (PWM). Dimana pada saat menggunakan PWM maka dapat mengurangi total harmonisa pada arus beban. Dalam teknik PWM, amplitudo tegangan yang dikeluarkan dapat diatur dengan sinyal gelombang yang termodulasi. Teknik ini memerlukan sinyal referensi (sinyal yang termodulasi) yang berupa sinyal sinusoidal, dan sinyal \emph{carrier}, yaitu sinyal triangular yang mengkontrol frekuensi \emph{switching} \parencite{hart}. Salah satu teknik dalam PWM adalah \emph{bipolar switching} \parencite{bipolar}.
 
-% \begin{figure} [H] \centering
-%   % Nama dari file gambar yang diinputkan
-%   \includegraphics[scale=0.65]{gambar/Planar 2 DOF.png}
-%   % Keterangan gambar yang diinputkan
-%   \caption{Lengan Robot 2 DOF \parencite{inverseKinematics}}
-%   % Label referensi dari gambar yang diinputkan
-%   \label{fig:Planar2DOF}
-% \end{figure}
+\[
+\begin{aligned}
+v_o &= +V_{dc} \quad \text{saat } v_{\text{sine}} > v_{\text{tri}} \\
+v_o &= -V_{dc} \quad \text{saat } v_{\text{sine}} < v_{\text{tri}}
+\end{aligned}
+\]
 
-Terdapat dua pendekatan \emph{inverse kinematic} yang
-dapat digunakan untuk menghitung sudut dari setiap \emph{joint} berdasarkan posisi dari
-\emph{end-effector} yang diinginkan.  
+
+\[
+\begin{aligned}
+S_1 \text{ dan } S_2 \text{ ON ketika } v_{\text{sine}} > v_{\text{tri}} \quad &\left( v_o = +V_{dc} \right) \\
+S_3 \text{ dan } S_4 \text{ ON ketika } v_{\text{sine}} < v_{\text{tri}} \quad &\left( v_o = -V_{dc} \right)
+\end{aligned}
+\]
+
+\begin{figure} [H] \centering
+  % Nama dari file gambar yang diinputkan
+  \includegraphics[scale=0.40]{gambar/inverter3.jpg}
+  % Keterangan gambar yang diinputkan
+  \caption{Bipolar \emph{Pulse Width Modulation}}
+  % Label referensi dari gambar yang diinputkan
+  \label{fig:Inverter}
+\end{figure}
+
+\subsection{Karakteristik Pompa Air}
+
+Pompa merupakan perangkat yang berfungsi untuk memindahkan cairan dari satu lokasi ke lokasi lainnya dengan meningkatkan tekanan pada cairan tersebut. Pompa sanggup menaikkan air dalam pipa vertikal sampai pada ketinggian di mana berat air dan gravitasi menahan air untuk tidak naik lebih tinggi dari itu, ketinggian ini disebut \emph{head}. Persamaan \emph{head} adalah sebagai berikut.
+\begin{equation}
+H_m = \frac{(P_d - P_s) \times 10}{\rho}
+\end{equation}
+
+\begin{figure} [H] \centering
+  % Nama dari file gambar yang diinputkan
+  \includegraphics[scale=0.50]{gambar/kurva.jpg}
+  % Keterangan gambar yang diinputkan
+  \caption{Kurva Karakteristik Kerja Pompa}
+  % Label referensi dari gambar yang diinputkan
+  \label{fig:Kurva}
+\end{figure}
+
+Pada kurva tersebut dapat dilihat hubungan antara debit dengan \emph{debit} dan kurva tersebut menunjukkan titik potong yang merupakan titik kerja pompa. Kemudian, daya poros motor (\(P_{Sh}\)) dapat dihitung dengan mengalikan torsi (\(\tau\)) yang dihasilkan motor dengan kecepatan sudut (\(\omega\)) poros motor. Persamaannya adalah sebagai berikut. Persamaan ini menunjukkan bahwa semakin besar torsi atau kecepatan putar motor, maka daya yang disalurkan melalui poros motor juga akan semakin besar. Daya poros ini merupakan salah satu komponen penting dalam perhitungan efisiensi motor maupun sistem pompa secara keseluruhan \parencite{MANSOUR2025342}.
+
+\begin{equation}
+P_{Sh} = \tau \times \omega = \tau \times \frac{2\pi n}{60}
+\end{equation}
+
+Berdasarkan hukum afinitas, debit aliran $Q$ berbanding lurus dengan kecepatan putar pompa. Artinya, jika kecepatan meningkat, maka debit aliran juga meningkat secara proporsional.
+
+\begin{equation}
+Q_2 = Q_1 \times \left( \frac{N_2}{N_1} \right)
+\end{equation}
+
+\emph{Head} $H$ berbanding lurus dengan kuadrat dari perubahan kecepatan pompa. Artinya, peningkatan kecepatan putar akan menaikkan head secara eksponensial.
+\begin{equation}
+H_2 = H_1 \times \left( \frac{N_2}{N_1} \right)^2
+\end{equation}
+
+Daya $P$ yang dibutuhkan oleh pompa berbanding lurus dengan pangkat tiga dari kecepatan. Oleh karena itu, sedikit peningkatan kecepatan akan menyebabkan kenaikan daya yang cukup signifikan.
+\begin{equation}
+P_2 = P_1 \times \left( \frac{N_2}{N_1} \right)^3
+\end{equation}
+
+Daya hidraulik yang dihasilkan oleh pompa $P_{\text{H}}$ bergantung pada debit aliran, densitas fluida, percepatan gravitasi, dan \emph{H} (tekanan fluida). Persamaan untuk menghitung daya hidraulik adalah sebagai berikut
+\begin{equation}
+P_H (\text{kW}) = \frac{Q \times \delta \times g \times H}{3.6 \times 10^6}
+\end{equation}
+
+Daya listrik yang disuplai ke motor (\(P_M\)) dapat dihitung dengan persamaan berikut.
+\begin{equation}
+P_M = \frac{\sqrt{3} \times V \times I \times \cos\phi}{1000 \times \eta_e}
+\end{equation}
+
+Dapat disimpulkan bahwa tegangan $V$ memengaruhi kecepatan motor dan tekanan motor \parencite{GIRDHAR200548}. 
+
+
+\subsection{Motor Induksi Satu Fasa}
+
+Motor induksi satu fasa banyak digunakan dalam aplikasi rumah tangga karena strukturnya yang sederhana, biaya yang rendah, dan daya tahan yang tinggi. Prinsip kerja motor induksi satu fasa didasarkan pada medan magnet berputar yang dihasilkan oleh arus bolak-balik di stator, yang kemudian menginduksi arus pada rotor dan menghasilkan torsi putar.
+Kecepatan medan magnet berputar dalam motor induksi, atau dikenal sebagai kecepatan sinkron $n_{\text{sync}}$, bergantung pada frekuensi sumber $f_{\text{e}}$,dan jumlah kutub P dari motor. sebagaimana ditunjukkan persamaan \ref{eq:Persamaandas}
+
+\begin{equation}
+\label{eq:Persamaandas}
+n_{\text{sync}} = \frac{120 f_e}{P}
+\end{equation}
+
+Dalam praktiknya, kecepatan aktual motor $n_{\text{m}}$ akan selalu sedikit lebih lambat dari $n_{\text{sync}}$,  selisihnya dinyatakan sebagai slip \text{s}. Slip menggambarkan rasio perbedaan antara kecepatan sinkron dan kecepatan rotor terhadap kecepatan sinkron, sebagaimana ditunjukkan oleh persamaan \ref{eq:perss}
+
+\begin{equation}
+\label{eq:perss}
+s = \frac{n_{\text{sync}} - n_m}{n_{\text{sync}}} \times 100\%
+\end{equation}
+
+Salah satu metode umum untuk mengatur kecepatan motor induksi adalah dengan memodifikasi slip. Hal ini dapat dicapai baik dengan menambahkan resistansi rotor atau dengan mengatur tegangan terminal motor \parencite{chapman}. Pada motor induksi satu fasa, metode pengaturan tegangan terminal lebih umum digunakan.Dengan menurunkan tegangan RMS terminal $V_{\text{T}}$ kecepatan motor dapat dikurangi karena slip meningkat. Persamaan torsi dari motor induksi ditunjukkan pada persamaan \ref{eq:perstorsi}.
+
+\begin{equation}
+\label{eq:perstorsi}
+\tau_{\text{ind}} = \frac{P_{AG}}{\omega_{\text{sync}}}
+\end{equation}
+
+\begin{equation}
+\label{eq:perstor2}
+\tau_{\text{ind}} = 
+\frac{3V_{\text{TH}}^2 \cdot \frac{R_2}{s}}{
+\omega_{\text{sync}} \left[ \left( R_{\text{TH}} + \frac{R_2}{s} \right)^2 + (X_{\text{TH}} + X_2)^2 \right]}
+\end{equation}
+
+Dari persamaan \ref{eq:perstor2} terlihat bahwa torsi sebanding dengan kuadrat tegangan terminal $V_{\text{TH}}$ \parencite{hart}. Oleh karena itu, penurunan tegangan RMS secara langsung mengurangi torsi output motor. Ini menunjukkan bahwa pengaturan tegangan terminal tidak hanya berdampak pada slip dan kecepatan motor, tetapi juga mempengaruhi kemampuan motor untuk menghasilkan torsi. Dengan demikian, pendekatan pengaturan kecepatan menggunakan pengendalian tegangan terminal dapat dilakukan.
+
+\subsection{Rangkaian PWM AC \emph{Chopper}}
+
+PWM AC \emph{chopper} merupakan metode pengaturan tegangan AC menggunakan \emph{pulse width modulation}.  Sebagai pengatur tegangan pada motor, PWM AC chopper mampu memberikan kontrol tegangan yang lebih linear saat \emph{starting}, menghasilkan torsi awal yang lebih halus. Selain itu, pengoperasian pada frekuensi \emph{switching} tinggi memungkinkan bentuk gelombang arus yang lebih mendekati sinusoidal dibandingkan dengan pengontrol berbasis thyristor \parencite{pwmacchop2}. Rangkaian ini dikendalikan berdasarkan interval waktu $T_{\text{on}}$ dan $T_{\text{off}}$, yang menentukan karakteristik pensaklaran. Tegangan pada beban induktif selanjutnya dirumuskan dalam Persamaan \ref{eq:Tegangan Beban}.
+
+\begin{equation}
+% Label referensi dari persamaan yang dibuat
+\label{eq:Duty Ratio}
+D = \frac{T_{\text{on}}}{T_s} = \frac{T_{\text{on}}}{T_{\text{on}} + T_{\text{off}}}
+\end{equation}
+
+\begin{equation}
+% Label referensi dari persamaan yang dibuat
+\label{eq:Tegangan Beban}
+V_L(t) = D \cdot V_m \sin(\omega t)
+\end{equation}
+
+
+\begin{figure} [H] \centering
+  % Nama dari file gambar yang diinputkan
+  \includegraphics[scale=0.40]{gambar/pwm_ac_chop.jpg}
+  % Keterangan gambar yang diinputkan
+  \caption{Susunan Saklar pada Rangkaian PWM AC \emph{Chopper}}
+  % Label referensi dari gambar yang diinputkan
+  \label{fig:Saklar PWM AC}
+\end{figure}
+
+Saklar S1 berfungsi sebagai saklar utama PWM yang mengatur waktu pada saat beban menerima tegangan. Saklar S2 dan dioda berfungsi sebagai jalur bebas \emph{freewheeling} saat S1 dimatikan, untuk menjaga arus tetap kontinu dan mencegah gangguan pada beban induktif. 
+Dengan mengubah rasio ON dan OFF \emph{duty cycle} dari S1, tegangan rata-rata (RMS) yang diterima beban bisa diatur \parencite{pwmacchop}.
+
+\begin{table}[H]
+\caption{Cara Kerja Rangkaian}
+\centering
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{|
+  >{\centering\arraybackslash}p{5cm}|
+  >{\centering\arraybackslash}m{4cm}|
+  >{\centering\arraybackslash}m{4cm}|}
+\hline
+\textbf{Titik Kerja} & \textbf{ON} & \textbf{OFF} \\
+\hline
+Tegangan Setengah Fasa Positif & D1, S1, D3 \newline Aktif & D5, S2, D7 \newline Aktif \\
+\hline
+Tegangan Setengah Fasa Negatif & D2, S1, D4 \newline Aktif & D6, S2, D8 \newline Aktif \\
+\hline
+\end{tabular}
+\label{tab:ac_chopper_operation}
+\end{table}
+
+\subsection{Kontrol \emph{Neural Network}}
+
+\emph{Neural Network} atau jaringan saraf tiruan merupakan sistem komputasi yang dikembangkan dengan meniru cara kerja otak manusia. Struktu dasar dari \emph{multilayer perceptron} (MLP) NN dapat dilihat pada gambar \ref{fig:NN}. $x_{\text{1}}$-$x_{\text{2}}$ adalah \emph{input} sedangkan $y$ adalah \emph{output}. Terdapat tiga buah \emph{layer} yaitu \emph{input layer}, \emph{hidden layer}, dan \emph{output layer} \parencite{ann}.
+
+\begin{figure} [H] \centering
+  % Nama dari file gambar yang diinputkan
+  \includegraphics[scale=0.50]{gambar/nn.jpg}
+  % Keterangan gambar yang diinputkan
+  \caption{Struktur MPL NN}
+  % Label referensi dari gambar yang diinputkan
+  \label{fig:NN}
+\end{figure}
+
+Input skalar $p$ ditransmisikan melalui suatu koneksi yang mengalikan besarannya dengan bobot skalar $w$, sehingga membentuk hasil kali $wp$, yang juga merupakan skalar. Dalam hal ini, input berbobot $wp$ menjadi satu-satunya argumen dari fungsi transfer $f$, yang menghasilkan output skalar $a$. Neuron pada sisi kanan memiliki suatu \textit{bias} skalar, yaitu $b$.
+
+\begin{equation}
+a = f(wp + b)
+\end{equation}
+
+\begin{figure} [H] \centering
+  % Nama dari file gambar yang diinputkan
+  \includegraphics[scale=0.50]{gambar/simpleneuron.jpg}
+  % Keterangan gambar yang diinputkan
+  \caption{Neuron Sederhana}
+  % Label referensi dari gambar yang diinputkan
+  \label{fig:neuron}
+\end{figure}
+
+Perceptron dilatih berdasarkan contoh-contoh perilaku yang diinginkan. Perilaku yang diinginkan ini dapat dirangkum dalam bentuk pasangan input dan output sebagai berikut:
+
+\[
+(p_1, t_1),\ (p_2, t_2),\ \ldots,\ (p_q, t_q)
+\]
+
+di mana $p$ merupakan input ke jaringan dan $t$ adalah output yang benar (target) yang sesuai. Tujuan dari pelatihan adalah untuk meminimalkan kesalahan $e$, yang merupakan selisih antara respons neuron $a$ dan vektor target $t$. \emph{Learning Rules} dari perseptron adalah sebagai berikut.
+
+\begin{align*}
+\mathbf{e}(k) &= \mathbf{t}(k) - \mathbf{a}(k) \\
+\mathbf{w}(k+1) &= \mathbf{w}(k) + \mathbf{e}(k)\,\mathbf{p}^T(k) \\
+\mathbf{b}(k+1) &= \mathbf{b}(k) + \mathbf{e}(k)\,\mathbf{1}^T(k)
+\end{align*}
+
+\emph{Inference}  merupakan tahap penggunaan model neural network yang telah dilatih untuk menghasilkan \emph{output} berdasarkan \emph{input} baru. Pada fase ini, model tidak lagi mempelajari parameter \emph{weights} dan \emph{bias}, tetapi hanya melakukan perhitungan forward pass untuk memperoleh prediksi.
+
+\begin{figure} [H] \centering
+  % Nama dari file gambar yang diinputkan
+  \includegraphics[scale=0.50]{gambar/learning.jpg}
+  % Keterangan gambar yang diinputkan
+  \caption{Proses \emph{Learning}}
+  % Label referensi dari gambar yang diinputkan
+  \label{fig:learning}
+\end{figure}
+
+Proses pelatihan neural network terdiri dari dua fase utama yaitu \emph{forward propagation} dan \emph{backpropagation}. \emph{Forward propagation} merupakan proses dasar dalam jaringan saraf tiruan di mana data masukan melewati beberapa lapisan jaringan untuk menghasilkan keluaran. Pada tahap ini, setiap lapisan akan melakukan operasi matematis berupa perkalian bobot dan penambahan bias, lalu menerapkan fungsi aktivasi.
+
+\begin{align}
+a^0 &= p \label{eq:input} \\
+a^{m+1} &= f^{m+1}\left( \mathbf{w}^{m+1} a^m + b^{m+1} \right), \quad \text{untuk } m = 0, 1, \dots, M-1 \label{eq:recursive} \\
+a &= a^M \label{eq:output}
+\end{align}
+
+\emph{Backpropagation} adalah algoritma pelatihan pada jaringan saraf tiruan yang bekerja dengan menghitung kesalahan dari output dan menyebarkannya kembali ke lapisan sebelumnya untuk memperbarui bobot. Proses ini dilakukan secara iteratif menggunakan metode \emph{gradient descent} untuk meminimalkan kesalahan \parencite{backp}.
+
+\begin{align}
+s^M &= -2 \, \dot{\bm{F}}^M \left( \bm{n}^M \right) (t - \bm{a}) \label{eq:sM} \\
+s^m &= \dot{\bm{F}}^m \left( \bm{n}^m \right) \left( \bm{w}^{m+1} \right)^T s^{m+1}, \quad \text{untuk } m = M-1, \ldots, 2, 1 \label{eq:sm}
+\end{align}
+
+\subsection{STM32F411CE}
+
+Mikrokontroler STM32F411CE berbasis ARM Cortex-M4 memiliki fitur \emph{timer} dan ADC \emph{Analog-to-Digital Converter}. STM32F411CE ini dilengkapi dengan  11 \emph{timer}, terdiri dari enam \emph{timer} 16-bit dan dua \emph{timer} 32-bit, yang mampu beroperasi pada frekuensi hingga 100 MHz. \emph{Timer} ini mendukung berbagai fungsi seperti \emph{Input Capture/Output Compare} (IC/OC), generasi sinyal PWM (\emph{Pulse Width Modulation}), serta \emph{decoder} untuk \emph{encoder quadrature}.
+
+\begin{figure} [H] \centering
+  % Nama dari file gambar yang diinputkan
+  \includegraphics[scale=0.15]{gambar/stm32.jpg}
+  % Keterangan gambar yang diinputkan
+  \caption{\emph{STM32F4C11EU6}}
+  % Label referensi dari gambar yang diinputkan
+  \label{fig:stm}
+\end{figure}
+
+STM32F411CE juga memiliki ADC 12-bit dengan hingga 16 channel eksternal dan kecepatan konversi hingga 2.4 MSPS (\emph{Mega Samples Per Second}). ADC ini mendukung mode \emph{single-shot} dan \emph{continuous conversion}, serta dilengkapi dengan fitur DMA {\emph{Direct Memory Access} untuk transfer data yang efisien tanpa membebani CPU \parencite{stm32}.
+
+\subsection{Sensor Tekanan Air}
+
+Sensor tekanan air bekerja dengan mengubah tekanan fisik air melalui elemen seperti diafragma, strain gauge, atau kristal piezoelektrik menjadi sinyal listrik. Sinyal ini kemudian diproses melalui amplifikasi, penyaringan noise, dan konversi digital. Sensor umumnya memiliki tiga pin, VCC (biasanya 5V), GND, dan pin sinyal (keluaran 0.5–4.5V). Beberapa sensor memiliki output berbasis nol (misalnya 0–5V) dan lainnya tidak (misalnya 1–5V), di mana pembacaan nol pada sensor non-basis nol menandakan kegagalan sensor \parencite{waterpress}.
 
 \begin{figure}[H]
   \centering
-  \begin{subfigure}{0.45\textwidth}
+  % Gambar kiri
+  \begin{minipage}{0.48\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{gambar/ElbowDown.png}
-    \caption{Elbow Down}
-    \label{fig:ElbowDown}
-  \end{subfigure}
+    \includegraphics[scale=0.5]{gambar/sensor.jpg}
+    \caption{\emph{Analog Water Pressure Sensor}}
+    \label{fig:water_sensor}
+  \end{minipage}
   \hfill
-  \begin{subfigure}{0.45\textwidth}
+  % Gambar kanan
+  \begin{minipage}{0.48\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{gambar/ElbowUp.png}
-    \caption{Elbow Up}
-    \label{fig:ElbowUp}
-  \end{subfigure}
-  \caption{Pendekatan elbow down dan elbow up \parencite{inverseKinematics}}
-  \label{fig:TwoImages}
+    \includegraphics[scale=0.5]{gambar/data tekanan.png}
+    \caption{\emph{Data Pembacaan Tekanan Air}}
+    \label{fig:water_data}
+  \end{minipage}
 \end{figure}
-Untuk pendekatan elbow down, dapat digunakan aturan cos untuk menggunakan aturan cosinus
-untuk mencari nilai $\theta_2$ sebagai berikut : 
-
-\begin{equation}
-  \label{eq:ElbowDownTheta2}
-  \begin{aligned}
-    (O_O P)^2 & = (O_O A_1)^2 + (A_1 P)^2 - 2(O_O A_1)(A_1 P)\cos(\pi - \theta_2), \\
-    p_x^2 + p_y^2 & = a_1^2 + a_2^2 + 2a_1a_2\cos\theta_2, \\
-    \theta_2 & = \cos^{-1}\left(\frac{p_x^2 + p_y^2 - a_1^2 - a_2^2}{2a_1a_2}\right).
-  \end{aligned}
-\end{equation}
-Kemudian untuk mendapatkan $theta_1$ dapat didapatkan dengan mengurangkan sudut yang
-dihasilkan oleh $p_x$ dan $p_y$ dengan sudut yang dihasilkan oleh $\theta_2$.
-\begin{equation}
-  \label{eq ElbowDownTheta1}
-  \theta_1 = \tan^{-1}\left(\frac{p_y}{p_x}\right) - \tan^{-1}\left(\frac{a_2\sin\theta_2}{a_1 + a_2\cos\theta_2}\right).
-\end{equation}
-Pendekatan elbow up juga menggunakan aturan cosinus untuk mencari nilai $\theta_2$ sedangkan
-untuk mencari nilai $\theta_1$ sama dengan pendekatan elbow down. 
-\begin{equation}
-  \label{eq:ElbowUpTheta2}
-  \begin{aligned}
-    \theta_2 & = -\cos^{-1}\left(\frac{p_x^2 + p_y^2 - a_1^2 - a_2^2}{-2a_1a_2}\right),\\
-    \theta_1 & = \tan^{-1}\left(\frac{p_y}{p_x}\right) - \tan^{-1}\left(\frac{a_2\sin\theta_2}{a_1 + a_2\cos\theta_2}\right).
-  \end{aligned} 
-\end{equation}
-Kedua pendekatan ini merupakan solusi dari \emph{inverse kinematic} yang dapat digunakan
-untuk menghitung sudut dari setiap \emph{joint} berdasarkan posisi dari \emph{end-effector}
-yang diinginkan. Namun, kedua pendekatan ini tidak dapat digunakan untuk semua tipe robot.
-Ketika jumlah \emph{joint} bertambah, maka solusi dari \emph{inverse kinematic} juga akan
-berbeda-beda.
-
-\subsection{\emph{Trajectoty Planning}}
-Selama pergerakan robot, kontroller robot diberikan serangkaian posisi dan kecepatan tujuan 
-secara terus-menerus untuk diikuti. Posisi robot sebagai fungsi waktu ini disebut
-sebagai trajektori. Dalam beberapa kasus, trajektori sepenuhnya ditentukan oleh tugas yang 
-harus dilakukan – misalnya, \emph{end-effector} mungkin perlu mengikuti objek bergerak yang 
-sudah diketahui. Namun, dalam kasus lain, seperti ketika robot hanya berpindah dari satu 
-posisi ke posisi lain dalam waktu tertentu, terdapat kebebasan untuk merancang 
-trajektori yang memenuhi batasan tersebut. Proses merancang lintasan  ini disebut 
-\emph{trajectory planning}. Trajektori yang dirancang harus berupa fungsi waktu
-yang halus (smooth) dan tetap mematuhi batasan sistem, seperti batas kecepatan,
-percepatan, atau torsi maksimum pada setiap joint robot. Tujuan akhirnya adalah
-menghasilkan gerakan yang efisien, stabil, dan aman bagi sistem maupun
-lingkungannya. \parencite{ModernRobotics}
-
-Untuk mencapai tujuan ini, terdapat beberapa metode perencanaan trajektori yang umum digunakan.
-Salah satu metode yang umum digunakan adalah metode interpolasi linear. Interpolasi linier
-bertujuan untuk mendapatkan fungsi linier yang menghubungkan dua titik pada suatu garis.
-\parencite{LinierInterpolation}
-
-\begin{figure} [H] \centering
-  % Nama dari file gambar yang diinputkan
-  \includegraphics[scale=0.65]{gambar/Interpolasi Linier.png}
-  % Keterangan gambar yang diinputkan
-  \caption{Hubungan antara dua titik sepanjang sebuah garis lurus \parencite{LinierInterpolation}}
-  % Label referensi dari gambar yang diinputkan
-  \label{fig:InterpolasiLinier}
-\end{figure}
-
-Pada gambar \ref{fig:InterpolasiLinier} terdapat dua titik yang terhubung oleh garis lurus. (x1,y1)
-merupakan titik awal dan (x2,y2) merupakan titik akhir. Untuk mendapatkan fungsi linier
-yang memberikan posisi pada garis lurus antara dua titik tersebut pada satu waktu tertentu, dapat digunakan
-persamaan berikut: 
-\begin{equation}
-  \label{eq:InterpolasiLinier}
-  x(t) = x_1 + (x_2 - x_1)t, \quad y(t) = y_1 + (y_2 - y_1)t, \quad 0 \leq t \leq 1.
-\end{equation}
-Hasil interpolasi linier ini dapat digunakan sebagai input untuk \emph{inverse kinematic}
-agar dapat menghasilkan sudut dari setiap \emph{joint} berdasarkan posisi dari
-\emph{end-effector} yang diinginkan.
-
-\subsection{Polah Langkah/\emph{Gait}}
-Pola pergerakan kaki yang digunakan untuk berjalan atau berlari disebut sebagai
-\emph{gait}, dan memiliki peran penting dalam menentukan desain sistem tungkai robot.
-Desain fisik robot sangat dipengaruhi oleh jenis gait yang akan diterapkan.
-Untuk mendukung pola langkah statis, robot dirancang dengan postur tubuh
-yang melebar dan merentang guna memaksimalkan stabilitas selama pergerakan.
-Sebaliknya, untuk pola langkah dinamis, robot biasanya memiliki postur tubuh
-yang lebih tegak dengan pusat massa yang lebih tinggi, sehingga dapat
-memperpanjang konstanta waktu jatuh dan mendukung gerakan yang lebih cepat dan
-lincah. \parencite{GaitRobot}
-
-Pada gerakan robot \emph{hexapod}, pergerakan setiap kaki dibagi menjadi dua fase utama:
-\begin{itemize} 
-  \item Fase dukungan (\emph{support phase}): Pada fase ini, kaki
-menyentuh tanah dan memberikan dukungan pada tubuh robot. Selama fase ini, kaki
-tidak bergerak. 
-\item Fase ayunan (\emph{swing phase}): Pada fase ini, kaki
-terangkat dari tanah dan bergerak menuju posisi baru sebelum kembali menyentuh
-tanah. Selama fase ini, kaki bergerak tanpa memberikan dukungan pada tubuh robot.
-\parencite{GaitSwingSupport} 
-\end{itemize}
-
-Robot \emph{hexapod} memiliki enam kaki, sehingga terdapat beberapa algoritma pola langkah
-yang umum digunakan, antara lain:
-\begin{itemize} 
-  \item \emph{Tripod gait}: Pada pola langkah ini, tiga kaki
-bergerak secara bersamaan sementara tiga kaki lainnya tetap di tanah. Pola
-langkah ini memberikan stabilitas yang baik dan memungkinkan robot bergerak
-dengan kecepatan sedang. 
-\item \emph{Wave gait}: Pada pola langkah ini, kaki
-bergerak secara bergantian dalam urutan tertentu, mirip dengan gelombang. Pola
-langkah ini memberikan stabilitas yang baik tetapi cenderung lebih lambat
-dibandingkan dengan pola langkah tripod. 
-\item \emph{Ripple gait}: Pada pola
-Dua atau tiga kaki bergerak secara bergantian, namun tidak serempak seperti tripod gait. 
-\parencite{GaitAlgorithm}
-\end{itemize}
-
-\begin{figure} [H] \centering
-  % Nama dari file gambar yang diinputkan
-  \includegraphics[scale=1.5]{gambar/gait.png}
-  % Keterangan gambar yang diinputkan
-  \caption{algoritma pola langkah robot \emph{hexapod}\parencite{GaitAlgorithm}}
-  % Label referensi dari gambar yang diinputkan
-  \label{fig:GaitHexapod}
-\end{figure}
-
-Pemilihan jenis gait ini bergantung pada kebutuhan spesifik aplikasi, seperti
-tuntutan stabilitas, kecepatan, efisiensi energi, dan medan operasional robot
-
-\subsection{\emph{Dynamixel Protocol 1.0}}
-\emph{Dynamixel Protocol 1.0} adalah protokol komunikasi yang digunakan oleh
-servo motor \emph{Dynamixel} untuk berkomunikasi dengan mikrokontroler atau
-perangkat lain. Mikrokontroler dan servo berkomunikasi satu sama lain (dua arah)
-dengan mengirimkan dan menerima data dalam bentuk paket. Paket dibagi menjadi dua
-bagian, yaitu : 
-\begin{itemize}
-  \item \emph{Instruction Packet}: Paket yang dikirimkan oleh mikrokontroler. Paket ini
-  berisi instruksi yang akan dieksekusi oleh servo. 
-  \item \emph{Status Packet}: Paket yang dikirimkan oleh servo. Paket ini mengembalikan
-  informasi status dari servo setelah menerima instruksi dari mikrokontroler. 
-\end{itemize}  
-\begin{table}[H]
-  \centering
-  \caption{Struktur \emph{Instruction Packet} data Dynamixel Protocol 1.0}
-  \label{tab:DynamixelPacket}
-  \renewcommand{\arraystretch}{1.5}
-  \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
-    \hline
-    \textbf{H1} & \textbf{H2} & \textbf{ID} & \textbf{LEN} & \textbf{INST} & \textbf{P1} & \textbf{$\cdots$} & \textbf{PN} & \textbf{CHKSUM} \\
-    \hline
-    0xFF & 0xFF & Servo ID & Length & Instruction & Param 1 & $\cdots$ & Param N & Checksum \\
-    \hline
-  \end{tabular}
-\end{table}
-Dimana maksud dari masing-masing kolom adalah sebagai berikut:
-\begin{itemize}
-  \item \textbf{H1} dan \textbf{H2}: Header dari paket yang menunjukkan bahwa ini adalah
-  paket \emph{Dynamixel}. Nilai header adalah 0xFF.
-  \item \textbf{ID}: ID dari servo yang akan dikontrol. Total ID servo yang dapat digunakan
-  adalah ID 0 hingga ID 253. Terdapat juga ID broadcast yaitu ID 254 yang digunakan
-  untuk mengirimkan instruksi ke semua servo yang terhubung dalam satu bus.
-  \item \textbf{LEN}: Panjang dari paket data, termasuk instruksi dan parameter. Lenght 
-  dihitung dari banyak parameter + 2.
-  \item \textbf{INST}: Instruksi yang akan dieksekusi oleh servo. Tabel \ref{tab:Instruction}
-  menunjukkan instruksi yang digunakan dalam \emph{Dynamixel Protocol 1.0}.
-  \item \textbf{P1} hingga \textbf{PN}: Parameter merupakan data dari instruksi yang dikirimkan. 
-  Setiap instruksi memiliki jumlah parameter yang berbeda-beda. 
-  \item \textbf{CHKSUM}: \emph{Checksum} adalah nilai yang digunakan untuk memverifikasi
-  data yang dikirimkan. Nilai  \emph{checksum} dihitung dengan menggunakna formula sebagai 
-  berikut:
-  \begin{equation}
-    \label{eq:Checksum}
-    CHKSUM = \sim ( ID + Length + Instruction + Parameter1 + \ldots + Parameter N )
-  \end{equation}
-  Operator "$\sim$" \emph{bitwise NOT} digunakan untuk membalikkan semua bit dari hasil penjumlahan.
-  Ketika nilai perhitungan \emph{checksum} lebih dari 255, maka hanya \emph{lower byte} yang digunakan.
-\end{itemize}
-\begin{table}[H]
-\centering
-\caption{Instruksi \emph{Dynamixel Protocol 1.0}}
-\label{tab:Instruction}
-\begin{tabular}{|c|l|p{8cm}|}
-\hline
-\textbf{Value} & \textbf{Instruksi} & \textbf{Deskripsi} \\
-\hline
-0x01 & Ping & Instruksi untuk memeriksa apakah paket telah sampai ke perangkat dengan ID yang sama seperti ID dalam paket. \\
-\hline
-0x02 & Read & Instruksi untuk membaca data dari perangkat. \\
-\hline
-0x03 & Write & Instruksi untuk menulis data ke perangkat. \\
-\hline
-0x04 & Reg Write & Instruksi untuk mendaftarkan paket instruksi ke status siaga; paket akan dieksekusi kemudian melalui instruksi Action. \\
-\hline
-0x05 & Action & Instruksi untuk mengeksekusi paket yang telah dikirimkan menggunakan Reg Write. \\
-\hline
-0x06 & Factory Reset & Instruksi untuk mengatur ulang Tabel Kontrol ke pengaturan awal pabrik. \\
-\hline
-0x08 & Reboot & Instruksi untuk memulai ulang DYNAMIXEL (Lihat produk yang didukung dalam deskripsi). \\
-\hline
-0x83 & Sync Write & Instruksi untuk menulis data pada beberapa servo secara bersamaan. \\
-\hline
-0x92 & Bulk Read & Instruksi untuk membaca data dari servo secara bersamaan. \\
-\hline
-\end{tabular}
-\end{table}
-
-Setelah \emph{Instruction Packet} dikirimkan, servo akan memproses instruksi tersebut
-dan mengirimkan \emph{Status Packet} sebagai balasan. Tabel \ref{tab:StatusPacket}
-menunjukkan struktur dari \emph{Status Packet} yang dikirimkan oleh servo.
-\begin{table}[H]
-\centering
-\caption{Struktur \emph{Status Packet} data Dynamixel Protocol 1.0}
-\label{tab:StatusPacket}
-\renewcommand{\arraystretch}{1.5}
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
-  \hline
-  \textbf{H1} & \textbf{H2} & \textbf{ID} & \textbf{LEN} & \textbf{Error} & \textbf{P1} & \textbf{$\cdots$} & \textbf{PN} & \textbf{CHKSUM} \\
-  \hline
-  0xFF & 0xFF & Servo ID & Length & Error & Param 1 & $\cdots$ & Param N & Checksum \\
-  \hline
-\end{tabular}
-\end{table}
-
-Yang membedakan \emph{Status Packet} dengan \emph{Instruction Packet} adalah 
-pada paket kelima. Pada \emph{Status Packet} paket kelima adalah \emph{Error} 
-yang menunjukkan apakah terjadi error pada servo. Tabel \ref{tab:Error} 
-menujkan error yang mungkin terjadi pada servo. 
-
-\begin{table}[H]
-\centering
-\caption{Tabel Error Bit Dynamixel}
-\label{tab:Error}
-\begin{tabular}{|c|l|p{9cm}|}
-\hline
-\textbf{Bit} & \textbf{Error} & \textbf{Deskripsi} \\
-\hline
-Bit 7 & 0 & - \\
-\hline
-Bit 6 & Instruction Error & Jika instruksi yang tidak dikenal dikirim atau instruksi aksi dikirim tanpa instruksi Reg Write, bit ini akan diset menjadi 1. \\
-\hline
-Bit 5 & Overload Error & Jika beban saat ini tidak dapat dikendalikan oleh torsi yang telah diatur, bit ini akan diset menjadi 1. \\
-\hline
-Bit 4 & Checksum Error & Jika checksum dari paket instruksi yang dikirim salah, bit ini akan diset menjadi 1. \\
-\hline
-Bit 3 & Range Error & Jika suatu instruksi berada di luar jangkauan penggunaan yang diizinkan, bit ini akan diset menjadi 1. \\
-\hline
-Bit 2 & Overheating Error & Jika suhu internal DYNAMIXEL melebihi batas suhu operasi yang ditentukan di tabel kontrol, bit ini akan diset menjadi 1. \\
-\hline
-Bit 1 & Angle Limit Error & Jika Goal Position berada di luar rentang dari batas sudut CW ke batas sudut CCW, bit ini akan diset menjadi 1. \\
-\hline
-Bit 0 & Input Voltage Error & Jika tegangan yang diterapkan berada di luar rentang tegangan operasi yang ditentukan di tabel kontrol, bit ini akan diset menjadi 1. \\
-\hline
-\end{tabular}
-\end{table}
-
-Paket error terdiri dari 8 bit, yang masing-masing menunjukkan error yang
-mungkin terjadi pada servo. Sebagai contoh, jika paket error bernilai 0x24 (dalam biner 00100100), maka
-error yang terjadi adalah \emph{Overload Error} dan \emph{Overheating Error}.
