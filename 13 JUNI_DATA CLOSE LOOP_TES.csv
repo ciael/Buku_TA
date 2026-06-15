@@ -1,0 +1,7 @@
+pc_timestamp,stm32_ms,adc_raw,adc_voltage_v,sensor_voltage_v,pressure_bar,duty_percent,frequency_hz,estimated_output_rms_v,jsy_online,jsy_voltage_rms_v,jsy_current_rms_a,jsy_active_power_w,jsy_power_factor,jsy_energy_kwh,jsy_error_count,nn_mode,nn_duty_percent,valve_open_count,valve_state_label,valve_phase,setpoint_bar,episode_id,is_decision
+2026-06-13T19:37:38.989,1387937,22,0.0164,0.019866666666666664,0.009,50.0,5000,110.0,0,0.0,0.0,0,0.0,0.01,1219,0,0.0,-,Belum ditandai,unset,0.3,1,0
+2026-06-13T19:37:39.522,1388457,25,0.015466666666666667,0.019799999999999998,0.009,50.0,5000,110.0,0,0.0,0.0,0,0.0,0.01,1219,0,0.0,-,Belum ditandai,unset,0.3,1,0
+2026-06-13T19:37:40.021,1388943,21,0.0134,0.0196,0.009,50.0,5000,110.0,0,0.0,0.0,0,0.0,0.01,1220,0,0.0,-,Belum ditandai,unset,0.3,1,0
+2026-06-13T19:37:40.521,1389463,23,0.0132,0.019399999999999997,0.009,50.0,5000,110.0,0,0.0,0.0,0,0.0,0.01,1220,0,0.0,-,Belum ditandai,unset,0.3,1,0
+2026-06-13T19:37:41.114,1390053,7,0.013266666666666668,0.019733333333333332,0.009,50.0,5000,110.0,0,0.0,0.0,0,0.0,0.01,1221,0,0.0,-,Belum ditandai,unset,0.3,1,0
+2026-06-13T19:37:41.664,1390573,20,0.013533333333333333,0.019799999999999998,0.009,50.0,5000,110.0,0,0.0,0.0,0,0.0,0.01,1221,0,0.0,-,Belum ditandai,unset,0.3,1,0

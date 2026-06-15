@@ -1,0 +1,1419 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{apa/apasortcite//global/global/global}
+    \entry{bipolar}{article}{}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=89819ad04e8377e3872d78041ae4defe}{%
+           family={Alrimali},
+           familyi={A\bibinitperiod},
+           given={Abdulsalam\bibnamedelima Ali},
+           giveni={A\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=7c07d893e56c185bb529f3ed46aec9e4}{%
+           family={Mohamed\bibnamedelima Aljehaimi},
+           familyi={M\bibinitperiod\bibinitdelim A\bibinitperiod},
+           given={Akrem},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=f291249fc145a5b4fee8411fa169c167}{%
+           family={Hussein},
+           familyi={H\bibinitperiod},
+           given={Abdallah\bibnamedelima Suliman},
+           giveni={A\bibinitperiod\bibinitdelim S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=c7db21581ddcfadd1fa0b4fb1b85fc45}{%
+           family={Pillay},
+           familyi={P\bibinitperiod},
+           given={Pragasen},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{8ef51f7e7fdb4ab74d1b26abbad24629}
+      \strng{fullhash}{867be005c97823e2d362187332f21c9f}
+      \strng{fullhashraw}{867be005c97823e2d362187332f21c9f}
+      \strng{bibnamehash}{867be005c97823e2d362187332f21c9f}
+      \strng{authorbibnamehash}{867be005c97823e2d362187332f21c9f}
+      \strng{authornamehash}{8ef51f7e7fdb4ab74d1b26abbad24629}
+      \strng{authorfullhash}{867be005c97823e2d362187332f21c9f}
+      \strng{authorfullhashraw}{867be005c97823e2d362187332f21c9f}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{2021 IEEE 1st International Maghreb Meeting of the Conference on Sciences and Techniques of Automatic Control and Computer Engineering MI-STA}
+      \field{title}{Controller Design for an Off-Grid Photovoltaic Solar Inverter}
+      \field{year}{2021}
+      \field{pages}{209\bibrangedash 216}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1109/MI-STA52233.2021.9464514
+      \endverb
+      \keyw{Current control;Voltage transformers;Modulation;Switches;Control systems;Harmonic analysis;Inverters;Full-bridge inverter;SPWM;PI Controller;PSIM}
+    \endentry
+    \entry{pwmacchop2}{article}{}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=f57aca51b55042d87b6b8745371dfecc}{%
+           family={Bumroongphuck},
+           familyi={B\bibinitperiod},
+           given={Chavaporn},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=c1177733539ac228fb658aa5ce644899}{%
+           family={Koodsamrong},
+           familyi={K\bibinitperiod},
+           given={Rangsan},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=4682ac91a0ef95fb3cb5d7ae6400b97c}{%
+           family={Kinnares},
+           familyi={K\bibinitperiod},
+           given={Vijit},
+           giveni={V\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{0f636ff09fc12daccd050aedff9b614b}
+      \strng{fullhash}{6b584a88f659bb96ba36f64cd02831e5}
+      \strng{fullhashraw}{6b584a88f659bb96ba36f64cd02831e5}
+      \strng{bibnamehash}{6b584a88f659bb96ba36f64cd02831e5}
+      \strng{authorbibnamehash}{6b584a88f659bb96ba36f64cd02831e5}
+      \strng{authornamehash}{0f636ff09fc12daccd050aedff9b614b}
+      \strng{authorfullhash}{6b584a88f659bb96ba36f64cd02831e5}
+      \strng{authorfullhashraw}{6b584a88f659bb96ba36f64cd02831e5}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{2025 13th International Electrical Engineering Congress (iEECON)}
+      \field{title}{Soft Starting of a Modified Three-Phase Induction Motor with a Single-Phase Synchronous PWM AC Chopper}
+      \field{year}{2025}
+      \field{pages}{1\bibrangedash 6}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1109/iEECON64081.2025.10987649
+      \endverb
+      \keyw{Vibrations;Thyristors;Induction motors;Torque;Capacitors;Printed circuits;Pulse width modulation;Choppers (circuits);Voltage control;Stress;synchronous PWM AC chopper;Single-phase induction motor (SPIM);Modified three-phase induction motor for a single-phase supply;Print Circuit Board (PCB)}
+    \endentry
+    \entry{chapman}{book}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=17f4e2b68cfc8e58ddd9d602783f13ec}{%
+           family={Chapman},
+           familyi={C\bibinitperiod},
+           given={Stephen\bibnamedelima J},
+           giveni={S\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {McGraw-Hill}%
+      }
+      \strng{namehash}{17f4e2b68cfc8e58ddd9d602783f13ec}
+      \strng{fullhash}{17f4e2b68cfc8e58ddd9d602783f13ec}
+      \strng{fullhashraw}{17f4e2b68cfc8e58ddd9d602783f13ec}
+      \strng{bibnamehash}{17f4e2b68cfc8e58ddd9d602783f13ec}
+      \strng{authorbibnamehash}{17f4e2b68cfc8e58ddd9d602783f13ec}
+      \strng{authornamehash}{17f4e2b68cfc8e58ddd9d602783f13ec}
+      \strng{authorfullhash}{17f4e2b68cfc8e58ddd9d602783f13ec}
+      \strng{authorfullhashraw}{17f4e2b68cfc8e58ddd9d602783f13ec}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Electric Machinary Fundamentals}
+      \field{year}{2005}
+    \endentry
+    \entry{GIRDHAR200548}{inbook}{}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=fe5a7406c84ed73f1bc1a05bff50bb44}{%
+           family={Girdhar},
+           familyi={G\bibinitperiod},
+           given={Paresh},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1afe95c30f8000786e14983aeaf9d9fd}{%
+           family={Moniz},
+           familyi={M\bibinitperiod},
+           given={Octo},
+           giveni={O\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=8cf69d60b9547425068f0fc553caa6e6}{%
+           family={Mackay},
+           familyi={M\bibinitperiod},
+           given={Steve},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \name{editor}{3}{}{%
+        {{hash=fe5a7406c84ed73f1bc1a05bff50bb44}{%
+           family={Girdhar},
+           familyi={G\bibinitperiod},
+           given={Paresh},
+           giveni={P\bibinitperiod}}}%
+        {{hash=1afe95c30f8000786e14983aeaf9d9fd}{%
+           family={Moniz},
+           familyi={M\bibinitperiod},
+           given={Octo},
+           giveni={O\bibinitperiod}}}%
+        {{hash=8cf69d60b9547425068f0fc553caa6e6}{%
+           family={Mackay},
+           familyi={M\bibinitperiod},
+           given={Steve},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Oxford}%
+      }
+      \list{publisher}{1}{%
+        {Newnes}%
+      }
+      \strng{namehash}{2ffca3bf1dabe17e32baa9419a07eb4f}
+      \strng{fullhash}{1f72b8f8d30fad4ec1e371c929a0ca17}
+      \strng{fullhashraw}{1f72b8f8d30fad4ec1e371c929a0ca17}
+      \strng{bibnamehash}{1f72b8f8d30fad4ec1e371c929a0ca17}
+      \strng{authorbibnamehash}{1f72b8f8d30fad4ec1e371c929a0ca17}
+      \strng{authornamehash}{2ffca3bf1dabe17e32baa9419a07eb4f}
+      \strng{authorfullhash}{1f72b8f8d30fad4ec1e371c929a0ca17}
+      \strng{authorfullhashraw}{1f72b8f8d30fad4ec1e371c929a0ca17}
+      \strng{editorbibnamehash}{1f72b8f8d30fad4ec1e371c929a0ca17}
+      \strng{editornamehash}{2ffca3bf1dabe17e32baa9419a07eb4f}
+      \strng{editorfullhash}{1f72b8f8d30fad4ec1e371c929a0ca17}
+      \strng{editorfullhashraw}{1f72b8f8d30fad4ec1e371c929a0ca17}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Practical Centrifugal Pumps}
+      \field{isbn}{978-0-7506-6273-4}
+      \field{title}{3 - Pump hydraulics}
+      \field{year}{2005}
+      \field{pages}{48\bibrangedash 75}
+      \range{pages}{28}
+      \verb{doi}
+      \verb https://doi.org/10.1016/B978-075066273-4/50003-9
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/B9780750662734500039
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/B9780750662734500039
+      \endverb
+    \endentry
+    \entry{hart}{book}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=bfa0ccb8483cd90aacd9d855fd3c7400}{%
+           family={Hart},
+           familyi={H\bibinitperiod},
+           given={Daniel\bibnamedelima W.},
+           giveni={D\bibinitperiod\bibinitdelim W\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {McGraw-Hill}%
+      }
+      \strng{namehash}{bfa0ccb8483cd90aacd9d855fd3c7400}
+      \strng{fullhash}{bfa0ccb8483cd90aacd9d855fd3c7400}
+      \strng{fullhashraw}{bfa0ccb8483cd90aacd9d855fd3c7400}
+      \strng{bibnamehash}{bfa0ccb8483cd90aacd9d855fd3c7400}
+      \strng{authorbibnamehash}{bfa0ccb8483cd90aacd9d855fd3c7400}
+      \strng{authornamehash}{bfa0ccb8483cd90aacd9d855fd3c7400}
+      \strng{authorfullhash}{bfa0ccb8483cd90aacd9d855fd3c7400}
+      \strng{authorfullhashraw}{bfa0ccb8483cd90aacd9d855fd3c7400}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Power Electronics}
+      \field{year}{2011}
+    \endentry
+    \entry{MANSOUR2025342}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=ad6897ee125a9c32bfaef1d945c2f972}{%
+           family={Mansour},
+           familyi={M\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=55e49d5e100944184a17d1f82d932079}{%
+           family={Thévenin},
+           familyi={T\bibinitperiod},
+           given={Dominique},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{12cb27434d2fe97b61a710d4d2e82253}
+      \strng{fullhash}{12cb27434d2fe97b61a710d4d2e82253}
+      \strng{fullhashraw}{12cb27434d2fe97b61a710d4d2e82253}
+      \strng{bibnamehash}{12cb27434d2fe97b61a710d4d2e82253}
+      \strng{authorbibnamehash}{12cb27434d2fe97b61a710d4d2e82253}
+      \strng{authornamehash}{12cb27434d2fe97b61a710d4d2e82253}
+      \strng{authorfullhash}{12cb27434d2fe97b61a710d4d2e82253}
+      \strng{authorfullhashraw}{12cb27434d2fe97b61a710d4d2e82253}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0263-8762}
+      \field{journaltitle}{Chemical Engineering Research and Design}
+      \field{title}{Optimized inducer design for transporting air–water two-phase flows in centrifugal pumps: Outperforming traditional inducers}
+      \field{volume}{215}
+      \field{year}{2025}
+      \field{pages}{342\bibrangedash 360}
+      \range{pages}{19}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.cherd.2025.01.039
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0263876225000504
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0263876225000504
+      \endverb
+      \keyw{Centrifugal pumps,Optimized inducer,Gas–liquid two-phase flow regimes,Pump surging}
+    \endentry
+    \entry{article}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=240e7baef1d6923b405efb21c510a7e7}{%
+           family={Nurjaman},
+           familyi={N\bibinitperiod},
+           given={Hendi},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=d4be954dfedbd3197da3172cf2f5a890}{%
+           family={Purnama},
+           familyi={P\bibinitperiod},
+           given={Trisna},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{9b560feaffcd76ee77fc525f3f4e7bce}
+      \strng{fullhash}{9b560feaffcd76ee77fc525f3f4e7bce}
+      \strng{fullhashraw}{9b560feaffcd76ee77fc525f3f4e7bce}
+      \strng{bibnamehash}{9b560feaffcd76ee77fc525f3f4e7bce}
+      \strng{authorbibnamehash}{9b560feaffcd76ee77fc525f3f4e7bce}
+      \strng{authornamehash}{9b560feaffcd76ee77fc525f3f4e7bce}
+      \strng{authorfullhash}{9b560feaffcd76ee77fc525f3f4e7bce}
+      \strng{authorfullhashraw}{9b560feaffcd76ee77fc525f3f4e7bce}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Jurnal Edukasi Elektro}
+      \field{month}{11}
+      \field{title}{Pembangkit Listrik Tenaga Surya (PLTS) Sebagai Solusi Energi Terbarukan Rumah Tangga}
+      \field{volume}{6}
+      \field{year}{2022}
+      \field{pages}{136\bibrangedash 142}
+      \range{pages}{7}
+      \verb{doi}
+      \verb 10.21831/jee.v6i2.51617
+      \endverb
+    \endentry
+    \entry{anakub}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=d13d4b8d970877dd2b4ea51d9dbcdae5}{%
+           family={Putra},
+           familyi={P\bibinitperiod},
+           given={Hari\bibnamedelima Widagdo},
+           giveni={H\bibinitperiod\bibinitdelim W\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{d13d4b8d970877dd2b4ea51d9dbcdae5}
+      \strng{fullhash}{d13d4b8d970877dd2b4ea51d9dbcdae5}
+      \strng{fullhashraw}{d13d4b8d970877dd2b4ea51d9dbcdae5}
+      \strng{bibnamehash}{d13d4b8d970877dd2b4ea51d9dbcdae5}
+      \strng{authorbibnamehash}{d13d4b8d970877dd2b4ea51d9dbcdae5}
+      \strng{authornamehash}{d13d4b8d970877dd2b4ea51d9dbcdae5}
+      \strng{authorfullhash}{d13d4b8d970877dd2b4ea51d9dbcdae5}
+      \strng{authorfullhashraw}{d13d4b8d970877dd2b4ea51d9dbcdae5}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Jurnal Mahasiswa TEUB}
+      \field{title}{Perancangan Sistem Pengendalian Kecepatan Motor Pompa Air Tekanan Konstan}
+      \field{year}{2015}
+    \endentry
+    \entry{anakits}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=8bab6541bb20f6a30f42c82615b23f85}{%
+           family={Rosada},
+           familyi={R\bibinitperiod},
+           given={Kevin},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{8bab6541bb20f6a30f42c82615b23f85}
+      \strng{fullhash}{8bab6541bb20f6a30f42c82615b23f85}
+      \strng{fullhashraw}{8bab6541bb20f6a30f42c82615b23f85}
+      \strng{bibnamehash}{8bab6541bb20f6a30f42c82615b23f85}
+      \strng{authorbibnamehash}{8bab6541bb20f6a30f42c82615b23f85}
+      \strng{authornamehash}{8bab6541bb20f6a30f42c82615b23f85}
+      \strng{authorfullhash}{8bab6541bb20f6a30f42c82615b23f85}
+      \strng{authorfullhashraw}{8bab6541bb20f6a30f42c82615b23f85}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{ITS Repository}
+      \field{title}{SISTEM KONTROL POMPA AIR MENGGUNAKAN KONTROLER PID BERBASIS RASPBERRY PI}
+      \field{year}{2017}
+    \endentry
+    \entry{pwmacchop}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=6cf312650c85095bbc4a8a2692239c4f}{%
+           family={Sabir},
+           familyi={S\bibinitperiod},
+           given={Shaikh\bibnamedelima Uzma},
+           giveni={S\bibinitperiod\bibinitdelim U\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=7940fe6b51372abc709041e751714507}{%
+           family={Koshti},
+           familyi={K\bibinitperiod},
+           given={A.\bibnamedelimi S.},
+           giveni={A\bibinitperiod\bibinitdelim S\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{222c95b5a6bfb831953b9f68b946b929}
+      \strng{fullhash}{222c95b5a6bfb831953b9f68b946b929}
+      \strng{fullhashraw}{222c95b5a6bfb831953b9f68b946b929}
+      \strng{bibnamehash}{222c95b5a6bfb831953b9f68b946b929}
+      \strng{authorbibnamehash}{222c95b5a6bfb831953b9f68b946b929}
+      \strng{authornamehash}{222c95b5a6bfb831953b9f68b946b929}
+      \strng{authorfullhash}{222c95b5a6bfb831953b9f68b946b929}
+      \strng{authorfullhashraw}{222c95b5a6bfb831953b9f68b946b929}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{2023 International Conference on Integration of Computational Intelligent System (ICICIS)}
+      \field{title}{Reduction of Selective Harmonics in PWM AC Chopper Using Artificial Neural Network}
+      \field{year}{2023}
+      \field{pages}{1\bibrangedash 7}
+      \range{pages}{7}
+      \verb{doi}
+      \verb 10.1109/ICICIS56802.2023.10430273
+      \endverb
+      \keyw{Training;Optimization methods;Artificial neural networks;Switches;Choppers (circuits);Harmonic analysis;Voltage control;Harmonics elimination;AC Chopper;SPWM;ANN;RBFNN}
+    \endentry
+    \entry{10695139}{article}{}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=121c5acff246c6195dd1ee5009f33347}{%
+           family={Sahu},
+           familyi={S\bibinitperiod},
+           given={Ajay\bibnamedelima Kumar},
+           giveni={A\bibinitperiod\bibinitdelim K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e03d977ad765e8e3212646d4b59fb994}{%
+           family={Patel},
+           familyi={P\bibinitperiod},
+           given={Ramnarayan},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=09fa5f569143dfac4e0b62790053d905}{%
+           family={Sahu},
+           familyi={S\bibinitperiod},
+           given={Lalit\bibnamedelima Kumar},
+           giveni={L\bibinitperiod\bibinitdelim K\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{4b779fd0a3d0c33ce9713a736aa9210b}
+      \strng{fullhash}{e8cafbc3020440c91b8a1d1b90b014fe}
+      \strng{fullhashraw}{e8cafbc3020440c91b8a1d1b90b014fe}
+      \strng{bibnamehash}{e8cafbc3020440c91b8a1d1b90b014fe}
+      \strng{authorbibnamehash}{e8cafbc3020440c91b8a1d1b90b014fe}
+      \strng{authornamehash}{4b779fd0a3d0c33ce9713a736aa9210b}
+      \strng{authorfullhash}{e8cafbc3020440c91b8a1d1b90b014fe}
+      \strng{authorfullhashraw}{e8cafbc3020440c91b8a1d1b90b014fe}
+      \field{extraname}{1}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradate}{1}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Journal of Emerging and Selected Topics in Power Electronics}
+      \field{number}{1}
+      \field{title}{ANN Controlled Single-Phase Microinverter for Off-Grid Solar Application}
+      \field{volume}{13}
+      \field{year}{2025}
+      \field{pages}{850\bibrangedash 860}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.1109/JESTPE.2024.3468391
+      \endverb
+      \keyw{Voltage control;Switches;Capacitors;Inverters;Inductors;Voltage;Topology;Common ground;microinverter;off-grid inverter;single phase single stage;solar photovoltaic (PV)}
+    \endentry
+    \entry{ann}{article}{}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=121c5acff246c6195dd1ee5009f33347}{%
+           family={Sahu},
+           familyi={S\bibinitperiod},
+           given={Ajay\bibnamedelima Kumar},
+           giveni={A\bibinitperiod\bibinitdelim K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e03d977ad765e8e3212646d4b59fb994}{%
+           family={Patel},
+           familyi={P\bibinitperiod},
+           given={Ramnarayan},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=09fa5f569143dfac4e0b62790053d905}{%
+           family={Sahu},
+           familyi={S\bibinitperiod},
+           given={Lalit\bibnamedelima Kumar},
+           giveni={L\bibinitperiod\bibinitdelim K\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{4b779fd0a3d0c33ce9713a736aa9210b}
+      \strng{fullhash}{e8cafbc3020440c91b8a1d1b90b014fe}
+      \strng{fullhashraw}{e8cafbc3020440c91b8a1d1b90b014fe}
+      \strng{bibnamehash}{e8cafbc3020440c91b8a1d1b90b014fe}
+      \strng{authorbibnamehash}{e8cafbc3020440c91b8a1d1b90b014fe}
+      \strng{authornamehash}{4b779fd0a3d0c33ce9713a736aa9210b}
+      \strng{authorfullhash}{e8cafbc3020440c91b8a1d1b90b014fe}
+      \strng{authorfullhashraw}{e8cafbc3020440c91b8a1d1b90b014fe}
+      \field{extraname}{2}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradate}{2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Journal of Emerging and Selected Topics in Power Electronics}
+      \field{number}{1}
+      \field{title}{ANN Controlled Single-Phase Microinverter for Off-Grid Solar Application}
+      \field{volume}{13}
+      \field{year}{2025}
+      \field{pages}{850\bibrangedash 860}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.1109/JESTPE.2024.3468391
+      \endverb
+      \keyw{Voltage control;Switches;Capacitors;Inverters;Inductors;Voltage;Topology;Common ground;microinverter;off-grid inverter;single phase single stage;solar photovoltaic (PV)}
+    \endentry
+    \entry{backp}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=c669c39abea9e1b9c904056e96d17661}{%
+           family={Sekhar},
+           familyi={S\bibinitperiod},
+           given={Ch},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=18881df292466c50c3f0dc2cfa8ef545}{%
+           family={Meghana},
+           familyi={M\bibinitperiod},
+           given={P},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{adb6eb72ecc462e8f95c2d2561915000}
+      \strng{fullhash}{adb6eb72ecc462e8f95c2d2561915000}
+      \strng{fullhashraw}{adb6eb72ecc462e8f95c2d2561915000}
+      \strng{bibnamehash}{adb6eb72ecc462e8f95c2d2561915000}
+      \strng{authorbibnamehash}{adb6eb72ecc462e8f95c2d2561915000}
+      \strng{authornamehash}{adb6eb72ecc462e8f95c2d2561915000}
+      \strng{authorfullhash}{adb6eb72ecc462e8f95c2d2561915000}
+      \strng{authorfullhashraw}{adb6eb72ecc462e8f95c2d2561915000}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Asia-Pacific Journal of Neural Networks and Its Applications}
+      \field{month}{08}
+      \field{title}{A Study on Backpropagation in Artificial Neural Networks}
+      \field{volume}{4}
+      \field{year}{2020}
+      \field{pages}{21\bibrangedash 28}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.21742/AJNNIA.2020.4.1.03
+      \endverb
+    \endentry
+    \entry{SENTHILKUMAR2020303}{article}{}{}
+      \name{author}{6}{}{%
+        {{un=0,uniquepart=base,hash=2fa8958905fc35fa7180a9688ae25365}{%
+           family={{Senthil Kumar}},
+           familyi={S\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=996a1492be03b782fe12e007c1339696}{%
+           family={Bibin},
+           familyi={B\bibinitperiod},
+           given={Chidambaranathan},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=0ad198ddceda1d6baca6e4d5b75d1c1c}{%
+           family={Akash},
+           familyi={A\bibinitperiod},
+           given={K.},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=4008faec943139959b2cb2768e4c2858}{%
+           family={Aravindan},
+           familyi={A\bibinitperiod},
+           given={K.},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=01214126a06481c2dd5ece4d7de61b22}{%
+           family={Kishore},
+           familyi={K\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=908fd29affd16d503a1bc177e81c7a0f}{%
+           family={Magesh},
+           familyi={M\bibinitperiod},
+           given={G.},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{583a429d43d4463bb41c2fcb93a9dbd0}
+      \strng{fullhash}{e3bbe3a949f157339a2f38c7607b7c23}
+      \strng{fullhashraw}{e3bbe3a949f157339a2f38c7607b7c23}
+      \strng{bibnamehash}{e3bbe3a949f157339a2f38c7607b7c23}
+      \strng{authorbibnamehash}{e3bbe3a949f157339a2f38c7607b7c23}
+      \strng{authornamehash}{583a429d43d4463bb41c2fcb93a9dbd0}
+      \strng{authorfullhash}{e3bbe3a949f157339a2f38c7607b7c23}
+      \strng{authorfullhashraw}{e3bbe3a949f157339a2f38c7607b7c23}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The electricity deficit and higher fuel costs affect the water supply to irrigation requirements. Solar energy for water pumping is a promising alternative to conventional electricity and diesel-based pumping systems. The photo- voltaic (PV) technology used for solar water pumping is to solar energy into electrical energy. This electrical energy is used to operate the water pump connected with sprinkler for irrigation. The main objective of the study is to present a best method for saving electricity and water. In a water irrigation system, the sprinkler with solar water pump is used to minimize the usage of water and reduce the consumption of electricity. The sprinkler is used to spray water in the irrigation field for reducing the usage of water consumption. The photo- voltaic (PV) technology used for producing electricity is used to operate the motor used for solar pump. The combined sprinkler and environmentally friendly & cost-effective photo- voltaic technology helps to minimize the usage of electricity and water.}
+      \field{issn}{2214-7853}
+      \field{journaltitle}{Materials Today: Proceedings}
+      \field{note}{International Conference on Future Generation Functional Materials and Research 2020}
+      \field{title}{Solar powered water pumping systems for irrigation: A comprehensive review on developments and prospects towards a green energy approach}
+      \field{volume}{33}
+      \field{year}{2020}
+      \field{pages}{303\bibrangedash 307}
+      \range{pages}{5}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.matpr.2020.04.092
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S2214785320327073
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S2214785320327073
+      \endverb
+      \keyw{Sprinkler water spray system,Solar panel,Solar converter,Battery,Transformer,Pump}
+    \endentry
+    \entry{waterpress}{report}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=1acb682cdd89735f3b7d4511876eda5e}{%
+           family={Simonson},
+           familyi={S\bibinitperiod},
+           given={Scott\bibnamedelima Louis},
+           giveni={S\bibinitperiod\bibinitdelim L\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{institution}{1}{%
+        {Tameson}%
+      }
+      \strng{namehash}{1acb682cdd89735f3b7d4511876eda5e}
+      \strng{fullhash}{1acb682cdd89735f3b7d4511876eda5e}
+      \strng{fullhashraw}{1acb682cdd89735f3b7d4511876eda5e}
+      \strng{bibnamehash}{1acb682cdd89735f3b7d4511876eda5e}
+      \strng{authorbibnamehash}{1acb682cdd89735f3b7d4511876eda5e}
+      \strng{authornamehash}{1acb682cdd89735f3b7d4511876eda5e}
+      \strng{authorfullhash}{1acb682cdd89735f3b7d4511876eda5e}
+      \strng{authorfullhashraw}{1acb682cdd89735f3b7d4511876eda5e}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Water Pressure Sensors Overview}
+      \field{type}{techreport}
+      \field{year}{2023}
+    \endentry
+    \entry{stm32}{report}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=c38884ab3cf908c2798725960369391b}{%
+           family={STMicroelectronics},
+           familyi={S\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {STMicroelectronics}%
+      }
+      \strng{namehash}{c38884ab3cf908c2798725960369391b}
+      \strng{fullhash}{c38884ab3cf908c2798725960369391b}
+      \strng{fullhashraw}{c38884ab3cf908c2798725960369391b}
+      \strng{bibnamehash}{c38884ab3cf908c2798725960369391b}
+      \strng{authorbibnamehash}{c38884ab3cf908c2798725960369391b}
+      \strng{authornamehash}{c38884ab3cf908c2798725960369391b}
+      \strng{authorfullhash}{c38884ab3cf908c2798725960369391b}
+      \strng{authorfullhashraw}{c38884ab3cf908c2798725960369391b}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{High-performance access line, Arm Cortex-M4 core with DSP and FPU, 512 Kbytes of Flash memory, 100 MHz CPU, ART Accelerator}
+      \field{type}{techreport}
+      \field{year}{2025}
+    \endentry
+  \enddatalist
+  \datalist[entry]{apa/global//global/global/global}
+    \entry{bipolar}{article}{}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=89819ad04e8377e3872d78041ae4defe}{%
+           family={Alrimali},
+           familyi={A\bibinitperiod},
+           given={Abdulsalam\bibnamedelima Ali},
+           giveni={A\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=7c07d893e56c185bb529f3ed46aec9e4}{%
+           family={Mohamed\bibnamedelima Aljehaimi},
+           familyi={M\bibinitperiod\bibinitdelim A\bibinitperiod},
+           given={Akrem},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=f291249fc145a5b4fee8411fa169c167}{%
+           family={Hussein},
+           familyi={H\bibinitperiod},
+           given={Abdallah\bibnamedelima Suliman},
+           giveni={A\bibinitperiod\bibinitdelim S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=c7db21581ddcfadd1fa0b4fb1b85fc45}{%
+           family={Pillay},
+           familyi={P\bibinitperiod},
+           given={Pragasen},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{8ef51f7e7fdb4ab74d1b26abbad24629}
+      \strng{fullhash}{867be005c97823e2d362187332f21c9f}
+      \strng{fullhashraw}{867be005c97823e2d362187332f21c9f}
+      \strng{bibnamehash}{867be005c97823e2d362187332f21c9f}
+      \strng{authorbibnamehash}{867be005c97823e2d362187332f21c9f}
+      \strng{authornamehash}{8ef51f7e7fdb4ab74d1b26abbad24629}
+      \strng{authorfullhash}{867be005c97823e2d362187332f21c9f}
+      \strng{authorfullhashraw}{867be005c97823e2d362187332f21c9f}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{2021 IEEE 1st International Maghreb Meeting of the Conference on Sciences and Techniques of Automatic Control and Computer Engineering MI-STA}
+      \field{title}{Controller Design for an Off-Grid Photovoltaic Solar Inverter}
+      \field{year}{2021}
+      \field{pages}{209\bibrangedash 216}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1109/MI-STA52233.2021.9464514
+      \endverb
+      \keyw{Current control;Voltage transformers;Modulation;Switches;Control systems;Harmonic analysis;Inverters;Full-bridge inverter;SPWM;PI Controller;PSIM}
+    \endentry
+    \entry{pwmacchop2}{article}{}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=f57aca51b55042d87b6b8745371dfecc}{%
+           family={Bumroongphuck},
+           familyi={B\bibinitperiod},
+           given={Chavaporn},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=c1177733539ac228fb658aa5ce644899}{%
+           family={Koodsamrong},
+           familyi={K\bibinitperiod},
+           given={Rangsan},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=4682ac91a0ef95fb3cb5d7ae6400b97c}{%
+           family={Kinnares},
+           familyi={K\bibinitperiod},
+           given={Vijit},
+           giveni={V\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{0f636ff09fc12daccd050aedff9b614b}
+      \strng{fullhash}{6b584a88f659bb96ba36f64cd02831e5}
+      \strng{fullhashraw}{6b584a88f659bb96ba36f64cd02831e5}
+      \strng{bibnamehash}{6b584a88f659bb96ba36f64cd02831e5}
+      \strng{authorbibnamehash}{6b584a88f659bb96ba36f64cd02831e5}
+      \strng{authornamehash}{0f636ff09fc12daccd050aedff9b614b}
+      \strng{authorfullhash}{6b584a88f659bb96ba36f64cd02831e5}
+      \strng{authorfullhashraw}{6b584a88f659bb96ba36f64cd02831e5}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{2025 13th International Electrical Engineering Congress (iEECON)}
+      \field{title}{Soft Starting of a Modified Three-Phase Induction Motor with a Single-Phase Synchronous PWM AC Chopper}
+      \field{year}{2025}
+      \field{pages}{1\bibrangedash 6}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1109/iEECON64081.2025.10987649
+      \endverb
+      \keyw{Vibrations;Thyristors;Induction motors;Torque;Capacitors;Printed circuits;Pulse width modulation;Choppers (circuits);Voltage control;Stress;synchronous PWM AC chopper;Single-phase induction motor (SPIM);Modified three-phase induction motor for a single-phase supply;Print Circuit Board (PCB)}
+    \endentry
+    \entry{chapman}{book}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=17f4e2b68cfc8e58ddd9d602783f13ec}{%
+           family={Chapman},
+           familyi={C\bibinitperiod},
+           given={Stephen\bibnamedelima J},
+           giveni={S\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {McGraw-Hill}%
+      }
+      \strng{namehash}{17f4e2b68cfc8e58ddd9d602783f13ec}
+      \strng{fullhash}{17f4e2b68cfc8e58ddd9d602783f13ec}
+      \strng{fullhashraw}{17f4e2b68cfc8e58ddd9d602783f13ec}
+      \strng{bibnamehash}{17f4e2b68cfc8e58ddd9d602783f13ec}
+      \strng{authorbibnamehash}{17f4e2b68cfc8e58ddd9d602783f13ec}
+      \strng{authornamehash}{17f4e2b68cfc8e58ddd9d602783f13ec}
+      \strng{authorfullhash}{17f4e2b68cfc8e58ddd9d602783f13ec}
+      \strng{authorfullhashraw}{17f4e2b68cfc8e58ddd9d602783f13ec}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Electric Machinary Fundamentals}
+      \field{year}{2005}
+    \endentry
+    \entry{GIRDHAR200548}{inbook}{}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=fe5a7406c84ed73f1bc1a05bff50bb44}{%
+           family={Girdhar},
+           familyi={G\bibinitperiod},
+           given={Paresh},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1afe95c30f8000786e14983aeaf9d9fd}{%
+           family={Moniz},
+           familyi={M\bibinitperiod},
+           given={Octo},
+           giveni={O\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=8cf69d60b9547425068f0fc553caa6e6}{%
+           family={Mackay},
+           familyi={M\bibinitperiod},
+           given={Steve},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \name{editor}{3}{}{%
+        {{hash=fe5a7406c84ed73f1bc1a05bff50bb44}{%
+           family={Girdhar},
+           familyi={G\bibinitperiod},
+           given={Paresh},
+           giveni={P\bibinitperiod}}}%
+        {{hash=1afe95c30f8000786e14983aeaf9d9fd}{%
+           family={Moniz},
+           familyi={M\bibinitperiod},
+           given={Octo},
+           giveni={O\bibinitperiod}}}%
+        {{hash=8cf69d60b9547425068f0fc553caa6e6}{%
+           family={Mackay},
+           familyi={M\bibinitperiod},
+           given={Steve},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Oxford}%
+      }
+      \list{publisher}{1}{%
+        {Newnes}%
+      }
+      \strng{namehash}{2ffca3bf1dabe17e32baa9419a07eb4f}
+      \strng{fullhash}{1f72b8f8d30fad4ec1e371c929a0ca17}
+      \strng{fullhashraw}{1f72b8f8d30fad4ec1e371c929a0ca17}
+      \strng{bibnamehash}{1f72b8f8d30fad4ec1e371c929a0ca17}
+      \strng{authorbibnamehash}{1f72b8f8d30fad4ec1e371c929a0ca17}
+      \strng{authornamehash}{2ffca3bf1dabe17e32baa9419a07eb4f}
+      \strng{authorfullhash}{1f72b8f8d30fad4ec1e371c929a0ca17}
+      \strng{authorfullhashraw}{1f72b8f8d30fad4ec1e371c929a0ca17}
+      \strng{editorbibnamehash}{1f72b8f8d30fad4ec1e371c929a0ca17}
+      \strng{editornamehash}{2ffca3bf1dabe17e32baa9419a07eb4f}
+      \strng{editorfullhash}{1f72b8f8d30fad4ec1e371c929a0ca17}
+      \strng{editorfullhashraw}{1f72b8f8d30fad4ec1e371c929a0ca17}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Practical Centrifugal Pumps}
+      \field{isbn}{978-0-7506-6273-4}
+      \field{title}{3 - Pump hydraulics}
+      \field{year}{2005}
+      \field{pages}{48\bibrangedash 75}
+      \range{pages}{28}
+      \verb{doi}
+      \verb https://doi.org/10.1016/B978-075066273-4/50003-9
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/B9780750662734500039
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/B9780750662734500039
+      \endverb
+    \endentry
+    \entry{hart}{book}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=bfa0ccb8483cd90aacd9d855fd3c7400}{%
+           family={Hart},
+           familyi={H\bibinitperiod},
+           given={Daniel\bibnamedelima W.},
+           giveni={D\bibinitperiod\bibinitdelim W\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {McGraw-Hill}%
+      }
+      \strng{namehash}{bfa0ccb8483cd90aacd9d855fd3c7400}
+      \strng{fullhash}{bfa0ccb8483cd90aacd9d855fd3c7400}
+      \strng{fullhashraw}{bfa0ccb8483cd90aacd9d855fd3c7400}
+      \strng{bibnamehash}{bfa0ccb8483cd90aacd9d855fd3c7400}
+      \strng{authorbibnamehash}{bfa0ccb8483cd90aacd9d855fd3c7400}
+      \strng{authornamehash}{bfa0ccb8483cd90aacd9d855fd3c7400}
+      \strng{authorfullhash}{bfa0ccb8483cd90aacd9d855fd3c7400}
+      \strng{authorfullhashraw}{bfa0ccb8483cd90aacd9d855fd3c7400}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Power Electronics}
+      \field{year}{2011}
+    \endentry
+    \entry{MANSOUR2025342}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=ad6897ee125a9c32bfaef1d945c2f972}{%
+           family={Mansour},
+           familyi={M\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=55e49d5e100944184a17d1f82d932079}{%
+           family={Thévenin},
+           familyi={T\bibinitperiod},
+           given={Dominique},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{12cb27434d2fe97b61a710d4d2e82253}
+      \strng{fullhash}{12cb27434d2fe97b61a710d4d2e82253}
+      \strng{fullhashraw}{12cb27434d2fe97b61a710d4d2e82253}
+      \strng{bibnamehash}{12cb27434d2fe97b61a710d4d2e82253}
+      \strng{authorbibnamehash}{12cb27434d2fe97b61a710d4d2e82253}
+      \strng{authornamehash}{12cb27434d2fe97b61a710d4d2e82253}
+      \strng{authorfullhash}{12cb27434d2fe97b61a710d4d2e82253}
+      \strng{authorfullhashraw}{12cb27434d2fe97b61a710d4d2e82253}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0263-8762}
+      \field{journaltitle}{Chemical Engineering Research and Design}
+      \field{title}{Optimized inducer design for transporting air–water two-phase flows in centrifugal pumps: Outperforming traditional inducers}
+      \field{volume}{215}
+      \field{year}{2025}
+      \field{pages}{342\bibrangedash 360}
+      \range{pages}{19}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.cherd.2025.01.039
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0263876225000504
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0263876225000504
+      \endverb
+      \keyw{Centrifugal pumps,Optimized inducer,Gas–liquid two-phase flow regimes,Pump surging}
+    \endentry
+    \entry{article}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=240e7baef1d6923b405efb21c510a7e7}{%
+           family={Nurjaman},
+           familyi={N\bibinitperiod},
+           given={Hendi},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=d4be954dfedbd3197da3172cf2f5a890}{%
+           family={Purnama},
+           familyi={P\bibinitperiod},
+           given={Trisna},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{9b560feaffcd76ee77fc525f3f4e7bce}
+      \strng{fullhash}{9b560feaffcd76ee77fc525f3f4e7bce}
+      \strng{fullhashraw}{9b560feaffcd76ee77fc525f3f4e7bce}
+      \strng{bibnamehash}{9b560feaffcd76ee77fc525f3f4e7bce}
+      \strng{authorbibnamehash}{9b560feaffcd76ee77fc525f3f4e7bce}
+      \strng{authornamehash}{9b560feaffcd76ee77fc525f3f4e7bce}
+      \strng{authorfullhash}{9b560feaffcd76ee77fc525f3f4e7bce}
+      \strng{authorfullhashraw}{9b560feaffcd76ee77fc525f3f4e7bce}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Jurnal Edukasi Elektro}
+      \field{month}{11}
+      \field{title}{Pembangkit Listrik Tenaga Surya (PLTS) Sebagai Solusi Energi Terbarukan Rumah Tangga}
+      \field{volume}{6}
+      \field{year}{2022}
+      \field{pages}{136\bibrangedash 142}
+      \range{pages}{7}
+      \verb{doi}
+      \verb 10.21831/jee.v6i2.51617
+      \endverb
+    \endentry
+    \entry{anakub}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=d13d4b8d970877dd2b4ea51d9dbcdae5}{%
+           family={Putra},
+           familyi={P\bibinitperiod},
+           given={Hari\bibnamedelima Widagdo},
+           giveni={H\bibinitperiod\bibinitdelim W\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{d13d4b8d970877dd2b4ea51d9dbcdae5}
+      \strng{fullhash}{d13d4b8d970877dd2b4ea51d9dbcdae5}
+      \strng{fullhashraw}{d13d4b8d970877dd2b4ea51d9dbcdae5}
+      \strng{bibnamehash}{d13d4b8d970877dd2b4ea51d9dbcdae5}
+      \strng{authorbibnamehash}{d13d4b8d970877dd2b4ea51d9dbcdae5}
+      \strng{authornamehash}{d13d4b8d970877dd2b4ea51d9dbcdae5}
+      \strng{authorfullhash}{d13d4b8d970877dd2b4ea51d9dbcdae5}
+      \strng{authorfullhashraw}{d13d4b8d970877dd2b4ea51d9dbcdae5}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Jurnal Mahasiswa TEUB}
+      \field{title}{Perancangan Sistem Pengendalian Kecepatan Motor Pompa Air Tekanan Konstan}
+      \field{year}{2015}
+    \endentry
+    \entry{anakits}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=8bab6541bb20f6a30f42c82615b23f85}{%
+           family={Rosada},
+           familyi={R\bibinitperiod},
+           given={Kevin},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{8bab6541bb20f6a30f42c82615b23f85}
+      \strng{fullhash}{8bab6541bb20f6a30f42c82615b23f85}
+      \strng{fullhashraw}{8bab6541bb20f6a30f42c82615b23f85}
+      \strng{bibnamehash}{8bab6541bb20f6a30f42c82615b23f85}
+      \strng{authorbibnamehash}{8bab6541bb20f6a30f42c82615b23f85}
+      \strng{authornamehash}{8bab6541bb20f6a30f42c82615b23f85}
+      \strng{authorfullhash}{8bab6541bb20f6a30f42c82615b23f85}
+      \strng{authorfullhashraw}{8bab6541bb20f6a30f42c82615b23f85}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{ITS Repository}
+      \field{title}{SISTEM KONTROL POMPA AIR MENGGUNAKAN KONTROLER PID BERBASIS RASPBERRY PI}
+      \field{year}{2017}
+    \endentry
+    \entry{pwmacchop}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=6cf312650c85095bbc4a8a2692239c4f}{%
+           family={Sabir},
+           familyi={S\bibinitperiod},
+           given={Shaikh\bibnamedelima Uzma},
+           giveni={S\bibinitperiod\bibinitdelim U\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=7940fe6b51372abc709041e751714507}{%
+           family={Koshti},
+           familyi={K\bibinitperiod},
+           given={A.\bibnamedelimi S.},
+           giveni={A\bibinitperiod\bibinitdelim S\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{222c95b5a6bfb831953b9f68b946b929}
+      \strng{fullhash}{222c95b5a6bfb831953b9f68b946b929}
+      \strng{fullhashraw}{222c95b5a6bfb831953b9f68b946b929}
+      \strng{bibnamehash}{222c95b5a6bfb831953b9f68b946b929}
+      \strng{authorbibnamehash}{222c95b5a6bfb831953b9f68b946b929}
+      \strng{authornamehash}{222c95b5a6bfb831953b9f68b946b929}
+      \strng{authorfullhash}{222c95b5a6bfb831953b9f68b946b929}
+      \strng{authorfullhashraw}{222c95b5a6bfb831953b9f68b946b929}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{2023 International Conference on Integration of Computational Intelligent System (ICICIS)}
+      \field{title}{Reduction of Selective Harmonics in PWM AC Chopper Using Artificial Neural Network}
+      \field{year}{2023}
+      \field{pages}{1\bibrangedash 7}
+      \range{pages}{7}
+      \verb{doi}
+      \verb 10.1109/ICICIS56802.2023.10430273
+      \endverb
+      \keyw{Training;Optimization methods;Artificial neural networks;Switches;Choppers (circuits);Harmonic analysis;Voltage control;Harmonics elimination;AC Chopper;SPWM;ANN;RBFNN}
+    \endentry
+    \entry{10695139}{article}{}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=121c5acff246c6195dd1ee5009f33347}{%
+           family={Sahu},
+           familyi={S\bibinitperiod},
+           given={Ajay\bibnamedelima Kumar},
+           giveni={A\bibinitperiod\bibinitdelim K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e03d977ad765e8e3212646d4b59fb994}{%
+           family={Patel},
+           familyi={P\bibinitperiod},
+           given={Ramnarayan},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=09fa5f569143dfac4e0b62790053d905}{%
+           family={Sahu},
+           familyi={S\bibinitperiod},
+           given={Lalit\bibnamedelima Kumar},
+           giveni={L\bibinitperiod\bibinitdelim K\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{4b779fd0a3d0c33ce9713a736aa9210b}
+      \strng{fullhash}{e8cafbc3020440c91b8a1d1b90b014fe}
+      \strng{fullhashraw}{e8cafbc3020440c91b8a1d1b90b014fe}
+      \strng{bibnamehash}{e8cafbc3020440c91b8a1d1b90b014fe}
+      \strng{authorbibnamehash}{e8cafbc3020440c91b8a1d1b90b014fe}
+      \strng{authornamehash}{4b779fd0a3d0c33ce9713a736aa9210b}
+      \strng{authorfullhash}{e8cafbc3020440c91b8a1d1b90b014fe}
+      \strng{authorfullhashraw}{e8cafbc3020440c91b8a1d1b90b014fe}
+      \field{extraname}{1}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradate}{1}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Journal of Emerging and Selected Topics in Power Electronics}
+      \field{number}{1}
+      \field{title}{ANN Controlled Single-Phase Microinverter for Off-Grid Solar Application}
+      \field{volume}{13}
+      \field{year}{2025}
+      \field{pages}{850\bibrangedash 860}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.1109/JESTPE.2024.3468391
+      \endverb
+      \keyw{Voltage control;Switches;Capacitors;Inverters;Inductors;Voltage;Topology;Common ground;microinverter;off-grid inverter;single phase single stage;solar photovoltaic (PV)}
+    \endentry
+    \entry{ann}{article}{}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=121c5acff246c6195dd1ee5009f33347}{%
+           family={Sahu},
+           familyi={S\bibinitperiod},
+           given={Ajay\bibnamedelima Kumar},
+           giveni={A\bibinitperiod\bibinitdelim K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e03d977ad765e8e3212646d4b59fb994}{%
+           family={Patel},
+           familyi={P\bibinitperiod},
+           given={Ramnarayan},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=09fa5f569143dfac4e0b62790053d905}{%
+           family={Sahu},
+           familyi={S\bibinitperiod},
+           given={Lalit\bibnamedelima Kumar},
+           giveni={L\bibinitperiod\bibinitdelim K\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{4b779fd0a3d0c33ce9713a736aa9210b}
+      \strng{fullhash}{e8cafbc3020440c91b8a1d1b90b014fe}
+      \strng{fullhashraw}{e8cafbc3020440c91b8a1d1b90b014fe}
+      \strng{bibnamehash}{e8cafbc3020440c91b8a1d1b90b014fe}
+      \strng{authorbibnamehash}{e8cafbc3020440c91b8a1d1b90b014fe}
+      \strng{authornamehash}{4b779fd0a3d0c33ce9713a736aa9210b}
+      \strng{authorfullhash}{e8cafbc3020440c91b8a1d1b90b014fe}
+      \strng{authorfullhashraw}{e8cafbc3020440c91b8a1d1b90b014fe}
+      \field{extraname}{2}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradate}{2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Journal of Emerging and Selected Topics in Power Electronics}
+      \field{number}{1}
+      \field{title}{ANN Controlled Single-Phase Microinverter for Off-Grid Solar Application}
+      \field{volume}{13}
+      \field{year}{2025}
+      \field{pages}{850\bibrangedash 860}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.1109/JESTPE.2024.3468391
+      \endverb
+      \keyw{Voltage control;Switches;Capacitors;Inverters;Inductors;Voltage;Topology;Common ground;microinverter;off-grid inverter;single phase single stage;solar photovoltaic (PV)}
+    \endentry
+    \entry{backp}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=c669c39abea9e1b9c904056e96d17661}{%
+           family={Sekhar},
+           familyi={S\bibinitperiod},
+           given={Ch},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=18881df292466c50c3f0dc2cfa8ef545}{%
+           family={Meghana},
+           familyi={M\bibinitperiod},
+           given={P},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{adb6eb72ecc462e8f95c2d2561915000}
+      \strng{fullhash}{adb6eb72ecc462e8f95c2d2561915000}
+      \strng{fullhashraw}{adb6eb72ecc462e8f95c2d2561915000}
+      \strng{bibnamehash}{adb6eb72ecc462e8f95c2d2561915000}
+      \strng{authorbibnamehash}{adb6eb72ecc462e8f95c2d2561915000}
+      \strng{authornamehash}{adb6eb72ecc462e8f95c2d2561915000}
+      \strng{authorfullhash}{adb6eb72ecc462e8f95c2d2561915000}
+      \strng{authorfullhashraw}{adb6eb72ecc462e8f95c2d2561915000}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Asia-Pacific Journal of Neural Networks and Its Applications}
+      \field{month}{08}
+      \field{title}{A Study on Backpropagation in Artificial Neural Networks}
+      \field{volume}{4}
+      \field{year}{2020}
+      \field{pages}{21\bibrangedash 28}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.21742/AJNNIA.2020.4.1.03
+      \endverb
+    \endentry
+    \entry{SENTHILKUMAR2020303}{article}{}{}
+      \name{author}{6}{}{%
+        {{un=0,uniquepart=base,hash=2fa8958905fc35fa7180a9688ae25365}{%
+           family={{Senthil Kumar}},
+           familyi={S\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=996a1492be03b782fe12e007c1339696}{%
+           family={Bibin},
+           familyi={B\bibinitperiod},
+           given={Chidambaranathan},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=0ad198ddceda1d6baca6e4d5b75d1c1c}{%
+           family={Akash},
+           familyi={A\bibinitperiod},
+           given={K.},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=4008faec943139959b2cb2768e4c2858}{%
+           family={Aravindan},
+           familyi={A\bibinitperiod},
+           given={K.},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=01214126a06481c2dd5ece4d7de61b22}{%
+           family={Kishore},
+           familyi={K\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=908fd29affd16d503a1bc177e81c7a0f}{%
+           family={Magesh},
+           familyi={M\bibinitperiod},
+           given={G.},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{583a429d43d4463bb41c2fcb93a9dbd0}
+      \strng{fullhash}{e3bbe3a949f157339a2f38c7607b7c23}
+      \strng{fullhashraw}{e3bbe3a949f157339a2f38c7607b7c23}
+      \strng{bibnamehash}{e3bbe3a949f157339a2f38c7607b7c23}
+      \strng{authorbibnamehash}{e3bbe3a949f157339a2f38c7607b7c23}
+      \strng{authornamehash}{583a429d43d4463bb41c2fcb93a9dbd0}
+      \strng{authorfullhash}{e3bbe3a949f157339a2f38c7607b7c23}
+      \strng{authorfullhashraw}{e3bbe3a949f157339a2f38c7607b7c23}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The electricity deficit and higher fuel costs affect the water supply to irrigation requirements. Solar energy for water pumping is a promising alternative to conventional electricity and diesel-based pumping systems. The photo- voltaic (PV) technology used for solar water pumping is to solar energy into electrical energy. This electrical energy is used to operate the water pump connected with sprinkler for irrigation. The main objective of the study is to present a best method for saving electricity and water. In a water irrigation system, the sprinkler with solar water pump is used to minimize the usage of water and reduce the consumption of electricity. The sprinkler is used to spray water in the irrigation field for reducing the usage of water consumption. The photo- voltaic (PV) technology used for producing electricity is used to operate the motor used for solar pump. The combined sprinkler and environmentally friendly & cost-effective photo- voltaic technology helps to minimize the usage of electricity and water.}
+      \field{issn}{2214-7853}
+      \field{journaltitle}{Materials Today: Proceedings}
+      \field{note}{International Conference on Future Generation Functional Materials and Research 2020}
+      \field{title}{Solar powered water pumping systems for irrigation: A comprehensive review on developments and prospects towards a green energy approach}
+      \field{volume}{33}
+      \field{year}{2020}
+      \field{pages}{303\bibrangedash 307}
+      \range{pages}{5}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.matpr.2020.04.092
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S2214785320327073
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S2214785320327073
+      \endverb
+      \keyw{Sprinkler water spray system,Solar panel,Solar converter,Battery,Transformer,Pump}
+    \endentry
+    \entry{waterpress}{report}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=1acb682cdd89735f3b7d4511876eda5e}{%
+           family={Simonson},
+           familyi={S\bibinitperiod},
+           given={Scott\bibnamedelima Louis},
+           giveni={S\bibinitperiod\bibinitdelim L\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{institution}{1}{%
+        {Tameson}%
+      }
+      \strng{namehash}{1acb682cdd89735f3b7d4511876eda5e}
+      \strng{fullhash}{1acb682cdd89735f3b7d4511876eda5e}
+      \strng{fullhashraw}{1acb682cdd89735f3b7d4511876eda5e}
+      \strng{bibnamehash}{1acb682cdd89735f3b7d4511876eda5e}
+      \strng{authorbibnamehash}{1acb682cdd89735f3b7d4511876eda5e}
+      \strng{authornamehash}{1acb682cdd89735f3b7d4511876eda5e}
+      \strng{authorfullhash}{1acb682cdd89735f3b7d4511876eda5e}
+      \strng{authorfullhashraw}{1acb682cdd89735f3b7d4511876eda5e}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Water Pressure Sensors Overview}
+      \field{type}{techreport}
+      \field{year}{2023}
+    \endentry
+    \entry{stm32}{report}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=c38884ab3cf908c2798725960369391b}{%
+           family={STMicroelectronics},
+           familyi={S\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {STMicroelectronics}%
+      }
+      \strng{namehash}{c38884ab3cf908c2798725960369391b}
+      \strng{fullhash}{c38884ab3cf908c2798725960369391b}
+      \strng{fullhashraw}{c38884ab3cf908c2798725960369391b}
+      \strng{bibnamehash}{c38884ab3cf908c2798725960369391b}
+      \strng{authorbibnamehash}{c38884ab3cf908c2798725960369391b}
+      \strng{authornamehash}{c38884ab3cf908c2798725960369391b}
+      \strng{authorfullhash}{c38884ab3cf908c2798725960369391b}
+      \strng{authorfullhashraw}{c38884ab3cf908c2798725960369391b}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{High-performance access line, Arm Cortex-M4 core with DSP and FPU, 512 Kbytes of Flash memory, 100 MHz CPU, ART Accelerator}
+      \field{type}{techreport}
+      \field{year}{2025}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

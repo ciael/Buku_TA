@@ -1,0 +1,173 @@
+% ============================================================================
+% Tabel-tabel untuk BAB 4 (Pengujian & Analisis)
+% Cara pakai: \input{tabel_bab4} di bab Anda, atau salin tabel yang diperlukan.
+% Sebagian sudah terisi dari hasil notebook; sebagian template (isi sendiri).
+% (Tabel pakai tabular standar + \hline; ganti ke booktabs bila template Anda mendukung.)
+% ============================================================================
+
+% ---------------------------------------------------------------------------
+% 1. ARSITEKTUR & PARAMETER MLP  (SUDAH TERISI)
+% ---------------------------------------------------------------------------
+\begin{table}[h]
+  \centering
+  \caption{Arsitektur dan parameter jaringan saraf tiruan (MLP).}
+  \label{tab:arsitektur_mlp}
+  \begin{tabular}{ll}
+    \hline
+    \textbf{Aspek} & \textbf{Nilai} \\
+    \hline
+    Jenis jaringan          & ANN -- Multilayer Perceptron (feedforward) \\
+    Arsitektur              & 3--4--1 \\
+    Jumlah input            & 3 ($error$, $\Delta error$, $duty$) \\
+    Jumlah neuron hidden    & 4 \\
+    Jumlah output           & 1 ($\Delta duty$) \\
+    Fungsi aktivasi hidden  & tanh \\
+    Fungsi aktivasi output  & linear \\
+    Normalisasi input       & StandardScaler (mean 0, std 1) \\
+    Jumlah parameter        & 21 (16 bobot/bias L1 + 5 L2) \\
+    Optimizer pelatihan     & L-BFGS \\
+    \hline
+  \end{tabular}
+\end{table}
+
+% ---------------------------------------------------------------------------
+% 2. KOMPOSISI DATASET CLOSED-LOOP  (SUDAH TERISI)
+% ---------------------------------------------------------------------------
+\begin{table}[h]
+  \centering
+  \caption{Komposisi dataset pelatihan closed-loop (14 Juni 2026).}
+  \label{tab:dataset}
+  \begin{tabular}{lc}
+    \hline
+    \textbf{Keterangan} & \textbf{Jumlah} \\
+    \hline
+    Jumlah file (sesi)              & 12 \\
+    Jumlah episode (global)         & 16 \\
+    Baris keputusan ($is\_decision=1$) & 469 \\
+    Baris siap latih (X,y)          & 453 \\
+    ~~- target naik ($\Delta duty>0$)  & 161 \\
+    ~~- target turun ($\Delta duty<0$) & 91 \\
+    ~~- target tahan ($\Delta duty=0$) & 201 \\
+    Baris setpoint 0.30 bar         & 403 \\
+    Baris setpoint 0.25 bar         & 50 \\
+    Pembagian Train/Val/Test        & 316 / 46 / 91 \\
+    \hline
+  \end{tabular}
+\end{table}
+
+% ---------------------------------------------------------------------------
+% 3. HASIL PELATIHAN MLP (Train/Val/Test)  (SUDAH TERISI)
+% ---------------------------------------------------------------------------
+\begin{table}[h]
+  \centering
+  \caption{Hasil pelatihan MLP 3--4--1 pada data latih, validasi, dan uji.}
+  \label{tab:hasil_latih}
+  \begin{tabular}{lccc}
+    \hline
+    \textbf{Subset} & \textbf{RMSE (\%)} & \textbf{MAE (\%)} & \textbf{$R^2$} \\
+    \hline
+    Train      & 0.417 & 0.311 & 0.932 \\
+    Validation & 0.541 & 0.334 & 0.882 \\
+    Test       & 0.463 & 0.329 & 0.915 \\
+    \hline
+  \end{tabular}
+\end{table}
+
+% ---------------------------------------------------------------------------
+% 4. PERBANDINGAN MLP vs BASELINE (TABEL KUNCI)  (SUDAH TERISI)
+% ---------------------------------------------------------------------------
+\begin{table}[h]
+  \centering
+  \caption{Perbandingan MLP terhadap baseline pada data uji.}
+  \label{tab:baseline}
+  \begin{tabular}{lccc}
+    \hline
+    \textbf{Model} & \textbf{RMSE (\%)} & \textbf{MAE (\%)} & \textbf{$R^2$} \\
+    \hline
+    MLP 3--4--1                         & \textbf{0.463} & \textbf{0.329} & \textbf{0.915} \\
+    Baseline $\Delta duty=0$ (diam)     & 1.597 & 1.121 & $-0.009$ \\
+    Baseline Proporsional ($k\cdot e$)  & 1.000 & 0.740 & 0.604 \\
+    \hline
+  \end{tabular}
+\end{table}
+
+% ---------------------------------------------------------------------------
+% 5. KARAKTERISASI PLANT: tekanan vs duty per jumlah keran  (TEMPLATE -- ISI)
+% ---------------------------------------------------------------------------
+\begin{table}[h]
+  \centering
+  \caption{Karakterisasi plant: tekanan (bar) pada berbagai duty dan jumlah keran.}
+  \label{tab:karakterisasi}
+  \begin{tabular}{cccccc}
+    \hline
+    \textbf{Duty (\%)} & \textbf{0 keran} & \textbf{1 keran} & \textbf{2 keran} & \textbf{3 keran} & \textbf{4 keran} \\
+    \hline
+    70 & \dots & \dots & \dots & \dots & \dots \\
+    75 & \dots & \dots & \dots & \dots & \dots \\
+    80 & \dots & \dots & \dots & \dots & \dots \\
+    85 & \dots & \dots & \dots & \dots & \dots \\
+    90 & \dots & \dots & \dots & \dots & \dots \\
+    95 & \dots & \dots & \dots & \dots & \dots \\
+    \hline
+  \end{tabular}
+\end{table}
+
+% ---------------------------------------------------------------------------
+% 6. PENGUJIAN CLOSED-LOOP DI HARDWARE per skenario  (TEMPLATE -- ISI)
+%    settling time, error steady-state, overshoot
+% ---------------------------------------------------------------------------
+\begin{table}[h]
+  \centering
+  \caption{Hasil pengujian closed-loop pada perangkat (setpoint 0.30 bar).}
+  \label{tab:closedloop}
+  \begin{tabular}{cccccc}
+    \hline
+    \textbf{Keran} & \textbf{Duty awal (\%)} & \textbf{Duty settle (\%)} &
+    \textbf{Tekanan settle (bar)} & \textbf{Error steady (bar)} & \textbf{Settling time (s)} \\
+    \hline
+    4 & \dots & \dots & \dots & \dots & \dots \\
+    3 & \dots & \dots & \dots & \dots & \dots \\
+    2 & \dots & \dots & \dots & \dots & \dots \\
+    1 & \dots & \dots & \dots & \dots & \dots \\
+    0 & \dots & \dots & \dots & \dots & \dots \\
+    \hline
+  \end{tabular}
+\end{table}
+
+% ---------------------------------------------------------------------------
+% 7. PENGUJIAN SETPOINT TRACKING (berbagai setpoint)  (TEMPLATE -- ISI)
+% ---------------------------------------------------------------------------
+\begin{table}[h]
+  \centering
+  \caption{Pengujian penjejakan setpoint (kondisi keran tetap).}
+  \label{tab:setpoint_tracking}
+  \begin{tabular}{cccc}
+    \hline
+    \textbf{Setpoint (bar)} & \textbf{Tekanan tercapai (bar)} &
+    \textbf{Error (bar)} & \textbf{Keterangan} \\
+    \hline
+    0.25 & \dots & \dots & \dots \\
+    0.30 & \dots & \dots & \dots \\
+    0.35 & \dots & \dots & \dots \\
+    \hline
+  \end{tabular}
+\end{table}
+
+% ---------------------------------------------------------------------------
+% 8. PENGUJIAN REJEKSI GANGGUAN (perubahan keran saat berjalan)  (TEMPLATE)
+% ---------------------------------------------------------------------------
+\begin{table}[h]
+  \centering
+  \caption{Pengujian rejeksi gangguan akibat perubahan jumlah keran (setpoint 0.30 bar).}
+  \label{tab:gangguan}
+  \begin{tabular}{cccc}
+    \hline
+    \textbf{Perubahan keran} & \textbf{Deviasi tekanan maks (bar)} &
+    \textbf{Waktu pulih (s)} & \textbf{Error akhir (bar)} \\
+    \hline
+    4 $\rightarrow$ 2 & \dots & \dots & \dots \\
+    2 $\rightarrow$ 4 & \dots & \dots & \dots \\
+    1 $\rightarrow$ 3 & \dots & \dots & \dots \\
+    \hline
+  \end{tabular}
+\end{table}

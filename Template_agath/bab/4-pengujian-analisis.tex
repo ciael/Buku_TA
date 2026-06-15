@@ -10,53 +10,38 @@ air pada pompa, serta kelayakan data yang digunakan untuk pelatihan algoritma
 \section{Skenario Pengujian}
 \label{sec:skenario-pengujian}
 
-Skenario pengujian disusun agar setiap bagian sistem dapat diamati secara
-bertahap. Pengujian dimulai dari keluaran PWM mikrokontroler, pengujian
-rangkaian PWM AC \emph{chopper}, pembacaan sensor tekanan air, pengambilan
-dataset, hingga pengujian model \emph{neural network}.
+Pengujian dilakukan secara bertahap dari tingkat komponen hingga sistem
+terintegrasi, sesuai Tabel~\ref{tab:skenario-pengujian}.
 
 \begin{table}[H]
 \centering
 \caption{Skenario Pengujian Sistem}
 \label{tab:skenario-pengujian}
-\begin{tabular}{|c|p{4.2cm}|p{4.2cm}|p{3.2cm}|}
+\begin{tabularx}{\linewidth}{|c|>{\raggedright\arraybackslash\hsize=0.9\hsize}X|>{\raggedright\arraybackslash\hsize=1.1\hsize}X|}
 \hline
 \textbf{No.} &
 \textbf{Pengujian} &
-\textbf{Parameter yang Diamati} &
-\textbf{Tujuan Pengujian} \\
+\textbf{Tujuan} \\
 \hline
-1 &
-Pengujian sinyal PWM STM32 &
-Frekuensi, \emph{duty cycle}, dan sinyal komplementer &
-Memastikan sinyal kendali sesuai perancangan \\
+1 & Sinyal PWM STM32 &
+Memvalidasi frekuensi, \emph{duty cycle}, dan sinyal komplementer \\
 \hline
-2 &
-Pengujian PWM AC \emph{chopper} tanpa beban pompa &
-Tegangan RMS keluaran dan bentuk gelombang &
-Mengetahui karakteristik dasar rangkaian daya \\
+2 & PWM AC \emph{chopper} tanpa beban &
+Mengetahui hubungan \emph{duty cycle} terhadap tegangan RMS \\
 \hline
-3 &
-Pengujian PWM AC \emph{chopper} dengan beban pompa &
-Tegangan RMS, arus, tekanan air, dan respons pompa &
-Mengetahui performa sistem saat diberi beban aktual \\
+3 & PWM AC \emph{chopper} dengan beban pompa &
+Mengukur tegangan RMS, arus, dan tekanan aktual \\
 \hline
-4 &
-Pengujian sensor tekanan air &
-ADC, tegangan sensor, dan tekanan air &
-Memastikan pembacaan sensor dapat digunakan sebagai umpan balik \\
+4 & Sensor tekanan air &
+Memverifikasi akurasi ADC terhadap tekanan referensi \\
 \hline
-5 &
-Pengambilan dataset \emph{neural network} &
-\emph{Duty cycle}, tekanan, tegangan, dan kondisi beban &
-Menyediakan data latih dan data uji model \\
+5 & Dataset \emph{neural network} &
+Mengakuisisi data latih dan data uji dengan variasi beban \\
 \hline
-6 &
-Pengujian model \emph{neural network} &
-\emph{Setpoint}, tekanan aktual, error, dan output \emph{duty cycle} &
-Menilai kemampuan model dalam mengatur tekanan \\
+6 & Model \emph{neural network} &
+Mengevaluasi RMSE, MAE, dan R$^2$ prediksi \emph{duty cycle} \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \section{Pengujian Sinyal PWM STM32}
@@ -72,53 +57,51 @@ komplementer diamati pada pin PA7. Parameter yang diamati meliputi frekuensi,
 \centering
 \caption{Hasil Pengujian Sinyal PWM STM32}
 \label{tab:hasil-pwm-stm32}
-\begin{tabular}{|c|p{2.1cm}|p{2.1cm}|p{2.2cm}|p{2.2cm}|p{2cm}|}
+  \begin{tabularx}{\linewidth}{|c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
 \hline
 \textbf{No.} &
 \textbf{Frekuensi Target (Hz)} &
 \textbf{Frekuensi Terukur (Hz)} &
 \textbf{\emph{Duty Cycle} Target (\%)} &
-\textbf{\emph{Duty Cycle} Terukur (\%)} &
-\textbf{Keterangan} \\
+\textbf{\emph{Duty Cycle} Terukur (\%)} \\
 \hline
-1 & 5000 &  & 10 &  &  \\
+1 & 5000 &  & 10 &  \\
 \hline
-2 & 5000 &  & 20 &  &  \\
+2 & 5000 &  & 20 &  \\
 \hline
-3 & 5000 &  & 30 &  &  \\
+3 & 5000 &  & 30 &  \\
 \hline
-4 & 5000 &  & 40 &  &  \\
+4 & 5000 &  & 40 &  \\
 \hline
-5 & 5000 &  & 50 &  &  \\
+5 & 5000 &  & 50 &  \\
 \hline
-6 & 5000 &  & 60 &  &  \\
+6 & 5000 &  & 60 &  \\
 \hline
-7 & 5000 &  & 70 &  &  \\
+7 & 5000 &  & 70 &  \\
 \hline
-8 & 5000 &  & 80 &  &  \\
+8 & 5000 &  & 80 &  \\
 \hline
-9 & 5000 &  & 90 &  &  \\
+9 & 5000 &  & 90 &  \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \begin{table}[H]
 \centering
 \caption{Pengujian Sinyal PWM dan Sinyal Komplementer}
 \label{tab:pwm-komplementer}
-\begin{tabular}{|c|c|c|c|c|}
+  \begin{tabularx}{\linewidth}{|c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
 \hline
 \textbf{No.} &
 \textbf{Pin} &
 \textbf{Kondisi Sinyal} &
-\textbf{\emph{Dead Time}} &
-\textbf{Keterangan} \\
+\textbf{\emph{Dead Time}} \\
 \hline
-1 & PA8 & PWM utama &  &  \\
+1 & PA8 & PWM utama &  \\
 \hline
-2 & PA7 & PWM komplementer &  &  \\
+2 & PA7 & PWM komplementer &  \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \section{Pengujian Rangkaian PWM AC \emph{Chopper}}
@@ -134,7 +117,7 @@ melihat selisih atau error dari sistem.
 \centering
 \caption{Hubungan \emph{Duty Cycle} terhadap Tegangan RMS Keluaran}
 \label{tab:duty-tegangan-rms}
-\begin{tabular}{|c|c|c|c|c|}
+\begin{tabularx}{\linewidth}{|c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
 \hline
 \textbf{No.} &
 \textbf{\emph{Duty Cycle} (\%)} &
@@ -160,14 +143,14 @@ melihat selisih atau error dari sistem.
 \hline
 9 & 90 & 220 & 198 &  \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \begin{table}[H]
 \centering
 \caption{Persentase Error Tegangan RMS Keluaran}
 \label{tab:error-tegangan-rms}
-\begin{tabular}{|c|c|c|c|c|}
+\begin{tabularx}{\linewidth}{|c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
 \hline
 \textbf{No.} &
 \textbf{\emph{Duty Cycle} (\%)} &
@@ -193,7 +176,7 @@ melihat selisih atau error dari sistem.
 \hline
 9 & 90 & 198 &  &  \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \section{Pengujian Sensor Tekanan Air}
@@ -210,7 +193,7 @@ ke pin ADC.
 \centering
 \caption{Hasil Pembacaan Sensor Tekanan Air}
 \label{tab:hasil-sensor-tekanan}
-\begin{tabular}{|c|c|c|c|c|}
+\begin{tabularx}{\linewidth}{|c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
 \hline
 \textbf{No.} &
 \textbf{ADC Terbaca} &
@@ -228,14 +211,14 @@ ke pin ADC.
 \hline
 5 &  &  &  &  \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \begin{table}[H]
 \centering
 \caption{Perbandingan Tekanan Sensor dengan Alat Ukur Referensi}
 \label{tab:kalibrasi-sensor-tekanan}
-\begin{tabular}{|c|c|c|c|}
+\begin{tabularx}{\linewidth}{|c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
 \hline
 \textbf{No.} &
 \textbf{Tekanan Referensi (bar)} &
@@ -252,7 +235,7 @@ ke pin ADC.
 \hline
 5 &  &  &  \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \section{Pengujian Sistem dengan Beban Pompa Air}
@@ -267,41 +250,40 @@ arus beban, dan tekanan air dicatat.
 \centering
 \caption{Pengaruh \emph{Duty Cycle} terhadap Tekanan Pompa Air}
 \label{tab:duty-tekanan-pompa}
-\begin{tabular}{|c|p{2cm}|p{2cm}|p{1.8cm}|p{1.8cm}|p{2.5cm}|}
+  \begin{tabularx}{\linewidth}{|c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
 \hline
 \textbf{No.} &
 \textbf{\emph{Duty Cycle} (\%)} &
 \textbf{V$_{out}$ RMS (V)} &
 \textbf{Arus Beban (A)} &
-\textbf{Tekanan (bar)} &
-\textbf{Kondisi Aliran} \\
+\textbf{Tekanan (bar)} \\
 \hline
-1 & 10 &  &  &  &  \\
+1 & 10 &  &  &  \\
 \hline
-2 & 20 &  &  &  &  \\
+2 & 20 &  &  &  \\
 \hline
-3 & 30 &  &  &  &  \\
+3 & 30 &  &  &  \\
 \hline
-4 & 40 &  &  &  &  \\
+4 & 40 &  &  &  \\
 \hline
-5 & 50 &  &  &  &  \\
+5 & 50 &  &  &  \\
 \hline
-6 & 60 &  &  &  &  \\
+6 & 60 &  &  &  \\
 \hline
-7 & 70 &  &  &  &  \\
+7 & 70 &  &  &  \\
 \hline
-8 & 80 &  &  &  &  \\
+8 & 80 &  &  &  \\
 \hline
-9 & 90 &  &  &  &  \\
+9 & 90 &  &  &  \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \begin{table}[H]
 \centering
 \caption{Respons Tekanan terhadap Perubahan Beban Keran}
 \label{tab:respons-beban-keran}
-\begin{tabular}{|c|p{3.2cm}|p{2.2cm}|p{2.2cm}|p{2.2cm}|}
+\begin{tabularx}{\linewidth}{|c|>{\raggedright\arraybackslash\hsize=1.3\hsize}X|>{\centering\arraybackslash\hsize=0.9\hsize}X|>{\centering\arraybackslash\hsize=0.9\hsize}X|>{\centering\arraybackslash\hsize=0.9\hsize}X|}
 \hline
 \textbf{No.} &
 \textbf{Kondisi Beban} &
@@ -319,7 +301,7 @@ arus beban, dan tekanan air dicatat.
 \hline
 5 & Beban berubah secara tiba-tiba &  &  &  \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \section{Pengambilan Dataset untuk \emph{Neural Network}}
@@ -331,11 +313,30 @@ meliputi waktu pengambilan data, nilai ADC, tekanan air, tegangan RMS keluaran,
 \emph{duty cycle}, frekuensi PWM, dan kondisi beban. Dataset ini digunakan
 sebagai dasar pelatihan dan pengujian model.
 
+Pengambilan data dilakukan secara \emph{closed-loop} manual, yaitu operator
+bertindak sebagai pengendali yang mengejar tekanan target 0,30~bar menggunakan
+kebijakan proporsional sederhana, sementara sistem mencatat setiap keputusan
+koreksi yang diambil. Pendekatan ini dikenal sebagai \emph{behavior cloning},
+yaitu model dilatih untuk meniru keputusan kendali. Berbeda dengan perekaman
+kuasi-statik, keluaran yang dipelajari model bukan nilai \emph{duty cycle}
+mutlak, melainkan perubahan \emph{duty cycle} ($\Delta duty$) pada tiap langkah
+keputusan. Dengan demikian model belajar menghasilkan \emph{aksi kendali} dan
+bukan sekadar menyalin nilai masukannya.
+
+Data dikumpulkan dalam 12 sesi (berkas) yang mencakup variasi 0--4 keran serta
+dua nilai \emph{setpoint} (0,30~bar dan 0,25~bar). Seluruh sesi menghasilkan
+16~episode dan total 453~baris keputusan ($is\_decision=1$) yang siap dilatih,
+dengan rincian 403~baris pada \emph{setpoint} 0,30~bar dan 50~baris pada
+\emph{setpoint} 0,25~bar. Sebaran target juga relatif seimbang, yaitu 161~baris
+bernilai positif (perlu menaikkan \emph{duty}), 91~baris bernilai negatif
+(perlu menurunkan \emph{duty}), dan 201~baris bernilai nol (mempertahankan
+\emph{duty}).
+
 \begin{table}[H]
 \centering
 \caption{Format Dataset Hasil Akuisisi Data}
 \label{tab:format-dataset-akuisisi}
-\begin{tabular}{|c|p{3.4cm}|p{4.2cm}|p{3.2cm}|}
+\begin{tabularx}{\linewidth}{|c|>{\raggedright\arraybackslash\hsize=0.9\hsize}X|>{\raggedright\arraybackslash\hsize=1.3\hsize}X|>{\centering\arraybackslash\hsize=0.8\hsize}X|}
 \hline
 \textbf{No.} &
 \textbf{Nama Data} &
@@ -358,53 +359,53 @@ sebagai dasar pelatihan dan pengujian model.
 \hline
 8 & Kondisi beban & Kondisi bukaan keran saat data diambil & - \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \begin{table}[H]
 \centering
 \caption{Contoh Tabel Dataset untuk Pelatihan \emph{Neural Network}}
 \label{tab:dataset-nn}
-\begin{tabular}{|c|p{2cm}|p{2.2cm}|p{1.7cm}|p{2.1cm}|p{2cm}|}
+  \begin{tabularx}{\linewidth}{|c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
 \hline
 \textbf{No.} &
 \textbf{Setpoint (bar)} &
 \textbf{Tekanan Aktual (bar)} &
 \textbf{Error (bar)} &
 \textbf{\emph{Duty Cycle} (\%)} &
-\textbf{Kondisi Beban} \\
+\textbf{Kondisi Beban (banyak keran)} \\
 \hline
-1 &  &  &  &  &  \\
+1 & 0,30 & 0,242 & $+$0,058 & 78 & 4 keran \\
 \hline
-2 &  &  &  &  &  \\
+2 & 0,30 & 0,450 & $-$0,150 & 71 & 0 keran \\
 \hline
-3 &  &  &  &  &  \\
+3 & 0,30 & 0,241 & $+$0,059 & 82 & 4 keran \\
 \hline
-4 &  &  &  &  &  \\
+4 & 0,30 & 0,629 & $-$0,329 & 71 & 0 keran \\
 \hline
-5 &  &  &  &  &  \\
+5 & 0,25 & 0,175 & $+$0,075 & 84 & 4 keran \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \begin{table}[H]
 \centering
 \caption{Pembagian Dataset \emph{Neural Network}}
 \label{tab:pembagian-dataset}
-\begin{tabular}{|c|c|c|c|}
+\begin{tabularx}{\linewidth}{|c|>{\raggedright\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
 \hline
 \textbf{No.} &
 \textbf{Jenis Data} &
 \textbf{Persentase Data} &
 \textbf{Jumlah Data} \\
 \hline
-1 & Data latih & 70\% &  \\
+1 & Data latih & 70\% & 316 \\
 \hline
-2 & Data validasi & 15\% &  \\
+2 & Data validasi & 10\% & 46 \\
 \hline
-3 & Data uji & 15\% &  \\
+3 & Data uji & 20\% & 91 \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \section{Pengujian Model \emph{Neural Network}}
@@ -413,99 +414,173 @@ sebagai dasar pelatihan dan pengujian model.
 Pengujian model \emph{neural network} dilakukan untuk menilai kemampuan model
 dalam menghasilkan nilai \emph{duty cycle} berdasarkan kondisi tekanan aktual
 dan nilai tekanan target. Hasil model dibandingkan dengan nilai target atau
-nilai hasil pengujian aktual untuk mengetahui besar error.
+nilai hasil pengujian aktual untuk mengetahui besar error. Model yang digunakan
+merupakan jaringan saraf tiruan jenis \emph{Multilayer Perceptron} (MLP)
+\emph{feedforward} dengan tiga masukan ($error$, $\Delta error$, dan
+\emph{duty cycle} saat ini) dan satu keluaran berupa perubahan \emph{duty cycle}
+($\Delta duty$). Nilai \emph{duty cycle} akhir diperoleh melalui akumulasi
+$duty_{t+1} = duty_{t} + \Delta duty$ yang dibatasi pada rentang 70--95\%.
 
 \begin{table}[H]
 \centering
 \caption{Parameter Pelatihan Model \emph{Neural Network}}
 \label{tab:parameter-pelatihan-nn}
-\begin{tabular}{|c|p{5cm}|p{4cm}|}
+\begin{tabularx}{\linewidth}{|c|>{\raggedright\arraybackslash\hsize=1.3\hsize}X|>{\centering\arraybackslash\hsize=0.7\hsize}X|}
 \hline
 \textbf{No.} &
 \textbf{Parameter} &
 \textbf{Nilai} \\
 \hline
-1 & Jumlah input &  \\
+1 & Jumlah input & 3 \\
 \hline
-2 & Jumlah \emph{hidden layer} &  \\
+2 & Jumlah \emph{hidden layer} & 1 \\
 \hline
-3 & Jumlah neuron tiap \emph{hidden layer} &  \\
+3 & Jumlah neuron tiap \emph{hidden layer} & 4 \\
 \hline
-4 & Fungsi aktivasi &  \\
+4 & Fungsi aktivasi & tanh / linear \\
 \hline
-5 & Jumlah output &  \\
+5 & Jumlah output & 1 \\
 \hline
-6 & Algoritma pelatihan &  \\
+6 & Algoritma pelatihan & L-BFGS \\
 \hline
-7 & Jumlah epoch &  \\
+7 & Jumlah epoch & $\leq$5000 iterasi \\
 \hline
-8 & \emph{Learning rate} &  \\
+8 & \emph{Learning rate} & $-$ (L-BFGS) \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \begin{table}[H]
 \centering
 \caption{Hasil Prediksi Model \emph{Neural Network}}
 \label{tab:hasil-prediksi-nn}
-\begin{tabular}{|c|p{1.8cm}|p{2cm}|p{2.2cm}|p{2.3cm}|p{1.5cm}|}
+\begin{tabularx}{\linewidth}{|c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
 \hline
 \textbf{No.} &
 \textbf{Setpoint (bar)} &
 \textbf{Tekanan Aktual (bar)} &
-\textbf{\emph{Duty Cycle} Target (\%)} &
-\textbf{\emph{Duty Cycle} Prediksi (\%)} &
-\textbf{Error (\%)} \\
+\textbf{$\Delta duty$ Target (\%)} &
+\textbf{$\Delta duty$ Prediksi (\%)} &
+\textbf{Selisih (\%)} \\
 \hline
-1 &  &  &  &  &  \\
+1 & 0,30 & 0,244 & $+$2,0 & $+$1,73 & 0,27 \\
 \hline
-2 &  &  &  &  &  \\
+2 & 0,30 & 0,262 & $+$1,0 & $+$1,15 & 0,15 \\
 \hline
-3 &  &  &  &  &  \\
+3 & 0,30 & 0,287 & 0,0 & $+$0,47 & 0,47 \\
 \hline
-4 &  &  &  &  &  \\
+4 & 0,30 & 0,307 & 0,0 & $-$0,24 & 0,24 \\
 \hline
-5 &  &  &  &  &  \\
+5 & 0,30 & 0,543 & $-$3,0 & $-$3,10 & 0,10 \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \begin{table}[H]
 \centering
 \caption{Evaluasi Performa Model \emph{Neural Network}}
 \label{tab:evaluasi-nn}
-\begin{tabular}{|c|c|c|}
+\begin{tabularx}{\linewidth}{|c|>{\raggedright\arraybackslash}X|>{\centering\arraybackslash}X|}
 \hline
 \textbf{No.} &
 \textbf{Metrik Evaluasi} &
 \textbf{Nilai} \\
 \hline
-1 & MSE &  \\
+1 & MSE & 0,214 \\
 \hline
-2 & RMSE &  \\
+2 & RMSE & 0,463 \\
 \hline
-3 & MAE &  \\
+3 & MAE & 0,329 \\
 \hline
-4 & MAPE &  \\
+4 & Koefisien determinasi ($R^2$) & 0,915 \\
 \hline
-5 & Akurasi rata-rata &  \\
+5 & MAPE & $-$ (tidak relevan) \\
 \hline
-\end{tabular}
+\end{tabularx}
+\end{table}
+
+Nilai RMSE dan MAE dinyatakan dalam satuan persen \emph{duty cycle}, sedangkan
+MSE dalam persen kuadrat. Metrik MAPE tidak dicantumkan karena target
+$\Delta duty$ banyak bernilai nol sehingga perhitungan persentase relatif
+menjadi tidak terdefinisi. Nilai $R^2 = 0{,}915$ pada data uji menunjukkan model
+mampu menjelaskan sekitar 91,5\% variasi aksi kendali, dengan selisih rata-rata
+hanya 0,33\% \emph{duty cycle} per langkah.
+
+Untuk memastikan model benar-benar mempelajari kendali dan bukan sekadar pola
+sepele, hasil MLP dibandingkan terhadap dua \emph{baseline}: (1)~\emph{baseline}
+$\Delta duty = 0$ yang berarti kendali tidak melakukan aksi apa pun, dan
+(2)~\emph{baseline} proporsional ($\Delta duty = k \cdot error$) sebagai
+pengendali linear sederhana. Hasil perbandingan disajikan pada
+Tabel~\ref{tab:perbandingan-baseline}.
+
+\begin{table}[H]
+\centering
+\caption{Perbandingan MLP terhadap \emph{Baseline} pada Data Uji}
+\label{tab:perbandingan-baseline}
+\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash\hsize=1.6\hsize}X|>{\centering\arraybackslash\hsize=0.8\hsize}X|>{\centering\arraybackslash\hsize=0.8\hsize}X|>{\centering\arraybackslash\hsize=0.8\hsize}X|}
+\hline
+\textbf{Model} &
+\textbf{RMSE (\%)} &
+\textbf{MAE (\%)} &
+\textbf{$R^2$} \\
+\hline
+MLP 3--4--1 & \textbf{0,463} & \textbf{0,329} & \textbf{0,915} \\
+\hline
+\emph{Baseline} $\Delta duty=0$ & 1,597 & 1,121 & $-0,009$ \\
+\hline
+\emph{Baseline} Proporsional & 1,000 & 0,740 & 0,604 \\
+\hline
+\end{tabularx}
 \end{table}
 
 \section{Pengujian Sistem Kendali Tekanan}
 \label{sec:pengujian-sistem-kendali}
 
-Pengujian sistem kendali tekanan dilakukan untuk melihat kemampuan sistem dalam
-menjaga tekanan air agar mendekati nilai \emph{setpoint}. Pada pengujian ini,
-nilai \emph{setpoint} ditentukan, kemudian perubahan tekanan aktual dan respons
-\emph{duty cycle} diamati selama sistem bekerja.
+Pengujian sistem kendali tekanan dilakukan untuk melihat kemampuan kontroler
+\emph{neural network} dalam menjaga tekanan air agar mendekati nilai
+\emph{setpoint}. Pengujian dibagi menjadi tiga: (1)~penjejakan \emph{setpoint}
+pada berbagai jumlah keran (Tabel~\ref{tab:respons-nn-keran}),
+(2)~respons terhadap perubahan \emph{setpoint} (Tabel~\ref{tab:respons-setpoint}),
+dan (3)~rejeksi gangguan akibat perubahan beban keran
+(Tabel~\ref{tab:respons-gangguan-beban}). Pada setiap pengujian, kontroler
+mengambil keputusan setiap 3~detik dan menghasilkan perubahan \emph{duty cycle}
+($\Delta duty$) yang diakumulasi menjadi nilai \emph{duty cycle} aktual.
+
+Pengujian pertama menilai kemampuan kontroler mencapai \emph{setpoint} 0,30~bar
+pada tiap kondisi jumlah keran (0--4) yang merepresentasikan beban berbeda.
+Hasilnya disajikan pada Tabel~\ref{tab:respons-nn-keran}.
+
+\begin{table}[H]
+\centering
+\caption{Respons Kontroler NN pada Berbagai Jumlah Keran (\emph{setpoint} 0,30 bar)}
+\label{tab:respons-nn-keran}
+\begin{tabularx}{\linewidth}{|c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash\hsize=1.2\hsize}X|}
+\hline
+\textbf{Keran} &
+\textbf{\emph{Duty} Awal (\%)} &
+\textbf{\emph{Duty} Settle (\%)} &
+\textbf{Tekanan Settle (bar)} &
+\textbf{Error Steady (bar)} &
+\textbf{\emph{Settling Time} (s)} \\
+\hline
+4 &  &  &  &  &  \\
+\hline
+3 &  &  &  &  &  \\
+\hline
+2 &  &  &  &  &  \\
+\hline
+1 &  &  &  &  &  \\
+\hline
+0 &  &  &  &  &  \\
+\hline
+\end{tabularx}
+\end{table}
 
 \begin{table}[H]
 \centering
 \caption{Respons Sistem terhadap Perubahan \emph{Setpoint}}
 \label{tab:respons-setpoint}
-\begin{tabular}{|c|p{1.8cm}|p{2cm}|p{2cm}|p{2cm}|p{1.8cm}|}
+\begin{tabularx}{\linewidth}{|c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
 \hline
 \textbf{No.} &
 \textbf{\emph{Setpoint} (bar)} &
@@ -524,14 +599,14 @@ nilai \emph{setpoint} ditentukan, kemudian perubahan tekanan aktual dan respons
 \hline
 5 &  &  &  &  &  \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \begin{table}[H]
 \centering
 \caption{Respons Sistem terhadap Gangguan Beban}
 \label{tab:respons-gangguan-beban}
-\begin{tabular}{|c|p{3cm}|p{2.5cm}|p{2.5cm}|p{2cm}|}
+\begin{tabularx}{\linewidth}{|c|>{\raggedright\arraybackslash\hsize=1.4\hsize}X|>{\centering\arraybackslash\hsize=0.9\hsize}X|>{\centering\arraybackslash\hsize=0.9\hsize}X|>{\centering\arraybackslash\hsize=0.8\hsize}X|}
 \hline
 \textbf{No.} &
 \textbf{Jenis Gangguan} &
@@ -547,16 +622,5 @@ nilai \emph{setpoint} ditentukan, kemudian perubahan tekanan aktual dan respons
 \hline
 4 & Keran ditutup penuh &  &  &  \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
-
-\section{Pembahasan}
-\label{sec:pembahasan-bab-4}
-
-Berdasarkan hasil pengujian, pembahasan dapat diarahkan pada kesesuaian antara
-teori dan hasil pengukuran, pengaruh perubahan \emph{duty cycle} terhadap
-tegangan RMS keluaran, pengaruh tegangan keluaran terhadap tekanan pompa, serta
-kemampuan model \emph{neural network} dalam menghasilkan nilai kendali. Bagian
-ini juga dapat digunakan untuk menjelaskan penyebab error, keterbatasan alat
-ukur, pengaruh karakteristik beban pompa, serta kestabilan sistem saat terjadi
-perubahan beban.
