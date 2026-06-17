@@ -1,0 +1,91 @@
+\chapter{PENDAHULUAN}
+\label{chap:pendahuluan}
+
+\section{Latar Belakang}
+\label{sec:latarbelakang}
+
+Penggunaan pembangkit listrik tenaga surya untuk kebutuhan rumah tangga
+mengalami tren peningkatan sebesar 2{,}26\% dalam lima tahun terakhir 
+\parencite{article}. Dalam sistem PLTS atap, inverter memegang peran penting 
+karena berfungsi untuk mengubah arus searah (DC) yang dihasilkan oleh panel 
+surya menjadi arus bolak-balik (AC) yang dapat digunakan oleh peralatan 
+rumah tangga. Tanpa inverter, energi dari panel surya tidak dapat 
+dimanfaatkan secara langsung oleh perangkat listrik dalam rumah tangga 
+\parencite{10695139}.
+
+Pompa air merupakan salah satu perangkat listrik yang umum digunakan 
+di rumah tangga. Pompa ini biasa digunakan untuk mengalirkan air dari 
+tandon atau sumur ke berbagai titik seperti kamar mandi, dapur, 
+dan sistem irigasi \parencite{SENTHILKUMAR2020303}. Dalam sistem 
+instalasi air yang melibatkan banyak titik keran, penggunaan keran 
+secara serentak dapat memengaruhi tekanan dan debit air yang disuplai 
+oleh pompa. Ketika hanya sedikit keran yang dibuka, pompa akan menghasilkan 
+tekanan yang sangat tinggi serta berlaku sebaliknya \parencite{anakub}.
+Beberapa solusi saat ini dalam mengontrol tekanan pompa air secara konstan 
+adalah dengan menggunakan \emph{automatic pressure control} (APC) yang 
+bekerja dengan prinsip buka-tutup aliran berdasarkan tekanan tertentu.
+
+Selain itu, ada juga yang menggunakan komponen TRIAC driver berbasis PID 
+untuk mengatur daya yang masuk ke motor pompa, sehingga kecepatan dan 
+tekanan dapat dikontrol \parencite{anakits}. Namun, beberapa solusi 
+tersebut umumnya masih terfokus pada pengendalian dari sisi output pompa. 
+Dalam penelitian ini, pendekatan yang dilakukan berbeda, yaitu 
+dengan mengontrol sistem dari sisi suplai melalui inverter, serta 
+mengintegrasikan kendali tekanan menggunakan metode berbasis \emph{neural network}. 
+
+Berdasarkan uraian tersebut, diperlukan suatu sistem inverter yang 
+tidak hanya berfungsi mengubah tegangan listrik menjadi AC, tetapi 
+juga mampu mengontrol tekanan pompa air secara otomatis. Sistem kontrol 
+ini dirancang untuk menerima masukan dari sensor tekanan dan menyesuaikan 
+kecepatan motor pompa melalui pengaturan output inverter satu fasa, agar 
+tekanan air tetap stabil meskipun jumlah keran yang dibuka berubah-ubah. 
+Dalam sistem ini, digunakan pendekatan \emph{neural network} sebagai 
+pengendali eksternal yang mengatur output inverter berdasarkan data 
+tekanan yang terbaca. Penelitian ini berfokus pada upaya menjaga 
+kestabilan tekanan air dengan mengendalikan sisi suplai daya pompa. 
+Dengan demikian, sistem ini diharapkan mampu mempertahankan tekanan 
+air pada tingkat yang diinginkan, terlepas dari variasi penggunaan.
+
+\par\vspace{1.2cm}
+\section{Rumusan Masalah}
+\label{sec:Rumusan Masalah}
+
+Berdasarkan hal yang telah dipaparkan pada latar belakang, terdapat beberapa permasalahan 
+yang mendasari penelitian ini, antara lain: 
+\begin{enumerate}
+  %revisi : ganti kata fleksibilitas karena parameternya tidak bisa dijelaskan pakai angka
+  \item Bagaimana proses perancangan sistem kontrol tekanan pada \
+  pompa air yang terintegrasi dengan inverter?
+  % : Langsung to the point (Bagaimana mengurangi ukuran PCB, waktu booting, dlll)
+  \item Bagaimana menerapkan \emph{neural network} sebagai sistem kendali 
+  tekanan pada pompa air?
+\end{enumerate}
+
+\section{Batasan Masalah}
+\label{sec:batasanmasalah}
+
+Batasan masalah dalam penelitian ini adalah sebagai berikut : 
+\begin {enumerate}
+  \item Desain dan simulasi dilakukan menggunakan software PSIM.
+  \item Semua simulasi dan perhitungan dilakukan dalam mode ideal dan menggunakan beban dinamis. 
+  \item Input dari inverter akan menggunakan baterai 12V ataupun \emph{power supply}
+  \item Jenis pompa yang digunakan adalah pompa air 1 fasa
+  \item Keran yang digunakan sebanyak lima buah
+\end{enumerate}
+
+
+\section{Tujuan}
+\label{sec:Tujuan}
+
+Penelitian ini memiliki tujuan sebagai berikut : 
+	Tujuan dari penelitian ini adalah merancangan sistem inverter yang dapat 
+  mengontrol tekanan pompa air pada beban yang berubah-ubah, sehingga tekanan 
+  air yang dihasilkan tetap stabil menggunakan \emph{neural network}.
+
+\section{Manfaat}
+Manfaat dari penelitian ini adalah :
+\begin{enumerate}
+    \item Dapat digunakan sebagai referensi untuk pengembangan 
+    \textit{solar water pump inverter}
+    \item Dapat menjadi salah satu solusi bagi pengguna PLTS atap yang memiliki pompa air
+\end{enumerate}
