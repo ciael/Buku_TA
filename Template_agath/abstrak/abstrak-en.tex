@@ -1,38 +1,54 @@
 \begin{center}
-  \large\textbf{ABSTRACT}
+  \fontsize{14}{17}\selectfont\textbf{ABSTRACT}
 \end{center}
 
 \addcontentsline{toc}{chapter}{ABSTRACT}
 
 \vspace{2ex}
 
-\begingroup
-% Menghilangkan padding
-\setlength{\tabcolsep}{0pt}
+\begin{center}
+  \fontsize{12}{15}\selectfont\textbf{\engtatitle{}}
+\end{center}
+
+\vspace{2ex}
 
 \noindent
-\begin{tabularx}{\textwidth}{l >{\centering}m{3em} X}
-  \emph{Name}     & : & Yoel Yhokhanan Sianipar         \\
+{\bfseries
+\begin{tabular}{@{}p{4.3cm}l}
+  Name / NRP & : \name{} / \nrp{} \\
+  Study Program & : \engdepartment{} ELECTICS -- ITS \\
+  Advisor    & : \advisor{} \\
+  Co-Advisor & : \coadvisor{} \\
+\end{tabular}
+}
 
-  \emph{Title}    & : & \emph{INVERTER-SUPPLIED WATER PUMP PRESSURE CONTROL SYSTEM USING NEURAL NETWORK}   \\
+\vspace{2ex}
 
-  \emph{Advisors} & : & 1. Prof. Dr. Muhammad Rivai, S.T., M.T.   \\
-                  &   & 2. Dr. Suwito, S.T., M.T. \\
-\vspace{1ex}
-\end{tabularx}
-\endgroup
+\noindent\textbf{Abstract}
 
 % Ubah paragraf berikut dengan abstrak dari tugas akhir dalam Bahasa Inggris
-\emph{Unstable water pressure in household water pumps often leads to inefficiencies in water distribution, 
-especially when multiple faucets are opened simultaneously. The current solution involves using additional 
-external devices such as a pressure switch. This study offers an alternative solution by controlling the pump’s 
-speed and pressure through input supply regulation using a PWM AC Chopper. The system is developed by incorporating 
-Neural Network (NN) technology as the main controller, which adaptively adjusts the 220 VAC inverter output voltage 
-based on varying load conditions. 
-The Neural Network is trained to recognize water pressure patterns and adjust the output in real time, thereby 
-maintaining stable pressure even under changing system loads. With this approach, the system is expected to deliver more responsive 
-and precise performance. This research aims to contribute to the development of intelligent control systems for water pumps 
-using neural network methods.}
+\emph{Water pressure in household pumps tends to be unstable, especially when
+several faucets are opened simultaneously, so a system capable of maintaining
+stable water pressure is required. Common
+solutions rely on additional external devices such as a pressure switch acting
+on the pump output side. This study proposes a different approach, namely
+controlling the pressure from the power-supply side through a PWM AC chopper
+based on a diode bridge and two IGBTs with a neural-network-based controller. The controller is a 3-4-1
+Multi-Layer Perceptron (MLP) whose inputs are the pressure error, the change of
+error, and the duty cycle, and whose output is the duty-cycle increment; it is
+trained from closed-loop operating data (behavior cloning). The test results show that the
+PWM AC chopper regulates the output RMS
+voltage linearly with the duty cycle, with less than 1\% deviation from the
+theoretical value, and a measured dead time of 1.48--1.49~$\mu$s as designed.
+The neural network model achieves a coefficient of determination $R^2 = 0.915$
+on the test set, indicating good accuracy in predicting the control action. In system testing, the controller maintains the pressure at the setpoint with a
+steady-state error $\leq 0.009$~bar for one to four open faucets. Setpoint
+tracking tests (0.25--0.35~bar) show settling times of 4--7~s, while load
+disturbance rejection tests recover the pressure within 9--15~s. A physical
+limitation occurs when all faucets are closed or when four faucets are opened
+simultaneously, causing the pump's minimum output pressure to exceed the setpoint
+and drive the actuator into saturation. Hence, the supply-side
+neural-network-based water pump pressure control system is shown to operate against load variations.}
 
-% Ubah kata-kata berikut dengan kata kunci dari tugas akhir dalam Bahasa Inggris
-\emph{Keywords}: \emph{PWM AC Chopper}, \emph{Neural Network}, \emph{Water Pump Pressure}.
+\vspace{1ex}
+\noindent\textbf{Keywords: \emph{PWM AC Chopper, Neural Network, Water Pump Pressure, Multi-Layer Perceptron}.}

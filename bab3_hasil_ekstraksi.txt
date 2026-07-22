@@ -1,0 +1,38 @@
+Jumlah file CSV: 12
+Total episode global: 16 | total baris mentah: 4035
+Baris keputusan (is_decision=1): 469
+Baris siap latih: 453
+
+=== Distribusi target deltaDuty ===
+  naik (>0) : 161
+  turun (<0): 91
+  tahan (=0): 201
+
+=== Rentang fitur (min/mean/max) ===
+                    min       mean        max
+error         -0.508800  -0.014887   0.230533
+d_error       -0.397733  -0.001208   0.557933
+duty_percent  65.000000  82.282561  95.000000
+
+=== Baris per setpoint ===
+setpoint_bar
+0.25     50
+0.30    403
+
+=== Pembagian data ===
+Train: 316 | Val: 46 | Test: 91
+
+=== Metrik MLP 3-4-1 ===
+Train: {'RMSE': 0.4171, 'MAE': 0.311, 'R2': 0.9324}
+Val  : {'RMSE': 0.5409, 'MAE': 0.3341, 'R2': 0.8817}
+Test : {'RMSE': 0.4629, 'MAE': 0.3287, 'R2': 0.9152}
+
+=== Baseline (data test) ===
+Gain proporsional k = 10.487
+             Model   RMSE    MAE      R2
+         MLP 3-4-1 0.4629 0.3287  0.9152
+  Baseline dDuty=0 1.5967 1.1209 -0.0094
+Baseline P (k*err) 0.9996 0.7402  0.6044
+
+=== Jumlah parameter ===
+Layer1: 16 | Layer2: 5 | Total: 21

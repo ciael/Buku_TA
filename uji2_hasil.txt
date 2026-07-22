@@ -1,0 +1,5 @@
+Ep1 | SP=0.25 | awal=0.188 | stabil=0.265 | err=-0.015 | settle=40.6 s | arah=naik | durasi_seg=46s | n=87
+Ep2 | SP=0.30 | awal=0.216 | stabil=0.293 | err=+0.007 | settle=4.2 s | arah=naik | durasi_seg=25s | n=48
+Ep3 | SP=0.35 | awal=0.299 | stabil=0.341 | err=+0.009 | settle=6.6 s | arah=naik | durasi_seg=26s | n=50
+Ep4 | SP=0.30 | awal=0.346 | stabil=0.308 | err=-0.008 | settle=4.7 s | arah=turun | durasi_seg=14s | n=27
+Ep5 | SP=0.25 | awal=0.299 | stabil=0.244 | err=+0.006 | settle=5.5 s | arah=turun | durasi_seg=25s | n=47

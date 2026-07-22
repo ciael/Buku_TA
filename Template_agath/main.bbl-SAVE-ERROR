@@ -71,6 +71,41 @@
       \endverb
       \keyw{Current control;Voltage transformers;Modulation;Switches;Control systems;Harmonic analysis;Inverters;Full-bridge inverter;SPWM;PI Controller;PSIM}
     \endentry
+    \entry{avdeef2021}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=cb20dcdf997f810b3aad92826ecdcd82}{%
+           family={Avdeef},
+           familyi={A\bibinitperiod},
+           given={Alex},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{cb20dcdf997f810b3aad92826ecdcd82}
+      \strng{fullhash}{cb20dcdf997f810b3aad92826ecdcd82}
+      \strng{fullhashraw}{cb20dcdf997f810b3aad92826ecdcd82}
+      \strng{bibnamehash}{cb20dcdf997f810b3aad92826ecdcd82}
+      \strng{authorbibnamehash}{cb20dcdf997f810b3aad92826ecdcd82}
+      \strng{authornamehash}{cb20dcdf997f810b3aad92826ecdcd82}
+      \strng{authorfullhash}{cb20dcdf997f810b3aad92826ecdcd82}
+      \strng{authorfullhashraw}{cb20dcdf997f810b3aad92826ecdcd82}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{ADMET and DMPK}
+      \field{number}{1}
+      \field{title}{Do you know your $r^{2}$?}
+      \field{volume}{9}
+      \field{year}{2021}
+      \field{pages}{69\bibrangedash 74}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.5599/admet.888
+      \endverb
+    \endentry
     \entry{pwmacchop2}{article}{}{}
       \name{author}{3}{}{%
         {{un=0,uniquepart=base,hash=f57aca51b55042d87b6b8745371dfecc}{%
@@ -146,6 +181,69 @@
       \field{labeltitlesource}{title}
       \field{title}{Electric Machinary Fundamentals}
       \field{year}{2005}
+    \endentry
+    \entry{dfrobot_sen0257}{online}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=c7ff2b6b5779cfabbdbe760c4fd6db92}{%
+           family={{DFRobot}},
+           familyi={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{c7ff2b6b5779cfabbdbe760c4fd6db92}
+      \strng{fullhash}{c7ff2b6b5779cfabbdbe760c4fd6db92}
+      \strng{fullhashraw}{c7ff2b6b5779cfabbdbe760c4fd6db92}
+      \strng{bibnamehash}{c7ff2b6b5779cfabbdbe760c4fd6db92}
+      \strng{authorbibnamehash}{c7ff2b6b5779cfabbdbe760c4fd6db92}
+      \strng{authornamehash}{c7ff2b6b5779cfabbdbe760c4fd6db92}
+      \strng{authorfullhash}{c7ff2b6b5779cfabbdbe760c4fd6db92}
+      \strng{authorfullhashraw}{c7ff2b6b5779cfabbdbe760c4fd6db92}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Gravity: Analog Water Pressure Sensor (SEN0257) Datasheet}
+      \field{urlday}{9}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{year}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.dfrobot.com/product-1675.html
+      \endverb
+      \verb{url}
+      \verb https://www.dfrobot.com/product-1675.html
+      \endverb
+    \endentry
+    \entry{fairchild_fgh40n120an}{report}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=761e4df794ad418f4a2c993a7d6931a1}{%
+           family={{Fairchild Semiconductor Corporation}},
+           familyi={F\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Fairchild Semiconductor Corporation}%
+      }
+      \strng{namehash}{761e4df794ad418f4a2c993a7d6931a1}
+      \strng{fullhash}{761e4df794ad418f4a2c993a7d6931a1}
+      \strng{fullhashraw}{761e4df794ad418f4a2c993a7d6931a1}
+      \strng{bibnamehash}{761e4df794ad418f4a2c993a7d6931a1}
+      \strng{authorbibnamehash}{761e4df794ad418f4a2c993a7d6931a1}
+      \strng{authornamehash}{761e4df794ad418f4a2c993a7d6931a1}
+      \strng{authorfullhash}{761e4df794ad418f4a2c993a7d6931a1}
+      \strng{authorfullhashraw}{761e4df794ad418f4a2c993a7d6931a1}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{number}{Rev.\ A2}
+      \field{title}{FGH40N120AN 1200V NPT IGBT Datasheet}
+      \field{type}{Datasheet}
+      \field{year}{2008}
     \endentry
     \entry{GIRDHAR200548}{inbook}{}{}
       \name{author}{3}{}{%
@@ -256,6 +354,111 @@
       \field{title}{Power Electronics}
       \field{year}{2011}
     \endentry
+    \entry{anakub}{article}{}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=75cc1ae554861314b152dce29d738438}{%
+           family={Hasanah},
+           familyi={H\bibinitperiod},
+           given={Rini\bibnamedelima Nur},
+           giveni={R\bibinitperiod\bibinitdelim N\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=d13d4b8d970877dd2b4ea51d9dbcdae5}{%
+           family={Putra},
+           familyi={P\bibinitperiod},
+           given={Hari\bibnamedelima Widagdo},
+           giveni={H\bibinitperiod\bibinitdelim W\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=a47e4b60c9f348fabe71eec20db4b317}{%
+           family={Wijono},
+           familyi={W\bibinitperiod}}}%
+      }
+      \strng{namehash}{820671f01a03719e04e2f36ec2d4240b}
+      \strng{fullhash}{9aae606cd727453da07d3098d0570857}
+      \strng{fullhashraw}{9aae606cd727453da07d3098d0570857}
+      \strng{bibnamehash}{9aae606cd727453da07d3098d0570857}
+      \strng{authorbibnamehash}{9aae606cd727453da07d3098d0570857}
+      \strng{authornamehash}{820671f01a03719e04e2f36ec2d4240b}
+      \strng{authorfullhash}{9aae606cd727453da07d3098d0570857}
+      \strng{authorfullhashraw}{9aae606cd727453da07d3098d0570857}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Penelitian ini membahas tentang pengendalian motor penggerak pompa air yang dimaksudkan untuk menghasilkan tekanan keluaran pompa yang konstan. Tekanan konstan diperlukan oleh suatu sistem pompa air untuk mengatasi perbedaan debit pada sistem instalasi air ketika jumlah keran yang dibuka bervariasi. Pada saat satu keran dibuka, tekanan air akan sangat tinggi, tetapi saat beberapa keran dibuka tekanan air akan menurun. Hal ini menjadi permasalahan pada sistem yang kerjanya dipengaruhi oleh tekanan seperti pemanas air. Pengendalian kecepatan pompa dilakukan oleh rangkaian PWM ac chopper yang dapat mengubah tegangan masukan sumber yang dicatukan ke motor berdasarkan duty-cycle PWM dengan umpan Balik sensor tekanan. Hasilnya adalah tekanan keluaran pompa dapat dipertahankan konstan sesuai dengan set-point sebesar 0,8 kg/cm2. Namun demikian, debit air yang dihasilkan di setiap keran tidak konstan. Oleh sebab itu, konsep pengen-dalian perlu diperbaiki agar dapat menghasilkan debit yang konstan.Kata kunci— Tekanan konstan, Motor pompa, pwm ac chopper}
+      \field{journaltitle}{Jurnal Mahasiswa Teknik Elektro Universitas Brawijaya}
+      \field{number}{1}
+      \field{title}{Perancangan Sistem Pengendalian Kecepatan Motor Pompa Air Tekanan Konstan}
+      \field{volume}{3}
+      \field{year}{2015}
+    \endentry
+    \entry{hodson2022}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=6f8d590caca75ce393f82245495f4035}{%
+           family={Hodson},
+           familyi={H\bibinitperiod},
+           given={T.\bibnamedelimi O.},
+           giveni={T\bibinitperiod\bibinitdelim O\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{6f8d590caca75ce393f82245495f4035}
+      \strng{fullhash}{6f8d590caca75ce393f82245495f4035}
+      \strng{fullhashraw}{6f8d590caca75ce393f82245495f4035}
+      \strng{bibnamehash}{6f8d590caca75ce393f82245495f4035}
+      \strng{authorbibnamehash}{6f8d590caca75ce393f82245495f4035}
+      \strng{authornamehash}{6f8d590caca75ce393f82245495f4035}
+      \strng{authorfullhash}{6f8d590caca75ce393f82245495f4035}
+      \strng{authorfullhashraw}{6f8d590caca75ce393f82245495f4035}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Geoscientific Model Development}
+      \field{number}{14}
+      \field{title}{Root-mean-square error (RMSE) or mean absolute error (MAE): when to use them or not}
+      \field{volume}{15}
+      \field{year}{2022}
+      \field{pages}{5481\bibrangedash 5487}
+      \range{pages}{7}
+      \verb{doi}
+      \verb 10.5194/gmd-15-5481-2022
+      \endverb
+    \endentry
+    \entry{infineon_deadtime2021}{report}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=8aea662ff77fef4f35191d192d1b1114}{%
+           family={{Infineon Technologies AG}},
+           familyi={I\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Infineon Technologies AG}%
+      }
+      \strng{namehash}{8aea662ff77fef4f35191d192d1b1114}
+      \strng{fullhash}{8aea662ff77fef4f35191d192d1b1114}
+      \strng{fullhashraw}{8aea662ff77fef4f35191d192d1b1114}
+      \strng{bibnamehash}{8aea662ff77fef4f35191d192d1b1114}
+      \strng{authorbibnamehash}{8aea662ff77fef4f35191d192d1b1114}
+      \strng{authornamehash}{8aea662ff77fef4f35191d192d1b1114}
+      \strng{authorfullhash}{8aea662ff77fef4f35191d192d1b1114}
+      \strng{authorfullhashraw}{8aea662ff77fef4f35191d192d1b1114}
+      \field{sortinit}{I}
+      \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{V1.10}
+      \field{number}{AN2007-04}
+      \field{title}{Calculate and Minimize the Dead Time for IGBTs}
+      \field{type}{Application Note}
+      \field{year}{2021}
+    \endentry
     \entry{MANSOUR2025342}{article}{}{}
       \name{author}{2}{}{%
         {{un=0,uniquepart=base,hash=ad6897ee125a9c32bfaef1d945c2f972}{%
@@ -345,23 +548,20 @@
       \verb 10.21831/jee.v6i2.51617
       \endverb
     \endentry
-    \entry{anakub}{article}{}{}
+    \entry{expval}{misc}{}{}
       \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=d13d4b8d970877dd2b4ea51d9dbcdae5}{%
-           family={Putra},
-           familyi={P\bibinitperiod},
-           given={Hari\bibnamedelima Widagdo},
-           giveni={H\bibinitperiod\bibinitdelim W\bibinitperiod},
-           givenun=0}}%
+        {{un=0,uniquepart=base,hash=a24688984e94b9cdb69e29770c88b65f}{%
+           family={{Photography Life}},
+           familyi={P\bibinitperiod}}}%
       }
-      \strng{namehash}{d13d4b8d970877dd2b4ea51d9dbcdae5}
-      \strng{fullhash}{d13d4b8d970877dd2b4ea51d9dbcdae5}
-      \strng{fullhashraw}{d13d4b8d970877dd2b4ea51d9dbcdae5}
-      \strng{bibnamehash}{d13d4b8d970877dd2b4ea51d9dbcdae5}
-      \strng{authorbibnamehash}{d13d4b8d970877dd2b4ea51d9dbcdae5}
-      \strng{authornamehash}{d13d4b8d970877dd2b4ea51d9dbcdae5}
-      \strng{authorfullhash}{d13d4b8d970877dd2b4ea51d9dbcdae5}
-      \strng{authorfullhashraw}{d13d4b8d970877dd2b4ea51d9dbcdae5}
+      \strng{namehash}{a24688984e94b9cdb69e29770c88b65f}
+      \strng{fullhash}{a24688984e94b9cdb69e29770c88b65f}
+      \strng{fullhashraw}{a24688984e94b9cdb69e29770c88b65f}
+      \strng{bibnamehash}{a24688984e94b9cdb69e29770c88b65f}
+      \strng{authorbibnamehash}{a24688984e94b9cdb69e29770c88b65f}
+      \strng{authornamehash}{a24688984e94b9cdb69e29770c88b65f}
+      \strng{authorfullhash}{a24688984e94b9cdb69e29770c88b65f}
+      \strng{authorfullhashraw}{a24688984e94b9cdb69e29770c88b65f}
       \field{sortinit}{P}
       \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
       \field{extradatescope}{labelyear}
@@ -369,9 +569,18 @@
       \true{uniqueprimaryauthor}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{journaltitle}{Jurnal Mahasiswa TEUB}
-      \field{title}{Perancangan Sistem Pengendalian Kecepatan Motor Pompa Air Tekanan Konstan}
-      \field{year}{2015}
+      \field{title}{Understanding Exposure Value (EV) in Photography}
+      \field{urlday}{2}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{year}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://photographylife.com/exposure-value
+      \endverb
+      \verb{url}
+      \verb https://photographylife.com/exposure-value
+      \endverb
     \endentry
     \entry{anakits}{article}{}{}
       \name{author}{1}{}{%
@@ -714,6 +923,51 @@
       \field{title}{High-performance access line, Arm Cortex-M4 core with DSP and FPU, 512 Kbytes of Flash memory, 100 MHz CPU, ART Accelerator}
       \field{type}{techreport}
       \field{year}{2025}
+    \endentry
+    \entry{6523243}{article}{}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=ddc56f642a1cab93f77919ecb4beef30}{%
+           family={Thanyaphirak},
+           familyi={T\bibinitperiod},
+           given={Veera},
+           giveni={V\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=4682ac91a0ef95fb3cb5d7ae6400b97c}{%
+           family={Kinnares},
+           familyi={K\bibinitperiod},
+           given={Vijit},
+           giveni={V\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=27ff754ab588a2171be56a6ad23a4450}{%
+           family={Kunakorn},
+           familyi={K\bibinitperiod},
+           given={Anantawat},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{f88f13788653d5736281f910865e8704}
+      \strng{fullhash}{5ce47313c226dfcd9532aa79202adf10}
+      \strng{fullhashraw}{5ce47313c226dfcd9532aa79202adf10}
+      \strng{bibnamehash}{5ce47313c226dfcd9532aa79202adf10}
+      \strng{authorbibnamehash}{5ce47313c226dfcd9532aa79202adf10}
+      \strng{authornamehash}{f88f13788653d5736281f910865e8704}
+      \strng{authorfullhash}{5ce47313c226dfcd9532aa79202adf10}
+      \strng{authorfullhashraw}{5ce47313c226dfcd9532aa79202adf10}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{2012 10th International Power \& Energy Conference (IPEC)}
+      \field{title}{PWM AC chopper control schemes for energy saving of single-phase induction motors}
+      \field{year}{2012}
+      \field{pages}{82\bibrangedash 87}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1109/ASSCC.2012.6523243
+      \endverb
     \endentry
   \enddatalist
   \datalist[entry]{apa/global//global/global/global}
@@ -769,6 +1023,41 @@
       \endverb
       \keyw{Current control;Voltage transformers;Modulation;Switches;Control systems;Harmonic analysis;Inverters;Full-bridge inverter;SPWM;PI Controller;PSIM}
     \endentry
+    \entry{avdeef2021}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=cb20dcdf997f810b3aad92826ecdcd82}{%
+           family={Avdeef},
+           familyi={A\bibinitperiod},
+           given={Alex},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{cb20dcdf997f810b3aad92826ecdcd82}
+      \strng{fullhash}{cb20dcdf997f810b3aad92826ecdcd82}
+      \strng{fullhashraw}{cb20dcdf997f810b3aad92826ecdcd82}
+      \strng{bibnamehash}{cb20dcdf997f810b3aad92826ecdcd82}
+      \strng{authorbibnamehash}{cb20dcdf997f810b3aad92826ecdcd82}
+      \strng{authornamehash}{cb20dcdf997f810b3aad92826ecdcd82}
+      \strng{authorfullhash}{cb20dcdf997f810b3aad92826ecdcd82}
+      \strng{authorfullhashraw}{cb20dcdf997f810b3aad92826ecdcd82}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{ADMET and DMPK}
+      \field{number}{1}
+      \field{title}{Do you know your $r^{2}$?}
+      \field{volume}{9}
+      \field{year}{2021}
+      \field{pages}{69\bibrangedash 74}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.5599/admet.888
+      \endverb
+    \endentry
     \entry{pwmacchop2}{article}{}{}
       \name{author}{3}{}{%
         {{un=0,uniquepart=base,hash=f57aca51b55042d87b6b8745371dfecc}{%
@@ -844,6 +1133,69 @@
       \field{labeltitlesource}{title}
       \field{title}{Electric Machinary Fundamentals}
       \field{year}{2005}
+    \endentry
+    \entry{dfrobot_sen0257}{online}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=c7ff2b6b5779cfabbdbe760c4fd6db92}{%
+           family={{DFRobot}},
+           familyi={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{c7ff2b6b5779cfabbdbe760c4fd6db92}
+      \strng{fullhash}{c7ff2b6b5779cfabbdbe760c4fd6db92}
+      \strng{fullhashraw}{c7ff2b6b5779cfabbdbe760c4fd6db92}
+      \strng{bibnamehash}{c7ff2b6b5779cfabbdbe760c4fd6db92}
+      \strng{authorbibnamehash}{c7ff2b6b5779cfabbdbe760c4fd6db92}
+      \strng{authornamehash}{c7ff2b6b5779cfabbdbe760c4fd6db92}
+      \strng{authorfullhash}{c7ff2b6b5779cfabbdbe760c4fd6db92}
+      \strng{authorfullhashraw}{c7ff2b6b5779cfabbdbe760c4fd6db92}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Gravity: Analog Water Pressure Sensor (SEN0257) Datasheet}
+      \field{urlday}{9}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{year}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.dfrobot.com/product-1675.html
+      \endverb
+      \verb{url}
+      \verb https://www.dfrobot.com/product-1675.html
+      \endverb
+    \endentry
+    \entry{fairchild_fgh40n120an}{report}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=761e4df794ad418f4a2c993a7d6931a1}{%
+           family={{Fairchild Semiconductor Corporation}},
+           familyi={F\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Fairchild Semiconductor Corporation}%
+      }
+      \strng{namehash}{761e4df794ad418f4a2c993a7d6931a1}
+      \strng{fullhash}{761e4df794ad418f4a2c993a7d6931a1}
+      \strng{fullhashraw}{761e4df794ad418f4a2c993a7d6931a1}
+      \strng{bibnamehash}{761e4df794ad418f4a2c993a7d6931a1}
+      \strng{authorbibnamehash}{761e4df794ad418f4a2c993a7d6931a1}
+      \strng{authornamehash}{761e4df794ad418f4a2c993a7d6931a1}
+      \strng{authorfullhash}{761e4df794ad418f4a2c993a7d6931a1}
+      \strng{authorfullhashraw}{761e4df794ad418f4a2c993a7d6931a1}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{number}{Rev.\ A2}
+      \field{title}{FGH40N120AN 1200V NPT IGBT Datasheet}
+      \field{type}{Datasheet}
+      \field{year}{2008}
     \endentry
     \entry{GIRDHAR200548}{inbook}{}{}
       \name{author}{3}{}{%
@@ -954,6 +1306,111 @@
       \field{title}{Power Electronics}
       \field{year}{2011}
     \endentry
+    \entry{anakub}{article}{}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=75cc1ae554861314b152dce29d738438}{%
+           family={Hasanah},
+           familyi={H\bibinitperiod},
+           given={Rini\bibnamedelima Nur},
+           giveni={R\bibinitperiod\bibinitdelim N\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=d13d4b8d970877dd2b4ea51d9dbcdae5}{%
+           family={Putra},
+           familyi={P\bibinitperiod},
+           given={Hari\bibnamedelima Widagdo},
+           giveni={H\bibinitperiod\bibinitdelim W\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=a47e4b60c9f348fabe71eec20db4b317}{%
+           family={Wijono},
+           familyi={W\bibinitperiod}}}%
+      }
+      \strng{namehash}{820671f01a03719e04e2f36ec2d4240b}
+      \strng{fullhash}{9aae606cd727453da07d3098d0570857}
+      \strng{fullhashraw}{9aae606cd727453da07d3098d0570857}
+      \strng{bibnamehash}{9aae606cd727453da07d3098d0570857}
+      \strng{authorbibnamehash}{9aae606cd727453da07d3098d0570857}
+      \strng{authornamehash}{820671f01a03719e04e2f36ec2d4240b}
+      \strng{authorfullhash}{9aae606cd727453da07d3098d0570857}
+      \strng{authorfullhashraw}{9aae606cd727453da07d3098d0570857}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Penelitian ini membahas tentang pengendalian motor penggerak pompa air yang dimaksudkan untuk menghasilkan tekanan keluaran pompa yang konstan. Tekanan konstan diperlukan oleh suatu sistem pompa air untuk mengatasi perbedaan debit pada sistem instalasi air ketika jumlah keran yang dibuka bervariasi. Pada saat satu keran dibuka, tekanan air akan sangat tinggi, tetapi saat beberapa keran dibuka tekanan air akan menurun. Hal ini menjadi permasalahan pada sistem yang kerjanya dipengaruhi oleh tekanan seperti pemanas air. Pengendalian kecepatan pompa dilakukan oleh rangkaian PWM ac chopper yang dapat mengubah tegangan masukan sumber yang dicatukan ke motor berdasarkan duty-cycle PWM dengan umpan Balik sensor tekanan. Hasilnya adalah tekanan keluaran pompa dapat dipertahankan konstan sesuai dengan set-point sebesar 0,8 kg/cm2. Namun demikian, debit air yang dihasilkan di setiap keran tidak konstan. Oleh sebab itu, konsep pengen-dalian perlu diperbaiki agar dapat menghasilkan debit yang konstan.Kata kunci— Tekanan konstan, Motor pompa, pwm ac chopper}
+      \field{journaltitle}{Jurnal Mahasiswa Teknik Elektro Universitas Brawijaya}
+      \field{number}{1}
+      \field{title}{Perancangan Sistem Pengendalian Kecepatan Motor Pompa Air Tekanan Konstan}
+      \field{volume}{3}
+      \field{year}{2015}
+    \endentry
+    \entry{hodson2022}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=6f8d590caca75ce393f82245495f4035}{%
+           family={Hodson},
+           familyi={H\bibinitperiod},
+           given={T.\bibnamedelimi O.},
+           giveni={T\bibinitperiod\bibinitdelim O\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{6f8d590caca75ce393f82245495f4035}
+      \strng{fullhash}{6f8d590caca75ce393f82245495f4035}
+      \strng{fullhashraw}{6f8d590caca75ce393f82245495f4035}
+      \strng{bibnamehash}{6f8d590caca75ce393f82245495f4035}
+      \strng{authorbibnamehash}{6f8d590caca75ce393f82245495f4035}
+      \strng{authornamehash}{6f8d590caca75ce393f82245495f4035}
+      \strng{authorfullhash}{6f8d590caca75ce393f82245495f4035}
+      \strng{authorfullhashraw}{6f8d590caca75ce393f82245495f4035}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Geoscientific Model Development}
+      \field{number}{14}
+      \field{title}{Root-mean-square error (RMSE) or mean absolute error (MAE): when to use them or not}
+      \field{volume}{15}
+      \field{year}{2022}
+      \field{pages}{5481\bibrangedash 5487}
+      \range{pages}{7}
+      \verb{doi}
+      \verb 10.5194/gmd-15-5481-2022
+      \endverb
+    \endentry
+    \entry{infineon_deadtime2021}{report}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=8aea662ff77fef4f35191d192d1b1114}{%
+           family={{Infineon Technologies AG}},
+           familyi={I\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Infineon Technologies AG}%
+      }
+      \strng{namehash}{8aea662ff77fef4f35191d192d1b1114}
+      \strng{fullhash}{8aea662ff77fef4f35191d192d1b1114}
+      \strng{fullhashraw}{8aea662ff77fef4f35191d192d1b1114}
+      \strng{bibnamehash}{8aea662ff77fef4f35191d192d1b1114}
+      \strng{authorbibnamehash}{8aea662ff77fef4f35191d192d1b1114}
+      \strng{authornamehash}{8aea662ff77fef4f35191d192d1b1114}
+      \strng{authorfullhash}{8aea662ff77fef4f35191d192d1b1114}
+      \strng{authorfullhashraw}{8aea662ff77fef4f35191d192d1b1114}
+      \field{sortinit}{I}
+      \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{V1.10}
+      \field{number}{AN2007-04}
+      \field{title}{Calculate and Minimize the Dead Time for IGBTs}
+      \field{type}{Application Note}
+      \field{year}{2021}
+    \endentry
     \entry{MANSOUR2025342}{article}{}{}
       \name{author}{2}{}{%
         {{un=0,uniquepart=base,hash=ad6897ee125a9c32bfaef1d945c2f972}{%
@@ -1043,23 +1500,20 @@
       \verb 10.21831/jee.v6i2.51617
       \endverb
     \endentry
-    \entry{anakub}{article}{}{}
+    \entry{expval}{misc}{}{}
       \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=d13d4b8d970877dd2b4ea51d9dbcdae5}{%
-           family={Putra},
-           familyi={P\bibinitperiod},
-           given={Hari\bibnamedelima Widagdo},
-           giveni={H\bibinitperiod\bibinitdelim W\bibinitperiod},
-           givenun=0}}%
+        {{un=0,uniquepart=base,hash=a24688984e94b9cdb69e29770c88b65f}{%
+           family={{Photography Life}},
+           familyi={P\bibinitperiod}}}%
       }
-      \strng{namehash}{d13d4b8d970877dd2b4ea51d9dbcdae5}
-      \strng{fullhash}{d13d4b8d970877dd2b4ea51d9dbcdae5}
-      \strng{fullhashraw}{d13d4b8d970877dd2b4ea51d9dbcdae5}
-      \strng{bibnamehash}{d13d4b8d970877dd2b4ea51d9dbcdae5}
-      \strng{authorbibnamehash}{d13d4b8d970877dd2b4ea51d9dbcdae5}
-      \strng{authornamehash}{d13d4b8d970877dd2b4ea51d9dbcdae5}
-      \strng{authorfullhash}{d13d4b8d970877dd2b4ea51d9dbcdae5}
-      \strng{authorfullhashraw}{d13d4b8d970877dd2b4ea51d9dbcdae5}
+      \strng{namehash}{a24688984e94b9cdb69e29770c88b65f}
+      \strng{fullhash}{a24688984e94b9cdb69e29770c88b65f}
+      \strng{fullhashraw}{a24688984e94b9cdb69e29770c88b65f}
+      \strng{bibnamehash}{a24688984e94b9cdb69e29770c88b65f}
+      \strng{authorbibnamehash}{a24688984e94b9cdb69e29770c88b65f}
+      \strng{authornamehash}{a24688984e94b9cdb69e29770c88b65f}
+      \strng{authorfullhash}{a24688984e94b9cdb69e29770c88b65f}
+      \strng{authorfullhashraw}{a24688984e94b9cdb69e29770c88b65f}
       \field{sortinit}{P}
       \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
       \field{extradatescope}{labelyear}
@@ -1067,9 +1521,18 @@
       \true{uniqueprimaryauthor}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{journaltitle}{Jurnal Mahasiswa TEUB}
-      \field{title}{Perancangan Sistem Pengendalian Kecepatan Motor Pompa Air Tekanan Konstan}
-      \field{year}{2015}
+      \field{title}{Understanding Exposure Value (EV) in Photography}
+      \field{urlday}{2}
+      \field{urlmonth}{7}
+      \field{urlyear}{2026}
+      \field{year}{2024}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://photographylife.com/exposure-value
+      \endverb
+      \verb{url}
+      \verb https://photographylife.com/exposure-value
+      \endverb
     \endentry
     \entry{anakits}{article}{}{}
       \name{author}{1}{}{%
@@ -1412,6 +1875,51 @@
       \field{title}{High-performance access line, Arm Cortex-M4 core with DSP and FPU, 512 Kbytes of Flash memory, 100 MHz CPU, ART Accelerator}
       \field{type}{techreport}
       \field{year}{2025}
+    \endentry
+    \entry{6523243}{article}{}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=ddc56f642a1cab93f77919ecb4beef30}{%
+           family={Thanyaphirak},
+           familyi={T\bibinitperiod},
+           given={Veera},
+           giveni={V\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=4682ac91a0ef95fb3cb5d7ae6400b97c}{%
+           family={Kinnares},
+           familyi={K\bibinitperiod},
+           given={Vijit},
+           giveni={V\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=27ff754ab588a2171be56a6ad23a4450}{%
+           family={Kunakorn},
+           familyi={K\bibinitperiod},
+           given={Anantawat},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{f88f13788653d5736281f910865e8704}
+      \strng{fullhash}{5ce47313c226dfcd9532aa79202adf10}
+      \strng{fullhashraw}{5ce47313c226dfcd9532aa79202adf10}
+      \strng{bibnamehash}{5ce47313c226dfcd9532aa79202adf10}
+      \strng{authorbibnamehash}{5ce47313c226dfcd9532aa79202adf10}
+      \strng{authornamehash}{f88f13788653d5736281f910865e8704}
+      \strng{authorfullhash}{5ce47313c226dfcd9532aa79202adf10}
+      \strng{authorfullhashraw}{5ce47313c226dfcd9532aa79202adf10}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{2012 10th International Power \& Energy Conference (IPEC)}
+      \field{title}{PWM AC chopper control schemes for energy saving of single-phase induction motors}
+      \field{year}{2012}
+      \field{pages}{82\bibrangedash 87}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1109/ASSCC.2012.6523243
+      \endverb
     \endentry
   \enddatalist
 \endrefsection

@@ -1,51 +1,119 @@
-\chapter{METODOLOGI}
+﻿\chapter{METODOLOGI}
 
 % Ubah konten-konten berikut sesuai dengan isi dari metodologi
 
-\section{Desain Rangkaian PWM AC \emph{Chopper}}
-\label{sec:desain-pwm-ac-chopper}
+\section{Desain dan Perhitungan Spesifikasi}
+\label{sec:desain-spesifikasi}
 
-Bagian ini membahas proses perancangan rangkaian daya dan sistem kontrol
-PWM AC \emph{chopper} yang digunakan untuk mengatur tegangan suplai motor
-pompa air satu fasa. Perancangan meliputi pemilihan topologi, penentuan
-komponen saklar daya (IGBT), perhitungan rangkaian \emph{snubber}, dan
-penentuan \emph{dead time} untuk mencegah \emph{shoot-through}. Skema
-keseluruhan sistem yang dirancang ditunjukkan pada
-Gambar~\ref{fig:skema-sistem-alat}.
+Bagian ini membahas perancangan sistem secara menyeluruh, mulai dari
+pemodelan rangkaian daya dan rangkaian kontrol sampai perhitungan nilai
+komponen.
 
-\begin{figure} [H] \centering
+\subsection{Pemodelan Sistem Pengendalian Tekanan Pompa Air Berbasis
+  \emph{Neural Network}}
+\label{sec:pemodelan-sistem}
+
+Sistem yang dirancang merupakan sistem kendali tekanan air \emph{closed-loop}
+yang memadukan rangkaian daya PWM AC \emph{chopper} dengan rangkaian kontrol
+berbasis \emph{neural network}. Blok diagram sistem secara keseluruhan
+ditunjukkan pada Gambar~\ref{fig:blok-diagram-sistem}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{gambar/blok_diagram.png}
+  \caption{Blok diagram sistem pengendalian tekanan pompa air}
+  \label{fig:blok-diagram-sistem}
+\end{figure}
+
+Pada blok diagram tersebut, aliran daya bergerak dari inverter sebagai sumber
+tegangan AC menuju rangkaian PWM AC \emph{chopper}, motor pompa air, hingga
+\emph{plant} berupa keran air. Tekanan air keluaran diukur oleh sensor tekanan
+dan diumpankan kembali ke STM32 yang menjalankan \emph{neural network} untuk
+mengatur pemicuan IGBT \emph{chopper} melalui \emph{gate driver}, sehingga
+membentuk sistem kendali \emph{closed-loop}. Selain itu, tegangan dan arus
+keluaran PWM AC \emph{chopper} dipantau oleh sensor tegangan dan arus, yang
+datanya turut dibaca STM32 untuk keperluan pengukuran dan pemantauan sistem.
+
+Mengacu pada Gambar~\ref{fig:skema-sistem-alat}, rangkaian daya berupa PWM AC
+\emph{chopper} berfungsi mengatur (memotong) tegangan AC~220~V yang kemudian
+disuplai ke motor pompa air. Pompa mengalirkan air menuju \emph{plant} yang
+terdiri atas empat buah keran sebagai variasi beban. Tekanan air yang
+dihasilkan pompa diukur oleh sensor tekanan, dan nilai tekanan ini menjadi
+umpan balik bagi mikrokontroler STM32. Berdasarkan tekanan tersebut, STM32
+menjalankan algoritma \emph{neural network} untuk menghasilkan nilai
+\emph{duty cycle}. Nilai \emph{duty cycle} diteruskan terlebih dahulu melalui
+\emph{gate driver} untuk memicu IGBT pada rangkaian PWM AC \emph{chopper}.
+Dengan demikian terbentuk \emph{loop} tertutup. Tegangan suplai pompa akan diatur
+sehingga tekanan air terus disesuaikan agar tetap berada pada
+\emph{setpoint} meskipun jumlah keran yang terbuka berubah-ubah.
+
+\begin{figure}[htbp] \centering
   % Nama dari file gambar yang diinputkan
-  \includegraphics[scale=0.55]{gambar/skema_alat_rev.png}
+  \includegraphics[scale=0.60]{gambar/skema_alat_rev_1.png}
   % Keterangan gambar yang diinputkan
-  \caption{Skema Sistem Alat}
+  \caption{Skema sistem alat}
   % Label referensi dari gambar yang diinputkan
   \label{fig:skema-sistem-alat}
 \end{figure}
 
-Pada sistem ini, sensor tekanan air memberikan umpan balik tekanan aktual
-ke mikrokontroler STM32. STM32 membandingkan nilai tekanan tersebut
-dengan \emph{setpoint} dan menghasilkan sinyal kendali berbasis
-\emph{neural network} berupa \emph{duty cycle} PWM. Sinyal PWM tersebut
-diteruskan ke rangkaian \emph{gate driver} untuk menggerakkan IGBT pada
-rangkaian PWM AC \emph{chopper} sehingga tegangan input ke motor pompa
-dapat diatur sesuai kebutuhan.
-
-\subsection{Penentuan Topologi dan IGBT}
-\label{sec:penentuan-topologi-dan-igbt}
-
-Rangkaian PWM AC \emph{chopper} dirancang menggunakan topologi
-\emph{full-bridge} empat IGBT yang ditunjukkan pada
+Rangkaian PWM AC \emph{chopper} dirancang menggunakan topologi dua buah
+\emph{diode-bridge} dan dua IGBT yang ditunjukkan pada
 Gambar~\ref{fig:skematik-pwm-ac-chopper}. Topologi ini memungkinkan
 pemotongan (\emph{chopping}) tegangan AC secara \emph{bipolar} sehingga
 didapatkan bentuk gelombang tegangan keluaran yang simetris pada kedua
-sisi siklus. IGBT dipicu oleh pasangan sinyal PWM komplementer
-(keempat IGBT bekerja sebagai dua pasang kaki \emph{leg}).
+sisi siklus. Pasangan IGBT dipicu oleh sinyal PWM komplementer yang
+dibangkitkan STM32.
 
-\begin{figure} [H] \centering
-  \includegraphics[scale=0.35]{gambar/RANGKAIAN.jpg}
-  \caption{Skematik PWM AC \emph{Chopper}}
+\begin{figure}[htbp] \centering
+  \includegraphics[scale=0.60]{gambar/skematik_pwmac_chopper.png}
+  \caption{Skematik PWM AC \emph{chopper}}
   \label{fig:skematik-pwm-ac-chopper}
 \end{figure}
+
+Sinyal PWM dari STM32 tidak dihubungkan langsung ke gerbang IGBT, melainkan
+melalui rangkaian \emph{gate driver} HCPL-3120 yang mengisolasi sisi kendali
+(level 3,3~V) dari sisi daya sekaligus menguatkan sinyal ke level tegangan
+gerbang yang memadai untuk memicu IGBT. Rangkaian \emph{gate driver} untuk
+sinyal aktif dan sinyal \emph{freewheeling} berturut-turut ditunjukkan pada
+Gambar~\ref{fig:skematik-driver-aktif} dan
+Gambar~\ref{fig:skematik-driver-freewheeling}. Masing-masing \emph{gate driver}
+memperoleh catu daya terisolasi melalui modul DC-DC 1215, sehingga referensi
+\emph{ground} sisi kendali (GNDSTM) dan sisi daya (GND) tetap terpisah.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.9\textwidth]{gambar/skematik_driver1.png}
+  \caption{Skematik \emph{gate driver} untuk sinyal PWM aktif}
+  \label{fig:skematik-driver-aktif}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.9\textwidth]{gambar/skematik_driver2.png}
+  \caption{Skematik \emph{gate driver} untuk sinyal PWM \emph{freewheeling}}
+  \label{fig:skematik-driver-freewheeling}
+\end{figure}
+
+Setelah topologi rangkaian daya ditetapkan, bagian berikut membahas
+rangkaian kontrol dan sensor yang melengkapi pemodelan sistem. Sistem
+kontrol pada penelitian ini menggunakan mikrokontroler STM32U545RE yang
+memiliki dua fungsi utama. Pertama, STM32 membangkitkan sepasang sinyal
+PWM komplementer dengan \emph{dead time} yang dapat diprogram untuk
+menggerakkan kedua IGBT pada rangkaian PWM AC \emph{chopper}. Kedua,
+STM32 membaca tegangan keluaran sensor tekanan air melalui
+\emph{Analog-to-Digital Converter} (ADC) yang selanjutnya diolah oleh
+model \emph{neural network} untuk menghasilkan nilai \emph{duty cycle}
+yang baru.
+
+\subsection{Penentuan Komponen dan Perhitungan Nilai}
+\label{sec:penentuan-komponen}
+
+Bagian ini membahas pemilihan saklar daya (IGBT) serta perhitungan
+nilai komponen kritis, yaitu rangkaian \emph{snubber} dan \emph{dead
+time}, yang menjamin keandalan operasi PWM AC \emph{chopper}.
+
+\subsubsection{Pemilihan IGBT}
+\label{sec:pemilihan-igbt}
 
 Pemilihan IGBT dilakukan dengan mempertimbangkan parameter berikut.
 \begin{enumerate}
@@ -63,15 +131,14 @@ Pemilihan IGBT dilakukan dengan mempertimbangkan parameter berikut.
 \end{enumerate}
 
 Dengan pertimbangan di atas, pada penelitian ini digunakan IGBT
-\textbf{FGH40N120AN} produksi ON Semiconductor dengan teknologi
-NPT (Non-Punch Through). Spesifikasi penting IGBT yang digunakan
-ditunjukkan pada Tabel~\ref{tab:spesifikasi-igbt}.
+FGH40N120AN. Spesifikasi penting IGBT yang digunakan
+ditunjukkan pada Tabel berikut \parencite{fairchild_fgh40n120an}.
 
 \begin{table}[H]
   \centering
-  \caption{Spesifikasi Penting IGBT FGH40N120AN}
+  \caption{Spesifikasi penting IGBT FGH40N120AN}
   \label{tab:spesifikasi-igbt}
-  \begin{tabularx}{\linewidth}{|c|>{\raggedright\arraybackslash}X|c|c|c|}
+  \begin{tabular}{|p{5cm}|c|c|c|c|}
   \hline
   \textbf{Parameter} & \textbf{Simbol} & \textbf{Min} & \textbf{Tip.} & \textbf{Maks.} \\
   \hline
@@ -97,7 +164,7 @@ ditunjukkan pada Tabel~\ref{tab:spesifikasi-igbt}.
   \hline
   Total gate charge & $Q_g$ & --- & 220 nC & --- \\
   \hline
-  \end{tabularx}
+  \end{tabular}
 \end{table}
 
 Pada Tabel~\ref{tab:spesifikasi-igbt} terlihat bahwa
@@ -111,133 +178,105 @@ dilakukan untuk menjaga suhu kerja IGBT agar tetap berada di
 bawah batas maksimum $150^{\circ}$C yang diizinkan pada
 datasheet.
 
-\subsection{Penentuan Rangkaian \emph{Snubber}}
+\subsubsection{Rangkaian \emph{Snubber}}
 \label{sec:penentuan-snubber}
 
-Rangkaian \emph{snubber} digunakan pada bagian saklar daya PWM AC
-\emph{chopper} untuk meredam lonjakan tegangan dan osilasi transien yang
-muncul saat proses \emph{switching}. Lonjakan tersebut disebabkan oleh
-energi yang tersimpan pada induktansi parasitik jalur PCB, kabel, dan
-beban motor. Apabila tidak diredam, tegangan transien dapat melebihi
-batas tegangan kerja IGBT sehingga menurunkan keandalan rangkaian.
-Oleh karena itu, pada penelitian ini digunakan \emph{snubber} tipe RC
-yang dipasang paralel terhadap saklar daya atau terhadap terminal
-keluaran rangkaian daya, sesuai hasil pengamatan bentuk gelombang saat
-pengujian.
+Rangkaian \emph{snubber} RC dipasang pada saklar daya PWM AC \emph{chopper}
+untuk meredam lonjakan tegangan (\emph{spike}) dan osilasi (\emph{ringing})
+yang muncul saat IGBT \emph{switching}, akibat energi yang tersimpan pada
+induktansi parasitik (\emph{stray inductance}) jalur PCB, kabel, dan beban.
 
-Tahap awal penentuan \emph{snubber} dilakukan dengan mengukur tegangan
-lonjakan ($V_{spike}$) pada IGBT menggunakan osiloskop. Nilai tegangan
-kerja maksimum yang diizinkan ditentukan berdasarkan batas tegangan
-IGBT ($V_{CES}$) dengan memperhitungkan faktor keamanan. Tegangan
-transien yang diizinkan dapat dituliskan sebagai berikut.
+Secara teoritis, nilai kapasitor \emph{snubber} ditentukan oleh energi yang
+terperangkap pada induktansi parasitik saat IGBT memutus arus, sebagaimana
+dinyatakan pada Persamaan~\ref{eq:kapasitor-snubber}.
 
 \begin{equation}
-  V_{aman} = k \times V_{CES}
-  \label{eq:v-aman-snubber}
-\end{equation}
-
-dengan $k$ merupakan faktor keamanan yang bernilai lebih kecil dari
-satu. Pada perancangan rangkaian daya, nilai $k$ dipilih agar tegangan
-kerja IGBT tetap berada di bawah batas maksimumnya. Apabila
-$V_{spike}$ lebih besar dari $V_{aman}$, maka kapasitor \emph{snubber}
-perlu ditambahkan untuk menyerap energi transien.
-
-Energi transien yang berasal dari induktansi parasitik dapat didekati
-dengan persamaan energi induktor sebagai berikut.
-
-\begin{equation}
-  E_L = \frac{1}{2} L_p I_{sw}^{2}
-  \label{eq:energi-induktor-snubber}
-\end{equation}
-
-dengan $E_L$ adalah energi transien, $L_p$ adalah induktansi parasitik
-total, dan $I_{sw}$ adalah arus saat proses \emph{switching}. Energi
-tersebut kemudian diserap oleh kapasitor \emph{snubber}. Besar kapasitor
-minimum dapat dihitung dari perubahan energi pada kapasitor.
-
-\begin{equation}
-  C_s \geq \frac{2E_L}{V_{spike}^{2} - V_{dc}^{2}}
+  C_{sn} = \frac{L_s \cdot I_o^{2}}{(V_{pk} - V_{cc})^{2}}
   \label{eq:kapasitor-snubber}
 \end{equation}
 
-dengan $C_s$ adalah kapasitansi \emph{snubber}, $V_{dc}$ adalah tegangan
-kerja rangkaian, dan $V_{spike}$ adalah tegangan puncak transien sebelum
-diberikan \emph{snubber}. Apabila nilai induktansi parasitik sulit diukur
-secara langsung, nilai $C_s$ dapat ditentukan secara eksperimental
-dengan menaikkan nilai kapasitor secara bertahap hingga lonjakan tegangan
-berada di bawah batas aman, tanpa menyebabkan rugi daya dan pemanasan
-yang berlebihan.
+dengan $L_s$ adalah induktansi parasitik (\emph{DC loop}), $I_o$ arus saat
+\emph{switching}, $V_{cc}$ tegangan kerja rangkaian, dan $V_{pk}$ tegangan
+puncak yang diizinkan. Namun, nilai $L_s$ tidak dapat diukur secara langsung
+karena induktansi parasitik tersebar pada seluruh jalur daya, meliputi jalur
+PCB, kabel penghubung, dan terminal komponen, sehingga penghitungan teoritis
+tidak dapat dilakukan. Oleh karena itu, penentuan $C_{sn}$ dilakukan secara
+empiris melalui pengujian bertahap menggunakan osiloskop untuk mengamati
+bentuk gelombang tegangan keluaran. Kapasitor dengan nilai 12~nF, 24~nF, dan
+36~nF diuji secara berurutan, namun pada setiap nilai tersebut lonjakan
+tegangan (\emph{spike}) masih teramati saat IGBT \emph{switching}. Nilai
+kapasitor dinaikkan ke 100~nF dan terbukti mampu meredam lonjakan
+tegangan secara memadai. Kapasitor yang dipilih bertipe film (\emph{low ESR})
+dengan tegangan kerja di atas tegangan puncak rangkaian.
 
-Setelah nilai $C_s$ diperoleh, nilai resistor \emph{snubber} ($R_s$)
-ditentukan untuk meredam osilasi dan membuang energi yang tersimpan pada
-kapasitor. Nilai awal resistor dapat didekati berdasarkan impedansi
-karakteristik dari induktansi parasitik dan kapasitor \emph{snubber}.
+Penentuan resistor \emph{snubber} ($R_{sn}$) berfungsi membuang energi pada kapasitor
+sekaligus meredam osilasi. Nilainya dibatasi agar kapasitor dapat
+mengosongkan muatannya (\emph{discharge}) sebelum siklus \emph{switching}
+berikutnya, yaitu dengan menjaga konstanta waktu RC cukup kecil terhadap
+waktu nyala minimum ($t_{on,min}$), sebagaimana
+Persamaan~\ref{eq:resistor-snubber}.
 
 \begin{equation}
-  R_s = \sqrt{\frac{L_p}{C_s}}
+  R_{sn} \leq \frac{t_{on,min}}{3 \cdot C_{sn}}
   \label{eq:resistor-snubber}
 \end{equation}
 
-Selain itu, resistor harus cukup besar agar arus impuls tidak terlalu
-tinggi, tetapi cukup kecil agar kapasitor dapat mengosongkan muatannya
-sebelum siklus \emph{switching} berikutnya. Konstanta waktu rangkaian RC
-dinyatakan sebagai berikut.
+dengan $t_{on,min}$ adalah waktu nyala minimum sakelar IGBT, diperoleh dari
+\emph{duty cycle} minimum ($D_{min} = 10\%$) dan periode pensaklaran pada
+frekuensi $f_{sw} = 5$~kHz:
+%
+\begin{align*}
+  t_{on,min} &= D_{min} \times T_{sw}
+              = D_{min} \times \frac{1}{f_{sw}}
+              = 0{,}10 \times \frac{1}{5000}
+              = 20~\mu\text{s}
+\end{align*}
+%
+Substitusi $t_{on,min} = 20~\mu\text{s}$ dan $C_{sn} = 100$~nF ke
+Persamaan~\ref{eq:resistor-snubber}:
+%
+\begin{align*}
+  R_{sn} &\leq \frac{20 \times 10^{-6}}{3 \times 100 \times 10^{-9}}
+           = \frac{20}{0{,}3}
+           \approx 66{,}7~\Omega
+\end{align*}
+
+Perhitungan menghasilkan $R_{sn} \approx 66~\Omega$. Pada implementasi, nilai
+ini direalisasikan menggunakan lima resistor 330~$\Omega$ yang
+dipasang paralel ($330/5 = 66~\Omega$).
+
+Daya yang harus didisipasikan resistor \emph{snubber} pada setiap siklus
+\emph{switching} dinyatakan oleh Persamaan~\ref{eq:daya-resistor-snubber}.
 
 \begin{equation}
-  \tau = R_s C_s
-  \label{eq:konstanta-waktu-snubber}
-\end{equation}
-
-Nilai $\tau$ dipilih lebih kecil dari periode \emph{switching} sehingga
-proses pengosongan kapasitor berlangsung dengan baik. Periode
-\emph{switching} ditentukan dari frekuensi PWM sebagai berikut.
-
-\begin{equation}
-  T_s = \frac{1}{f_s}
-  \label{eq:periode-switching-snubber}
-\end{equation}
-
-dengan $T_s$ adalah periode \emph{switching} dan $f_s$ adalah frekuensi
-PWM. Pada praktiknya, nilai $R_s$ disesuaikan kembali melalui pengujian
-osiloskop untuk mendapatkan bentuk gelombang dengan lonjakan tegangan
-dan \emph{ringing} paling kecil.
-
-Rugi daya pada resistor \emph{snubber} perlu dihitung agar komponen yang
-dipilih tidak mengalami panas berlebih. Pendekatan rugi daya resistor
-akibat proses pengisian dan pengosongan kapasitor pada setiap siklus
-\emph{switching} adalah sebagai berikut.
-
-\begin{equation}
-  P_{R_s} = C_s V_{dc}^{2} f_s
+  P_{R_{sn}} = \tfrac{1}{2}\, C_{sn} \left( V_{pk}^{2} - V_{cc}^{2} \right) f_{sw}
   \label{eq:daya-resistor-snubber}
 \end{equation}
 
-dengan $P_{R_s}$ adalah disipasi daya resistor \emph{snubber}. Daya
-nominal resistor yang digunakan harus lebih besar dari nilai hasil
-perhitungan dengan faktor keamanan. Kapasitor \emph{snubber} juga dipilih
-dengan tegangan kerja lebih tinggi dari tegangan puncak yang mungkin
-terjadi pada rangkaian. Jenis kapasitor yang digunakan sebaiknya memiliki
-karakteristik \emph{low ESR} dan mampu bekerja pada pulsa arus tinggi,
-misalnya kapasitor film.
+dengan $f_{sw}$ adalah frekuensi \emph{switching}. Dari
+Persamaan~\ref{eq:daya-resistor-snubber} terlihat bahwa disipasi daya
+berbanding lurus dengan $C_{sn}$. Artinya, semakin besar kapasitor
+\emph{snubber} yang dipilih ($C_{sn} = 100$~nF), semakin besar pula
+daya yang harus dibuang oleh resistor \emph{snubber}. Oleh karena itu,
+penggunaan lima resistor paralel tidak hanya memberikan nilai resistansi
+yang diinginkan, tetapi juga membagi disipasi daya ke beberapa komponen
+sehingga setiap resistor hanya menanggung sekitar seperlima dari total daya
+dan suhu kerjanya tetap aman.
 
-Prosedur penentuan \emph{snubber} pada penelitian ini dilakukan melalui
-beberapa tahap, yaitu mengukur bentuk gelombang tegangan pada saklar daya
-tanpa \emph{snubber}, menentukan batas tegangan aman IGBT, menghitung
-nilai awal $C_s$ dan $R_s$, memasang rangkaian RC \emph{snubber}, kemudian
-mengamati kembali bentuk gelombang tegangan. Nilai komponen dinyatakan
-sesuai apabila tegangan lonjakan berada di bawah batas aman, osilasi
-transien berkurang, suhu resistor masih dalam batas kerja, dan rangkaian
-PWM AC \emph{chopper} tetap dapat menghasilkan tegangan keluaran sesuai
-kebutuhan sistem pompa air.
+Dengan demikian, nilai \emph{snubber} yang digunakan adalah
+$C_{sn} = 100$~nF (film) dan $R_{sn} = 66~\Omega$ (lima resistor
+330~$\Omega$ paralel). Efektivitas peredaman lonjakan tegangan oleh
+\emph{snubber} ini diverifikasi secara eksperimental menggunakan osiloskop,
+yang hasilnya dibahas pada Bab~\ref{chap:hasil_dan_pembahasan}.
 
-\subsection{Penentuan \emph{Dead Time}}
+\subsubsection{\emph{Dead Time}}
 \label{sec:penentuan-dead-time}
 
 \emph{Dead time} adalah jeda waktu singkat yang disisipkan antara
 perubahan kondisi dua IGBT pada satu kaki \emph{leg} agar tidak ada
 kondisi di mana IGBT sisi atas dan sisi bawah menghantar secara
-bersamaan (\emph{shoot-through}). Pada topologi \emph{full-bridge} yang
-digunakan, masing-masing pasangan IGBT komplementer diberi sinyal
+bersamaan (\emph{shoot-through}). Pada topologi yang digunakan
+(jembatan diode dengan dua buah IGBT), pasangan IGBT diberi sinyal
 PWM dengan \emph{dead time} yang identik. \emph{Dead time} yang terlalu
 pendek berisiko menimbulkan \emph{shoot-through} yang dapat merusak
 IGBT, sedangkan \emph{dead time} yang terlalu panjang akan mendistorsi
@@ -245,12 +284,9 @@ bentuk gelombang tegangan keluaran dan menurunkan efisiensi sistem,
 sehingga penentuan nilai \emph{dead time} harus dilakukan dengan
 analisis berbasis datasheet perangkat yang digunakan.
 
-Rumus perhitungan \emph{dead time} pada penelitian ini mengacu
-pada Application Note Infineon ``\emph{Calculate and minimize
-the dead time for IGBTs}'' (AN2007-04, V1.10, 2021-12-10).
 Persamaan dasar untuk menghitung \emph{control dead time}
 ($t_{dead}$) pada sebuah \emph{phase-leg} inverter dinyatakan
-sebagai berikut.
+sebagai berikut \parencite{infineon_deadtime2021}.
 
 \begin{equation}
   t_{dead} = \bigl( t_{d(off),max} - t_{d(on),min} + t_{pdd,max} - t_{pdd,min} \bigr) \times 1{,}2
@@ -295,9 +331,9 @@ relevan ditunjukkan pada Tabel~\ref{tab:switching-igbt}.
 
 \begin{table}[H]
   \centering
-  \caption{Karakteristik \emph{Switching} IGBT FGH40N120AN}
+  \caption{Karakteristik \emph{switching} IGBT FGH40N120AN}
   \label{tab:switching-igbt}
-  \begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}X|c|c|c|}
+  \begin{tabular}{|p{3.5cm}|c|c|c|}
   \hline
   \textbf{Parameter} & \textbf{Simbol} &
   \textbf{Nilai pada $T_C = 25^{\circ}$C} &
@@ -311,7 +347,7 @@ relevan ditunjukkan pada Tabel~\ref{tab:switching-igbt}.
   \hline
   Fall time & $t_f$ & 40~ns & 45~ns \\
   \hline
-  \end{tabularx}
+  \end{tabular}
 \end{table}
 
 Karena datasheet FGH40N120AN hanya menyediakan nilai tipikal
@@ -331,8 +367,7 @@ konservatif yang digunakan adalah sebagai berikut.
         perubahan suhu dan arus kolektor.
 \end{itemize}
 
-\emph{Gate driver} yang digunakan adalah optocoupler
-\textbf{HCPL-3120} produksi Avago Technologies (Broadcom).
+\emph{Gate driver} yang digunakan adalah optocoupler HCPL-3120.
 Berdasarkan datasheet HCPL-3120, spesifikasi \emph{propagation
 delay} pada kondisi pengujian $R_g = 10~\Omega$,
 $C_g = 10$~nF, $f = 10$~kHz, $V_{CC} = 15$--$30$~V,
@@ -341,9 +376,9 @@ Tabel~\ref{tab:propagation-hcpl}.
 
 \begin{table}[H]
   \centering
-  \caption{Spesifikasi \emph{Propagation Delay} HCPL-3120}
+  \caption{Spesifikasi \emph{propagation delay} HCPL-3120}
   \label{tab:propagation-hcpl}
-  \begin{tabularx}{\linewidth}{|c|>{\raggedright\arraybackslash}X|c|c|c|}
+  \begin{tabular}{|p{5cm}|c|c|c|c|}
   \hline
   \textbf{Parameter} & \textbf{Simbol} & \textbf{Min.} &
   \textbf{Tip.} & \textbf{Maks.} \\
@@ -357,7 +392,7 @@ Tabel~\ref{tab:propagation-hcpl}.
   \emph{Propagation delay difference} & PDD &
   $-0{,}35$~$\mu$s & --- & $+0{,}35$~$\mu$s \\
   \hline
-  \end{tabularx}
+  \end{tabular}
 \end{table}
 
 \emph{Propagation delay difference} (PDD) didefinisikan sebagai
@@ -385,13 +420,13 @@ dalam Persamaan~\eqref{eq:dead-time-infineon}, diperoleh:
 \end{equation}
 
 Perhitungan ini menghasilkan \emph{control dead time} minimum
-sebesar \textbf{0{,}97~$\mu$s} (atau $966$~ns).
+sebesar 0{,}97~$\mu$s (atau $966$~ns).
 
-Pada Application Note Infineon yang sama, terdapat sebuah
+Pada Application Note Infineon \parencite{infineon_deadtime2021}, terdapat sebuah
 contoh perhitungan (bagian \emph{Example}) yang menggunakan
 \emph{gate driver} HCPL-3120 (sama dengan penelitian ini) bersama
-modul IGBT FP40R12KT3. Pada contoh tersebut, Infineon
-menyebutkan nilai tipikal $t_{d(off)} \approx 1500$~ns dan
+modul IGBT FP40R12KT3. Pada contoh tersebut, disebutkan
+nilai tipikal $t_{d(off)} \approx 1500$~ns dan
 $t_{d(on)} \approx 100$~ns dengan $t_{pdd,max} - t_{pdd,min} =
 700$~ns. Dengan menyubstitusikan nilai-nilai tersebut ke dalam
 persamaan yang sama, diperoleh \emph{dead time} sebesar
@@ -412,10 +447,10 @@ toleransi parameter, efek suhu, dan kemunduran
 (\emph{aging}) perangkat, diperlukan \emph{safety margin} tambahan
 di atas nilai minimum tersebut.
 
-Dengan memperhitungkan dua acuan — hasil perhitungan berbasis
+Dengan memperhitungkan dua acuan, yitu hasil perhitungan berbasis
 datasheet ($\approx 1$~$\mu$s,) dan contoh acuan Infineon untuk
-HCPL-3120 ($\approx 2{,}5$~$\mu$s) — maka pada penelitian ini
-dipilih nilai \emph{dead time} sebesar \textbf{1{,}5~$\mu$s}.
+HCPL-3120 ($\approx 2{,}5$~$\mu$s), maka pada penelitian ini
+dipilih nilai \emph{dead time} sebesar 1{,}5~$\mu$s.
 Nilai ini berada di antara kedua acuan tersebut dan dipilih
 dengan pertimbangan sebagai berikut.
 \begin{enumerate}
@@ -436,12 +471,12 @@ dengan pertimbangan sebagai berikut.
         keluaran masih dapat diabaikan.
 \end{enumerate}
 
-Dengan demikian, nilai \textbf{1{,}5~$\mu$s} dipilih sebagai
+Dengan demikian, nilai 1{,}5~$\mu$s dipilih sebagai
 kompromi yang memadai antara keamanan \emph{switching}
 (mencegah \emph{shoot-through}) dan kinerja sistem (meminimalkan
 distorsi dan rugi \emph{dead time}). Nilai ini akan diverifikasi
 secara eksperimental pada tahap pengujian dengan mengamati
-sinyal \emph{gate}--\emph{emitter} kedua IGBT komplementer
+sinyal \emph{gate}--\emph{emitter} kedua buah IGBT
 menggunakan osiloskop untuk memastikan tidak terdapat
 \emph{spike} \emph{shoot-through} pada sinyal keluaran.
 
@@ -453,71 +488,28 @@ dengan mengatur nilai register \emph{dead-time generator}
 $T_{DT}$ yang diinginkan pada frekuensi \emph{clock} timer
 yang digunakan.
 
-\subsection{Penentuan Sistem Kontrol (STM32) dan Sensor Tekanan}
-\label{sec:penentuan-sistem-kontrol-dan-sensor}
-
-Sistem kontrol pada penelitian ini menggunakan mikrokontroler STM32
-\textit{[isi seri, misal STM32F407VG / Nucleo-F446RE]} yang
-memiliki dua fungsi utama. Pertama, STM32 membangkitkan sepasang
-sinyal PWM komplementer dengan \emph{dead time} yang dapat diprogram
-untuk menggerakkan keempat IGBT pada rangkaian PWM AC
-\emph{chopper}. Kedua, STM32 membaca tegangan keluaran sensor tekanan
-air melalui \emph{Analog-to-Digital Converter} (ADC) yang selanjutnya
-diolah oleh model \emph{neural network} untuk menghasilkan nilai
-\emph{duty cycle} yang baru. Skema sistem kendali PWM AC
-\emph{chopper} ditunjukkan pada Gambar~\ref{fig:skema-sistem-kontrol}.
-
-\begin{figure} [H] \centering
-  \includegraphics[scale=0.55]{gambar/pwm_ac_rev.drawio.png}
-  \caption{Skema Sistem Kontrol PWM AC \emph{Chopper}}
-  \label{fig:skema-sistem-kontrol}
-\end{figure}
-
-Pada sisi input kontrol, parameter yang dimasukkan ke dalam
-\emph{input layer} jaringan saraf adalah \emph{setpoint} tekanan dan
-tekanan aktual hasil pembacaan sensor. Keluaran dari jaringan adalah
-\emph{duty ratio} PWM yang diterapkan ke \emph{compare register}
-(\emph{CCR}) pada \emph{timer} STM32. Dengan pembaruan nilai
-\emph{CCR} secara periodik, sistem dapat menyesuaikan tegangan
-keluaran PWM AC \emph{chopper} untuk mempertahankan tekanan air
-sesuai \emph{setpoint} meskipun terjadi perubahan beban (misalnya
-pembukaan atau penutupan keran).
-
-Sensor tekanan yang digunakan adalah DFRobot Analog Water Pressure
-Sensor dengan rentang pengukuran 0--1,6 MPa (sekitar 0--16 bar) dan
-keluaran analog 0,5--4,5 V. Karena tegangan keluaran sensor tersebut
-lebih besar dari tegangan referensi ADC STM32 (3,3 V), digunakan
-rangkaian pembagi tegangan untuk membatasi tegangan masuk ke pin
-ADC. Persamaan kalibrasi sensor yang digunakan pada penelitian ini
-adalah sebagai berikut.
-
-\begin{equation}
-  P = a \cdot V_{sensor} + b
-  \label{eq:kalibrasi-sensor}
-\end{equation}
-
-dengan $P$ adalah tekanan terukur (bar), $V_{sensor}$ adalah tegangan
-keluaran sensor setelah melalui pembagi tegangan (V), serta $a$
-dan $b$ adalah konstanta kalibrasi yang diperoleh dari regresi linier
-antara tegangan sensor dan tekanan referensi. Konstanta $a$ dan $b$
-ditentukan dengan membandingkan pembacaan sensor terhadap alat ukur
-tekanan referensi pada beberapa titik ukur statis.
-
-\section{Simulasi Rangkaian PWM AC \emph{Chopper} (PSIM)}
+\section{Simulasi Rangkaian Daya (PSIM)}
 \label{sec:simulasi-psim}
 
-Sesuai dengan batasan masalah pada Bab~1, simulasi
-rangkaian dilakukan menggunakan perangkat lunak PSIM. Simulasi bertujuan
-untuk memvalidasi desain rangkaian daya, menguji keefektifan
-\emph{snubber}, dan mengamati karakteristik bentuk gelombang tegangan
-keluaran terhadap variasi \emph{duty cycle} dan perubahan beban dinamis
-sebelum implementasi pada perangkat keras.
+Sesuai dengan batasan masalah pada Bab~1, simulasi rangkaian dilakukan
+menggunakan perangkat lunak PSIM. Simulasi bertujuan untuk memvalidasi
+desain rangkaian daya serta mengamati karakteristik bentuk gelombang
+tegangan dan arus keluaran terhadap variasi \emph{duty cycle} sebelum
+implementasi pada perangkat keras.
+
+Perlu ditegaskan bahwa simulasi PSIM dibatasi hanya pada \emph{rangkaian
+daya}. Pengendalian tekanan air berbasis \emph{neural network} tidak
+disimulasikan pada PSIM karena melibatkan dinamika fluida dan
+karakteristik pompa air nyata yang berada di luar lingkup pemodelan
+rangkaian elektronik. Oleh karena itu, pengujian kinerja pengendalian
+tekanan dilakukan langsung pada perangkat keras dan dibahas pada
+Bab~\ref{chap:hasil_dan_pembahasan}.
 
 \subsection{Model PSIM dan Skenario Simulasi}
 \label{sec:model-psim-dan-skenario}
 
 Model PSIM yang dibangun terdiri atas sumber tegangan AC 220 V/50 Hz
-sebagai masukan, rangkaian \emph{full-bridge} empat IGBT sebagai
+sebagai masukan, rangkaian jembatan diode dengan dua buah IGBT sebagai
 \emph{chopper}, blok \emph{gate signal} yang menghasilkan sepasang
 sinyal PWM komplementer dengan \emph{dead time}, serta blok beban
 motor pompa yang dimodelkan sebagai impedansi R-L yang dipasang seri
@@ -525,72 +517,44 @@ dengan sumber tegangan \emph{back-EMF} untuk menyederhanakan perilaku
 motor AC. Skematik model PSIM ditunjukkan pada
 Gambar~\ref{fig:model-psim}.
 
-\begin{figure} [H] \centering
+\begin{figure}[H] \centering
   % Nama dari file gambar yang diinputkan
   \includegraphics[scale=0.65]{gambar/rangkaian_power.png}
-  \caption{Rangkaian Power Simulasi PSIM PWM AC \emph{Chopper}}
+  \caption{Rangkaian power simulasi PSIM PWM AC \emph{chopper}}
   \label{fig:model-psim}
 \end{figure}
 
-\begin{figure} [H] \centering
+Blok \emph{gate signal} pada model PSIM dibangun menggunakan rangkaian
+komparator yang membandingkan sinyal sinusoidal referensi dengan level
+tegangan acuan, sehingga menghasilkan sinyal biner sesuai polaritas
+setengah siklus. Keluaran komparator ini kemudian dicabangkan menjadi
+dua jalur: jalur pertama diteruskan langsung sebagai sinyal aktif
+(\texttt{S\_ACT}), sedangkan jalur kedua dibalik melalui gerbang NOT
+untuk menghasilkan sinyal komplementer (\texttt{S\_FRE}) yang berfungsi
+sebagai sinyal \emph{freewheeling}. Kedua sinyal inilah yang selanjutnya
+memicu pasangan IGBT pada rangkaian daya. Rangkaian pembangkit sinyal
+PWM tersebut ditunjukkan pada Gambar~\ref{fig:rangkaian-pwm-simulasi}.
+
+\begin{figure}[H] \centering
   % Nama dari file gambar yang diinputkan
   \includegraphics[scale=0.75]{gambar/rangkaian_pwm.png}
-  \caption{Rangkaian Sinyal PWM Simulasi PSIM}
+  \caption{Rangkaian sinyal PWM simulasi PSIM}
   \label{fig:rangkaian-pwm-simulasi}
-
 \end{figure}
+
 Skenario simulasi yang dijalankan adalah sebagai berikut.
 \begin{enumerate}
-  \item Simulasi variasi \emph{duty cycle} pada 10\%, 20\%, \ldots,
-        90\% dengan beban R-L nominal tetap, untuk mendapatkan
-        hubungan \emph{duty cycle} terhadap tegangan RMS keluaran dan
-        membandingkannya dengan perhitungan teoritis.
-  \item Simulasi pengamatan bentuk gelombang tegangan pada sisi
-        IGBT ($V_{CE}$) sebelum pemasangan
-        \emph{snubber}, untuk memperoleh nilai $V_{spike}$.
-  \item Simulasi pengamatan bentuk gelombang yang sama setelah
-        pemasangan \emph{snubber} RC, untuk melihat reduksi
-        \emph{spike} dan \emph{ringing}.
-  \item Simulasi perubahan beban secara mendadak (beban dinamis),
-        untuk mengamati perilaku sistem ketika impedansi beban
-        berubah-ubah sesuai variasi pembukaan keran.
+  \item Simulasi variasi \emph{duty cycle} (70\%, 75\%, \ldots, 95\%)
+        dengan beban R-L untuk mengamati bentuk gelombang
+        \emph{tegangan} keluaran dan hubungannya terhadap \emph{duty
+        cycle}.
+  \item Simulasi pada kondisi yang sama untuk mengamati bentuk gelombang
+        \emph{arus} beban keluaran.
 \end{enumerate}
 
-\subsection{Simulasi Efektivitas \emph{Snubber} dan Beban Dinamis}
-\label{sec:simulasi-efektivitas-snubber-dan-beban-dinamis}
-
-Simulasi efektivitas \emph{snubber} dilakukan dengan cara yang
-sama seperti skenario poin 2 dan 3 pada sub-bagian sebelumnya,
-yaitu membandingkan bentuk gelombang $V_{CE}$ IGBT ketika
-\emph{snubber} belum dipasang dan ketika \emph{snubber} sudah
-dipasang. Parameter yang diamati adalah amplitudo $V_{spike}$,
-amplitudo dan jumlah siklus \emph{ringing}, serta waktu yang
-diperlukan hingga gelombang kembali stabil. Nilai kapasitor
-\emph{snubber} $C_s$ dan resistor $R_s$ divariasikan pada
-beberapa nilai untuk mendapatkan kombinasi yang memberikan
-reduksi lonjakan paling baik tanpa menambah rugi daya yang
-berlebihan. Bentuk gelombang hasil simulasi sebelum dan sesudah
-\emph{snubber} ditunjukkan pada Gambar~\ref{fig:simulasi-snubber}.
-
-\begin{figure} [H] \centering
-  % Nama dari file gambar yang diinputkan
-  \includegraphics[scale=0.5]{gambar/simulasi_snubber.png}
-  \caption{Perbandingan Bentuk Gelombang IGBT Sebelum dan Sesudah
-           \emph{Snubber}}
-  \label{fig:simulasi-snubber}
-\end{figure}
-
-Simulasi beban dinamis dilakukan dengan memvariasikan nilai
-resistansi dan induktansi beban dalam rentang waktu tertentu,
-misalnya pada $t = 0{,}5$ s beban berubah dari kondisi
-\textit{semua keran tertutup} menjadi \textit{satu keran
-terbuka}, dan pada $t = 1$ s berubah menjadi \textit{dua keran
-terbuka}. Bentuk gelombang tegangan dan arus pada terminal
-keluaran PWM AC \emph{chopper} diamati untuk memastikan
-bahwa sistem dapat mempertahankan operasi yang stabil saat
-beban berubah secara mendadak. Hasil simulasi ini selanjutnya
-dijadikan acuan awal untuk implementasi pada perangkat keras
-nyata.
+Bentuk gelombang tegangan dan arus hasil simulasi ini selanjutnya
+dibandingkan secara langsung dengan hasil pengukuran pada perangkat keras,
+sebagaimana dibahas pada Bab~\ref{chap:hasil_dan_pembahasan}.
 
 \section{Implementasi Sistem}
 \label{sec:implementasi-sistem}
@@ -610,18 +574,18 @@ ditunjukkan pada Tabel~\ref{tab:perangkat-lunak}.
 
 \begin{table}[H]
   \centering
-  \caption{Daftar Perangkat Keras yang Digunakan}
+  \caption{Daftar perangkat keras yang digunakan}
   \label{tab:perangkat-keras}
-  \begin{tabularx}{\linewidth}{|c|>{\raggedright\arraybackslash\hsize=0.7\hsize}X|>{\raggedright\arraybackslash\hsize=1.3\hsize}X|}
+  \begin{tabular}{|c|p{4.5cm}|p{5.5cm}|}
   \hline
   \textbf{No.} & \textbf{Perangkat Keras} & \textbf{Spesifikasi / Fungsi} \\
   \hline
-  1 & Mikrokontroler STM32 \textit{[seri]} &
+  1 & Mikrokontroler STM32U545RE &
       Pembangkit PWM komplementer, ADC sensor tekanan,
       \emph{host} \emph{neural network} \\
   \hline
-  2 & IGBT \textit{[tipe]} &
-      Saklar daya PWM AC \emph{chopper} full-bridge \\
+  2 & IGBT FGH40N120AN &
+      Saklar daya PWM AC \emph{chopper} (jembatan diode + dua IGBT) \\
   \hline
   3 & Rangkaian \emph{gate driver} &
       Pengondisi sinyal PWM dari level logika STM32 ke
@@ -651,14 +615,14 @@ ditunjukkan pada Tabel~\ref{tab:perangkat-lunak}.
   11 & \emph{Pressure gauge} referensi &
       Pembanding pembacaan tekanan sensor \\
   \hline
-  \end{tabularx}
+  \end{tabular}
 \end{table}
 
 \begin{table}[H]
   \centering
-  \caption{Daftar Perangkat Lunak yang Digunakan}
+  \caption{Daftar perangkat lunak yang digunakan}
   \label{tab:perangkat-lunak}
-  \begin{tabularx}{\linewidth}{|c|>{\raggedright\arraybackslash\hsize=0.6\hsize}X|>{\raggedright\arraybackslash\hsize=1.4\hsize}X|}
+  \begin{tabular}{|c|p{3.5cm}|p{6.5cm}|}
   \hline
   \textbf{No.} & \textbf{Perangkat Lunak} & \textbf{Fungsi} \\
   \hline
@@ -674,23 +638,74 @@ ditunjukkan pada Tabel~\ref{tab:perangkat-lunak}.
   4 & Python (NumPy, Scikit-learn/PyTorch/Keras) &
       Pelatihan dan evaluasi \emph{neural network} \\
   \hline
-  \end{tabularx}
+  \end{tabular}
 \end{table}
+
+\subsection{Konfigurasi Pin Mikrokontroler STM32}
+\label{sec:konfigurasi-pin-stm32}
+
+Mikrokontroler yang digunakan adalah STM32U545RET6Q dalam paket LQFP64.
+Pemetaan pin dikonfigurasi melalui STM32CubeIDE dan dirangkum pada
+Tabel~\ref{tab:konfigurasi-pin-stm32}. Secara garis besar, pin dikelompokkan
+menjadi empat fungsi: pembangkitan sinyal PWM, pembacaan sensor, komunikasi
+serial, serta pemrograman dan pewaktuan.
+
+\begin{table}[H]
+\centering
+\caption{Konfigurasi pin STM32U545RET6Q yang digunakan}
+\label{tab:konfigurasi-pin-stm32}
+\begin{tabularx}{\linewidth}{|c|c|>{\raggedright\arraybackslash}X|}
+\hline
+\textbf{Pin} & \textbf{Sinyal} & \textbf{Fungsi} \\
+\hline
+PA8  & TIM1\_CH1  & Sinyal PWM utama menuju \emph{gate driver} IGBT \\
+\hline
+PA7  & TIM1\_CH1N & Sinyal PWM komplementer (\emph{freewheeling}) menuju \emph{gate driver} IGBT \\
+\hline
+PC1  & ADC1\_IN2  & Pembacaan tegangan keluaran sensor tekanan melalui pembagi tegangan \\
+\hline
+PA9  & USART1\_TX & Pengiriman telemetri ke GUI pada PC (\emph{Virtual COM Port}) \\
+\hline
+PA10 & USART1\_RX & Penerimaan perintah dari GUI pada PC \\
+\hline
+PB10 & USART3\_TX & Komunikasi Modbus RTU ke sensor daya JSY \\
+\hline
+PA5  & USART3\_RX & Komunikasi Modbus RTU dari sensor daya JSY \\
+\hline
+PA13 & SWDIO      & Antarmuka \emph{Serial Wire Debug} untuk pemrograman \\
+\hline
+PA14 & SWCLK      & Antarmuka \emph{Serial Wire Debug} untuk pemrograman \\
+\hline
+PC14 & OSC32\_IN  & Masukan kristal \emph{Low-Speed External} 32,768~kHz \\
+\hline
+PC15 & OSC32\_OUT & Keluaran kristal \emph{Low-Speed External} 32,768~kHz \\
+\hline
+\end{tabularx}
+\end{table}
+
+Pasangan pin PA8 dan PA7 dikonfigurasi sebagai keluaran \emph{timer} TIM1
+(kanal 1 dan komplemennya) untuk menghasilkan sepasang sinyal PWM dengan
+\emph{dead time} sebagaimana dibahas pada Subbab~\ref{sec:penentuan-dead-time}.
+Pin PC1 berfungsi sebagai masukan ADC untuk membaca tegangan sensor tekanan
+yang telah diturunkan oleh rangkaian pembagi tegangan. Komunikasi serial
+dibagi menjadi dua jalur terpisah, yaitu USART1 (PA9/PA10) untuk pertukaran
+data dengan GUI pada PC, dan USART3 (PB10/PA5) untuk membaca sensor daya JSY
+melalui protokol Modbus RTU.
 
 \subsection{Perakitan Rangkaian}
 \label{sec:perakitan-rangkaian}
 
 Perakitan rangkaian dilakukan setelah desain pada
-sub-bab~\ref{sec:desain-pwm-ac-chopper} tervalidasi melalui
+sub-bab~\ref{sec:desain-spesifikasi} tervalidasi melalui
 simulasi. Skema koneksi keseluruhan sistem implementasi ditunjukkan
 pada Gambar~\ref{fig:skema-implementasi}, yang menggambarkan
 koneksi antara STM32, \emph{gate driver}, IGBT, sensor tekanan,
 dan pompa air.
 
-\begin{figure} [H] \centering
+\begin{figure}[htbp] \centering
   % Nama dari file gambar yang diinputkan
-  \includegraphics[scale=0.5]{gambar/skema_implementasi.png}
-  \caption{Skema Koneksi Keseluruhan Sistem Implementasi}
+  \includegraphics[scale=0.5]{gambar/implementasi_3.png}
+  \caption{Implementasi alat}
   \label{fig:skema-implementasi}
 \end{figure}
 
@@ -715,275 +730,423 @@ pada hal-hal berikut.
 Setelah perakitan selesai, firmware STM32 di-\emph{flash} melalui
 \emph{ST-Link}. Firmware tersebut berisi konfigurasi \emph{timer}
 untuk menghasilkan PWM komplementer dengan \emph{dead time},
-rutinitas pembacaan ADC untuk sensor tekanan, serta modul
+pembacaan ADC untuk sensor tekanan, sensor arus, sensor tegangan, serta modul
 \emph{inference} \emph{neural network} yang akan dibahas pada
 sub-bagian~\ref{sec:pelatihan-model-dan-deployment}.
 
-\section{Perancangan \emph{Neural Network}}
+\section{Perancangan dan Implementasi Pengendali \emph{Neural Network}}
 \label{sec:perancangan-neural-network}
 
 \emph{Neural network} pada penelitian ini digunakan sebagai
-pengendali utama yang memetakan hubungan antara kondisi tekanan
-air dan \emph{duty cycle} PWM yang sesuai. Tidak seperti
-pengendali konvensional yang memerlukan model matematis plant
-secara eksplisit, \emph{neural network} mempelajari pemetaan
-\emph{input}--\emph{output} tersebut langsung dari data hasil
-eksperimen, sehingga mampu mengikuti karakteristik nonlinier
-pompa dan variasi beban keran.
+pengendali utama yang memetakan kondisi galat tekanan air menjadi
+aksi koreksi \emph{duty cycle} PWM. Tidak seperti pengendali
+konvensional yang memerlukan model matematis \emph{plant} secara
+eksplisit, jaringan ini mempelajari kebijakan kendali langsung dari
+data operasi \emph{closed-loop} hasil eksperimen (pendekatan
+\emph{behavior cloning}), sehingga mampu mengikuti karakteristik
+nonlinier pompa dan variasi beban keran. Pendekatan berbasis data ini
+dipilih karena hubungan antara \emph{duty cycle}, tekanan keluaran
+pompa, dan jumlah keran yang terbuka bersifat nonlinier dan sulit
+dituliskan sebagai persamaan analitik yang akurat, sebagaimana telah
+diuraikan pada Bab~1. Dengan mempelajari pola dari data operasi
+nyata, \emph{neural network} dapat menangkap perilaku sistem secara
+implisit tanpa memerlukan penurunan model matematis \emph{plant}
+maupun proses penyetelan (\emph{tuning}) parameter kendali secara
+manual sebagaimana lazim dilakukan pada kendali PID konvensional.
+
+Sebagaimana ditunjukkan pada Gambar~\ref{fig:skema-sistem-kontrol}, pengendali
+\emph{neural network} menerima tiga masukan, yaitu galat tekanan
+($error = setpoint - tekanan~aktual$), perubahan galat antar-keputusan
+($\Delta error$), dan \emph{duty cycle} saat ini ($duty$). Keluaran jaringan
+berupa perubahan \emph{duty cycle} ($\Delta duty$) yang diakumulasikan terhadap
+\emph{duty cycle} sebelumnya, kemudian dituliskan ke \emph{compare register}
+(CCR) \emph{timer} STM32 sehingga \emph{duty cycle} PWM yang baru langsung
+diterapkan. Dengan pembaruan secara periodik ini, tegangan keluaran PWM AC
+\emph{chopper} menyesuaikan diri untuk menjaga tekanan air pada \emph{setpoint}
+ketika beban berubah (pembukaan atau penutupan keran). Interval pembaruan
+keputusan kendali ditetapkan setiap 3 detik, konsisten dengan periode
+akuisisi data pelatihan sebagaimana dibahas pada
+Subbab~\ref{sec:akuisisi-dataset-dan-pra-pengolahan}, sehingga perilaku
+kendali saat implementasi tetap selaras dengan pola yang dipelajari model
+selama pelatihan. Interval ini dipilih cukup singkat agar sistem responsif
+terhadap perubahan beban, namun cukup panjang agar dinamika tekanan sempat
+mencapai kondisi yang representatif sebelum keputusan koreksi berikutnya
+diambil.
+
+\begin{figure}[htbp] \centering
+  \includegraphics[scale=0.55]{gambar/sistem_kontrol_ann.png}
+  \caption{Skema sistem kontrol PWM AC \emph{chopper}}
+  \label{fig:skema-sistem-kontrol}
+\end{figure}
 
 \subsection{Arsitektur dan Parameter}
 \label{sec:arsitektur-dan-parameter}
 
-Arsitektur \emph{neural network} yang digunakan adalah
-\emph{Multi-Layer Perceptron} (MLP) dengan satu \emph{hidden
-layer} (atau dua \emph{hidden layer} jika akurasi belum
-mencukupi) yang ditunjukkan pada Gambar~\ref{fig:arsitektur-nn}.
+Dari sisi struktur masukan, kombinasi galat tekanan dan turunan galat
+yang digunakan pada penelitian ini secara konseptual serupa dengan suku
+proporsional dan turunan (derivatif) pada kendali PID konvensional.
+Perbedaan mendasarnya terletak pada cara pemetaan galat tersebut menjadi
+aksi kendali: pada PID, pemetaan bersifat linear dengan \emph{gain} tetap
+yang ditentukan melalui penyetelan manual, sedangkan pada \emph{neural
+network} pemetaan bersifat nonlinear dan diperoleh secara otomatis dari
+data pelatihan, sehingga besar koreksi \emph{duty cycle} dapat menyesuaikan
+diri terhadap kondisi operasi yang berbeda-beda. Selain itu, karena proses
+\emph{inference neural network} dijalankan langsung pada mikrokontroler
+STM32 dan bukan pada komputer eksternal, sistem kendali dapat beroperasi
+secara \emph{standalone} tanpa bergantung pada koneksi ke PC saat
+digunakan, sehingga lebih praktis diterapkan pada instalasi pompa air
+rumah tangga yang sesungguhnya.
 
-\begin{figure} [H] \centering
+Arsitektur yang digunakan adalah \emph{Multi-Layer Perceptron} (MLP)
+\emph{feedforward fully-connected} berukuran \textbf{3-4-1}, yaitu tiga
+neuron \emph{input}, satu \emph{hidden layer} berisi empat neuron, dan
+satu neuron \emph{output}, sebagaimana ditunjukkan pada
+Gambar~\ref{fig:arsitektur-nn}. MLP dipilih (bukan CNN ataupun RNN)
+karena data kendali bukan citra maupun deret waktu panjang; sifat
+dinamik sistem cukup ditangkap dengan menambahkan turunan galat
+($\Delta error$) sebagai fitur, tanpa memerlukan memori internal
+seperti pada RNN.
+
+\begin{figure}[htbp] \centering
   % Nama dari file gambar yang diinputkan
-  \includegraphics[scale=0.5]{gambar/arsitektur_nn.png}
-  \caption{Arsitektur \emph{Neural Network} Pengendali
-           \emph{Duty Cycle}}
+  \includegraphics[scale=0.45]{gambar/arsitektur_nn_rev.png}
+  \caption{Arsitektur \emph{neural network} pengendali
+           \emph{duty cycle} (MLP 3-4-1)}
   \label{fig:arsitektur-nn}
 \end{figure}
 
 Komposisi \emph{input} dan \emph{output} jaringan adalah
 sebagai berikut.
 \begin{itemize}
-  \item \emph{Input layer}: \emph{setpoint} tekanan
-        ($P_{sp}$, bar) dan tekanan aktual
-        ($P_{act}$, bar). Opsional dapat ditambahkan
-        \emph{error} sebelumnya dan turunannya untuk
-        memberikan sifat dinamik pada jaringan.
-  \item \emph{Hidden layer}: \textit{[isi jumlah neuron,
-        misal 8--16 neuron]} dengan fungsi aktivasi
-        \textit{[ReLU / \emph{tanh}]}.
-  \item \emph{Output layer}: satu neuron dengan aktivasi
-        \emph{sigmoid} yang dinormalisasi ke rentang
-        \emph{duty cycle} 0--100\%.
+  \item \emph{Input layer} (3 neuron): galat tekanan
+        $error = P_{sp} - P_{act}$, turunan galat antar-keputusan
+        $\Delta error$, dan \emph{duty cycle} sekarang $duty_t$.
+  \item \emph{Hidden layer} (4 neuron): fungsi aktivasi \emph{tanh}.
+  \item \emph{Output layer} (1 neuron, linear): perubahan
+        \emph{duty cycle} $\Delta duty$, bukan \emph{duty} absolut.
 \end{itemize}
 
-Parameter pelatihan yang digunakan pada penelitian ini
-ditunjukkan pada Tabel~\ref{tab:parameter-pelatihan-nn}.
-Nilai-nilai pada tabel ini akan diisi pada
-bab~\ref{chap:hasil_dan_pembahasan} berdasarkan hasil
-eksperimen pelatihan.
+Berbeda dari pendekatan yang memetakan langsung ke \emph{duty} absolut,
+keluaran jaringan berupa \emph{aksi inkremental} $\Delta duty$ yang
+diterapkan secara akumulatif dengan pembatasan (\emph{clamping}) pada
+rentang kerja aman pompa, sebagaimana Persamaan~\ref{eq:update-duty}.
+
+\begin{equation}
+  duty_{t+1} = \mathrm{clamp}\bigl(duty_t + \Delta duty,\; 70\%,\; 95\%\bigr)
+  \label{eq:update-duty}
+\end{equation}
+
+Sebelum masuk jaringan, setiap fitur distandarisasi
+(\emph{StandardScaler}) ke rata-rata nol dan simpangan baku satu
+menggunakan Persamaan~\ref{eq:standardisasi}, karena ketiga fitur
+memiliki skala yang sangat berbeda ($error \approx 0{,}1$ sedangkan
+$duty \approx 80$).
+
+\begin{equation}
+  x'_i = \frac{x_i - \mu_i}{\sigma_i}
+  \label{eq:standardisasi}
+\end{equation}
+
+dengan $\mu_i$ dan $\sigma_i$ adalah rata-rata dan simpangan baku fitur
+ke-$i$ pada data latih. Proses \emph{forward pass} jaringan dihitung
+melalui Persamaan~\ref{eq:hidden-nn} dan Persamaan~\ref{eq:output-nn}.
+
+\begin{equation}
+  h_j = \tanh\!\Bigl( b^{(1)}_j + \sum_{i=1}^{3} x'_i\, W^{(1)}_{ij} \Bigr),
+  \quad j = 1,\dots,4
+  \label{eq:hidden-nn}
+\end{equation}
+
+\begin{equation}
+  \Delta duty = b^{(2)} + \sum_{j=1}^{4} h_j\, W^{(2)}_{j}
+  \label{eq:output-nn}
+\end{equation}
+
+Karena arsitektur 3-4-1, jumlah parameter yang dipelajari hanya
+$(3\times4 + 4) + (4\times1 + 1) = 21$ buah, sehingga sangat ringan
+untuk dijalankan pada STM32. Spesifikasi arsitektur dan parameter
+pelatihan selengkapnya ditunjukkan pada
+Tabel~\ref{tab:parameter-pelatihan-nn-desain}.
 
 \begin{table}[H]
   \centering
-  \caption{Parameter Pelatihan Model \emph{Neural Network}}
+  \caption{Arsitektur dan parameter pelatihan model \emph{neural network}}
   \label{tab:parameter-pelatihan-nn-desain}
-  \begin{tabularx}{\linewidth}{|c|>{\raggedright\arraybackslash\hsize=1.3\hsize}X|>{\centering\arraybackslash\hsize=0.7\hsize}X|}
+  \begin{tabular}{|c|p{5.5cm}|c|}
   \hline
   \textbf{No.} & \textbf{Parameter} & \textbf{Nilai} \\
   \hline
-  1 & Jumlah \emph{input} & 2 \\
+  1 & Jumlah \emph{input} & 3 \\
   \hline
-  2 & Jumlah \emph{hidden layer} &  \\
+  2 & Jumlah \emph{hidden layer} & 1 \\
   \hline
-  3 & Jumlah neuron tiap \emph{hidden layer} &  \\
+  3 & Jumlah neuron \emph{hidden} & 4 \\
   \hline
-  4 & Fungsi aktivasi &  \\
+  4 & Fungsi aktivasi \emph{hidden} & \emph{tanh} \\
   \hline
   5 & Jumlah \emph{output} & 1 \\
   \hline
-  6 & Algoritma pelatihan &  \\
+  6 & Fungsi aktivasi \emph{output} & linear \\
   \hline
-  7 & \emph{Loss function} &  \\
+  7 & Total parameter & 21 \\
   \hline
-  8 & Jumlah \emph{epoch} &  \\
+  8 & Praproses fitur & \emph{StandardScaler} \\
   \hline
-  9 & \emph{Learning rate} &  \\
+  9 & Algoritma pelatihan (\emph{solver}) & L-BFGS \\
   \hline
-  \end{tabularx}
+  10 & \emph{Loss function} & MSE \\
+  \hline
+  11 & Regularisasi ($\alpha$) & $1\times10^{-3}$ \\
+  \hline
+  12 & Maksimum iterasi & 5000 \\
+  \hline
+  13 & Toleransi (\emph{tol}) & $1\times10^{-7}$ \\
+  \hline
+  14 & Pustaka & \emph{scikit-learn} \\
+  \hline
+  \end{tabular}
 \end{table}
 
-Alasan pemilihan arsitektur MLP dengan jumlah neuron
-yang relatif kecil adalah untuk menjaga agar model
-dapat dijalankan pada STM32 yang memiliki memori dan
-kapasitas komputasi terbatas. Setiap \emph{forward pass}
-di STM32 hanya membutuhkan operasi perkalian--penjumlahan
-sederhana dan satu fungsi aktivasi, sehingga waktu
-\emph{inference} dapat dipertahankan pada orde milidetik
-yang sesuai dengan laju pengambilan data sensor.
+Pemilihan arsitektur kecil ini menjaga agar setiap \emph{forward pass}
+di STM32 hanya membutuhkan operasi perkalian--penjumlahan sederhana dan
+satu fungsi aktivasi \emph{tanh}, sehingga waktu \emph{inference} berada
+pada orde milidetik dan sesuai dengan periode keputusan kendali.
 
 \subsection{Akuisisi Dataset dan Pra-Pengolahan}
 \label{sec:akuisisi-dataset-dan-pra-pengolahan}
 
-Dataset untuk pelatihan \emph{neural network} diperoleh
-dari hasil pengukuran sistem secara langsung. Setiap kali
-beban berubah, sistem mencatat nilai \emph{setpoint},
-tekanan aktual hasil pembacaan sensor, dan \emph{duty
-cycle} yang sedang diberikan. Skenario akuisisi data
-meliputi pembukaan keran secara bertahap, mulai dari
-semua keran tertutup, satu keran terbuka sebagian, satu
-keran terbuka penuh, dua keran terbuka, sampai lima
-keran terbuka. Format dataset hasil akuisisi ditunjukkan
-pada Tabel~\ref{tab:format-dataset-akuisisi}, dan
-contoh template dataset untuk pelatihan ditunjukkan pada
-Tabel~\ref{tab:dataset-template}.
+Dataset pelatihan diperoleh dari operasi sistem secara
+\emph{closed-loop} melalui antarmuka akuisisi data (GUI) di PC. Pada
+mode ini, posisi keran diperlakukan sebagai \emph{gangguan} (variabel
+beban), sedangkan \emph{duty cycle} berperan sebagai \emph{aktuator}.
+Setiap selang waktu keputusan tetap (3~detik), sistem mencatat
+\emph{setpoint}, tekanan aktual, dan \emph{duty cycle}, lalu menerapkan
+koreksi $\Delta duty$ mengikuti aturan kendali bertingkat berdasarkan
+galat seperti pada Tabel~\ref{tab:aturan-delta-duty}, dengan hasil
+\emph{duty} dibatasi pada rentang 70--95\%. Baris pada saat keputusan
+diambil ditandai \texttt{is\_decision}=1.
 
 \begin{table}[H]
   \centering
-  \caption{Format Dataset Hasil Akuisisi Data}
+  \caption{Aturan koreksi $\Delta duty$ terhadap galat tekanan}
+  \label{tab:aturan-delta-duty}
+  \begin{tabular}{|c|c|}
+  \hline
+  \textbf{Galat $error = setpoint - pressure$ (bar)} & \textbf{$\Delta duty$ (\%)} \\
+  \hline
+  $error > +0{,}08$            & $+3$ \\ \hline
+  $+0{,}05 < error \le +0{,}08$ & $+2$ \\ \hline
+  $+0{,}02 < error \le +0{,}05$ & $+1$ \\ \hline
+  $-0{,}02 \le error \le +0{,}02$ & $0$ \\ \hline
+  $-0{,}05 \le error < -0{,}02$ & $-1$ \\ \hline
+  $-0{,}08 \le error < -0{,}05$ & $-2$ \\ \hline
+  $error < -0{,}08$            & $-3$ \\ \hline
+  \end{tabular}
+\end{table}
+
+Akuisisi dilakukan dalam beberapa \emph{episode} dengan variasi jumlah
+keran terbuka (0--4) dan dua nilai \emph{setpoint} (0{,}30~bar sebagai
+kondisi utama dan 0{,}25~bar untuk menguji kemampuan penggantian
+\emph{setpoint}). Variasi mencakup blok kejar-naik, kejar-turun, sapuan
+buka/tutup keran berurutan, serta gangguan acak, agar data mewakili
+beragam kondisi dinamik. Variabel yang direkam beserta fitur turunannya
+ditunjukkan pada Tabel~\ref{tab:format-dataset-akuisisi-desain}. Metodologi pengambilan data untuk pelatihan \emph{neural network} ditunjukkan pada Gambar~\ref{fig:metodologi-pengambilan-dataset}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{gambar/metode_ambil_data.png}
+  \caption{Metodologi pengambilan data untuk pelatihan \emph{neural network}}
+  \label{fig:metodologi-pengambilan-dataset}
+\end{figure}
+
+Setiap episode dimulai dengan menetapkan \emph{duty cycle} awal secara
+manual, lalu sistem dijalankan dalam mode \emph{auto-collect} sehingga
+koreksi $\Delta duty$ diambil secara otomatis setiap 3~detik sesuai
+aturan pada Tabel~\ref{tab:aturan-delta-duty}. Skema pengambilan data
+dibagi menjadi enam blok. Blok A (kejar-naik) dimulai dengan
+\emph{duty} awal 70\% dan keran terbuka penuh (3--4 keran), sehingga
+tekanan awal berada di bawah \emph{setpoint} dan kontroler menaikkan
+\emph{duty} secara bertahap. Blok B (kejar-turun) menggunakan
+\emph{duty} awal tinggi (80--90\%) dengan keran lebih tertutup (0--3
+keran), sehingga tekanan awal di atas \emph{setpoint} dan kontroler
+menurunkan \emph{duty}.Blok C dan D adalah sapuan
+berurutan: Blok~C menutup keran satu per satu (4$\to$3$\to$2$\to$1$\to$0)
+dalam satu episode, sedangkan Blok~D membuka keran secara berurutan
+(0$\to$1$\to$2$\to$3$\to$4). Kedua blok ini merekam perilaku kontroler
+saat beban berubah secara bertahap di tengah episode, sehingga data
+mencakup transisi antar-kondisi. Blok E merupakan blok gangguan
+acak yang paling beragam: urutan keran diubah secara tidak beraturan (contoh:
+2$\to$4$\to$1$\to$3$\to$0) dalam satu episode agar model mempelajari respons
+terhadap lompatan beban yang tidak terduga. Blok F mengulang
+sebagian skenario dengan \emph{setpoint} berbeda (0{,}25~bar dan
+0{,}35~bar) untuk menguji kemampuan generalisasi kontroler di luar
+\emph{setpoint} utama. Keseluruhan akuisisi menghasilkan 16~episode dengan
+469~baris keputusan (\texttt{is\_decision}=1), setelah praproses menjadi
+453~baris siap latih.
+
+\begin{table}[H]
+  \centering
+  \caption{Variabel dataset akuisisi dan fitur turunan}
   \label{tab:format-dataset-akuisisi-desain}
-  \begin{tabularx}{\linewidth}{|c|>{\raggedright\arraybackslash\hsize=0.9\hsize}X|>{\raggedright\arraybackslash\hsize=1.3\hsize}X|>{\centering\arraybackslash\hsize=0.8\hsize}X|}
+  \begin{tabular}{|c|p{3cm}|p{5.5cm}|c|}
   \hline
-  \textbf{No.} &
-  \textbf{Nama Data} &
-  \textbf{Keterangan} &
-  \textbf{Satuan} \\
+  \textbf{No.} & \textbf{Variabel} & \textbf{Keterangan} & \textbf{Satuan} \\
   \hline
-  1 & Waktu pengambilan data &
-      Waktu data diterima oleh komputer & detik \\
+  1 & \texttt{setpoint\_bar} & Tekanan target & bar \\
   \hline
-  2 & ADC sensor tekanan &
-      Nilai digital hasil pembacaan ADC STM32 & bit \\
+  2 & \texttt{pressure\_bar} & Tekanan aktual hasil pembacaan sensor & bar \\
   \hline
-  3 & Tegangan sensor &
-      Tegangan keluaran sensor setelah pembagi tegangan & V \\
+  3 & \texttt{duty\_percent} & \emph{Duty cycle} PWM saat itu & \% \\
   \hline
-  4 & Tekanan aktual &
-      Tekanan air hasil pembacaan sensor & bar \\
+  4 & \texttt{valve\_open\_count} & Jumlah keran terbuka (gangguan beban) & - \\
   \hline
-  5 & \emph{Duty cycle} &
-      Nilai kendali PWM yang diberikan ke rangkaian & \% \\
+  5 & \texttt{episode\_id} & Penanda episode & - \\
   \hline
-  6 & Frekuensi PWM &
-      Frekuensi sinyal PWM dari STM32 & Hz \\
+  6 & \texttt{is\_decision} & Penanda baris keputusan (tiap 3 detik) & - \\
   \hline
-  7 & Tegangan RMS keluaran &
-      Tegangan keluaran PWM AC \emph{chopper} & V \\
+  7 & $error$ & $setpoint - pressure$ (input 1) & bar \\
   \hline
-  8 & Kondisi beban &
-      Kondisi bukaan keran saat data diambil & - \\
+  8 & $\Delta error$ & Selisih $error$ antar-keputusan (input 2) & bar \\
   \hline
-  \end{tabularx}
+  9 & $\Delta duty$ & Perubahan \emph{duty} berikutnya (target) & \% \\
+  \hline
+  \end{tabular}
+\end{table}
+
+Pengolahan fitur dilakukan hanya pada baris keputusan
+(\texttt{is\_decision}=1). Tiga fitur \emph{input} dan satu \emph{target}
+dibentuk per-\emph{episode} agar selisih antar-baris tidak menyambung dua
+episode yang berbeda:
+\begin{itemize}
+  \item $error = setpoint - pressure$;
+  \item $\Delta error = error_t - error_{t-1}$ (selisih per episode);
+  \item $duty$ = \emph{duty cycle} pada keputusan tersebut;
+  \item target $\Delta duty = duty_{t+1} - duty_{t}$, yaitu aksi koreksi
+        berikutnya yang benar-benar dilakukan operator
+        (\emph{behavior cloning}).
+\end{itemize}
+Baris terakhir tiap episode dibuang karena target $\Delta duty$-nya tidak
+terdefinisi, dan baris korup dibuang otomatis. Komposisi dataset akhir
+ditunjukkan pada Tabel~\ref{tab:komposisi-dataset}, sedangkan rentang
+nilai tiap fitur ditunjukkan pada Tabel~\ref{tab:rentang-fitur}.
+
+\begin{table}[H]
+  \centering
+  \caption{Komposisi dataset hasil akuisisi (14 Juni 2026)}
+  \label{tab:komposisi-dataset}
+  \begin{tabular}{|c|p{8cm}|c|}
+  \hline
+  \textbf{No.} & \textbf{Keterangan} & \textbf{Jumlah} \\
+  \hline
+  1 & Jumlah berkas CSV & 12 \\
+  \hline
+  2 & Jumlah episode & 16 \\
+  \hline
+  3 & Baris keputusan (\texttt{is\_decision}=1) & 469 \\
+  \hline
+  4 & Baris siap latih (setelah praproses) & 453 \\
+  \hline
+  5 & Target $\Delta duty$ naik ($>0$) & 161 \\
+  \hline
+  6 & Target $\Delta duty$ tahan ($=0$) & 201 \\
+  \hline
+  7 & Target $\Delta duty$ turun ($<0$) & 91 \\
+  \hline
+  8 & Baris \emph{setpoint} 0{,}30~bar & 403 \\
+  \hline
+  9 & Baris \emph{setpoint} 0{,}25~bar & 50 \\
+  \hline
+  \end{tabular}
 \end{table}
 
 \begin{table}[H]
   \centering
-  \caption{Tabel Pengambilan Dataset Pengendalian Tekanan
-           dengan \emph{Neural Network}}
-  \label{tab:dataset-template}
-  \begin{tabularx}{\linewidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+  \caption{Rentang nilai fitur pada dataset}
+  \label{tab:rentang-fitur}
+  \begin{tabular}{|c|c|c|c|c|}
   \hline
-  \rowcolor{cyan!20}
-  \textbf{Tekanan (Bar)} & \textbf{PWM \emph{Duty Cycle} (\%)} &
-  \textbf{Tegangan Output (V)} \\
+  \textbf{Fitur} & \textbf{Min} & \textbf{Rata-rata} & \textbf{Maks} & \textbf{Satuan} \\
   \hline
-                       &                                  &                            \\
+  $error$        & $-0{,}509$ & $-0{,}015$ & $0{,}231$ & bar \\
   \hline
-                       &                                  &                            \\
+  $\Delta error$ & $-0{,}398$ & $-0{,}001$ & $0{,}558$ & bar \\
   \hline
-                       &                                  &                            \\
+  $duty$         & $65{,}0$   & $82{,}3$   & $95{,}0$  & \% \\
   \hline
-                       &                                  &                            \\
-  \hline
-                       &                                  &                            \\
-  \hline
-                       &                                  &                            \\
-  \hline
-                       &                                  &                            \\
-  \hline
-  \end{tabularx}
+  \end{tabular}
 \end{table}
 
-Sebelum digunakan untuk pelatihan, seluruh fitur input
-dinormalisasi ke rentang $[0, 1]$ menggunakan
-\emph{min-max normalization} dengan persamaan berikut.
-
-\begin{equation}
-  x_{norm} = \frac{x - x_{min}}{x_{max} - x_{min}}
-  \label{eq:normalisasi}
-\end{equation}
-
-dengan $x$ adalah nilai fitur asli, $x_{min}$ dan
-$x_{max}$ adalah nilai minimum dan maksimum fitur
-tersebut pada dataset. Normalisasi dilakukan agar
-proses pelatihan tidak didominasi oleh fitur dengan
-rentang nilai yang besar dan agar \emph{forward pass}
-pada STM32 dapat dilakukan dengan aritmatika titik
-tetap (\emph{fixed-point}) tanpa overflow. Dataset
-selanjutnya dibagi menjadi data latih, data validasi,
-dan data uji dengan proporsi seperti pada
-Tabel~\ref{tab:pembagian-dataset-desain}. Nilai proporsi
-diambil sebagai acuan awal dan akan dilaporkan secara
-kongkrit pada
-bab~\ref{chap:hasil_dan_pembahasan}.
+Berbeda dari normalisasi \emph{min-max}, penelitian ini menggunakan
+standarisasi \emph{z-score} (Persamaan~\ref{eq:standardisasi}) yang
+parameternya ($\mu$ dan $\sigma$) dihitung hanya dari data latih untuk
+mencegah kebocoran informasi (\emph{data leakage}). Dataset kemudian
+dibagi menjadi data latih, validasi, dan uji dengan proporsi 70:10:20
+seperti pada Tabel~\ref{tab:pembagian-dataset-desain}.
 
 \begin{table}[H]
   \centering
-  \caption{Pembagian Dataset \emph{Neural Network}}
+  \caption{Pembagian dataset \emph{neural network}}
   \label{tab:pembagian-dataset-desain}
-  \begin{tabularx}{\linewidth}{|c|>{\raggedright\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+  \begin{tabular}{|c|>{\raggedright\arraybackslash}p{3.2cm}|c|c|}
   \hline
-  \textbf{No.} & \textbf{Jenis Data} & \textbf{Persentase} &
-  \textbf{Jumlah Data} \\
+  \textbf{No.} & \textbf{Jenis Data} & \textbf{Proporsi} &
+  \textbf{Jumlah} \\
   \hline
-  1 & Data latih & 70\% &  \\
+  1 & Data latih (\emph{train}) & 70\% & 316 \\
   \hline
-  2 & Data validasi & 15\% &  \\
+  2 & Data validasi (\emph{validation}) & 10\% & 46 \\
   \hline
-  3 & Data uji & 15\% &  \\
+  3 & Data uji (\emph{test}) & 20\% & 91 \\
   \hline
-  \end{tabularx}
+    & \textbf{Total} & 100\% & 453 \\
+  \hline
+  \end{tabular}
 \end{table}
 
 \subsection{Pelatihan Model dan \emph{Deployment} ke STM32}
 \label{sec:pelatihan-model-dan-deployment}
 
-Pelatihan model \emph{neural network} dilakukan di PC
-menggunakan bahasa pemrograman Python dan pustaka
-\textit{[isi pustaka yang dipakai]} dengan parameter
-yang tercantum pada
-Tabel~\ref{tab:parameter-pelatihan-nn-desain}. Proses
-pelatihan dijalankan hingga \emph{loss} pada data
-validasi tidak lagi menurun secara signifikan, dan
-model dengan kinerja terbaik pada data validasi
-disimpan untuk tahap \emph{deployment}.
+Pelatihan dilakukan di PC menggunakan Python dan pustaka
+\emph{scikit-learn}. Model dibangun sebagai \emph{pipeline} dua tahap,
+yaitu \emph{StandardScaler} diikuti \emph{MLPRegressor}
+($hidden\_layer\_sizes=(4,)$, \emph{activation}=\emph{tanh},
+\emph{solver}=L-BFGS, $\alpha=10^{-3}$), dengan parameter selengkapnya
+pada Tabel~\ref{tab:parameter-pelatihan-nn-desain}. Fungsi rugi yang
+diminimalkan adalah \emph{Mean Squared Error} (MSE) antara $\Delta duty$
+prediksi dan target. Kinerja model dievaluasi menggunakan metrik
+\emph{Root Mean Square Error} (RMSE), \emph{Mean Absolute Error} (MAE),
+dan koefisien determinasi ($R^2$) pada data uji. Hasil pelatihan dan
+evaluasinya dilaporkan pada Bab~\ref{chap:hasil_dan_pembahasan}.
 
-Setelah model terbaik diperoleh, bobot dan bias pada
-setiap layer diekstrak ke dalam bentuk \emph{array}
-\texttt{float} (atau dikuantisasi ke \texttt{int16}
-jika diperlukan). Konstanta normalisasi $x_{min}$,
-$x_{max}$, $y_{min}$, dan $y_{max}$ juga diekstrak
-untuk digunakan pada tahap denormalisasi di STM32.
-Seluruh nilai tersebut kemudian disalin ke dalam
-\emph{array} \texttt{const} pada firmware STM32,
-sehingga menjadi bagian dari \emph{image} program
-yang akan di-\emph{flash} ke mikrokontroler.
+Setelah model terbaik diperoleh, ke-21 parameter (rata-rata dan
+simpangan baku \emph{scaler}, bobot $W^{(1)}$ dan $W^{(2)}$, serta bias
+$b^{(1)}$ dan $b^{(2)}$) diekstrak menjadi \emph{array} \texttt{const
+float} dan disalin ke \emph{firmware} STM32, sehingga menjadi bagian
+dari \emph{image} program yang di-\emph{flash} ke mikrokontroler.
 
-Pada STM32, modul \emph{inference} dijalankan pada
-setiap periode sampling kendali dengan urutan sebagai
-berikut.
+Pada STM32, modul \emph{inference} dijalankan pada setiap periode
+keputusan kendali dengan urutan sebagai berikut.
 \begin{enumerate}
-  \item Membaca nilai ADC sensor tekanan dan mengonversinya
-        menjadi tekanan aktual $P_{act}$ menggunakan
-        Persamaan~\ref{eq:kalibrasi-sensor}.
-  \item Menyusun \emph{vector input}
-        $\mathbf{x} = [P_{sp}, P_{act}]^T$ dan
-        menormalisasikannya menggunakan
-        Persamaan~\ref{eq:normalisasi}.
-  \item Melakukan \emph{forward pass} MLP
-        (perkalian matriks--vektor dan penerapan fungsi
-        aktivasi) untuk mendapatkan output ternormalisasi
-        $\hat{y}_{norm}$.
-  \item Mendelormalisasi $\hat{y}_{norm}$ kembali ke
-        rentang \emph{duty cycle} 0--100\% dan menuliskan
-        nilainya ke \emph{Compare Register} (\emph{CCR})
-        \emph{timer} STM32, sehingga \emph{duty cycle}
-        PWM yang baru langsung diterapkan pada IGBT.
+  \item Membaca nilai ADC sensor tekanan dan mengonversinya menjadi
+        tekanan aktual $P_{act}$, lalu menghitung $error$,
+        $\Delta error$, dan membaca \emph{duty} sekarang.
+  \item Menstandarisasi vektor input
+        $\mathbf{x} = [error, \Delta error, duty]^{T}$ menggunakan
+        Persamaan~\ref{eq:standardisasi}.
+  \item Melakukan \emph{forward pass}
+        (Persamaan~\ref{eq:hidden-nn} dan
+        Persamaan~\ref{eq:output-nn}) untuk memperoleh $\Delta duty$.
+  \item Memperbarui \emph{duty cycle} dengan
+        Persamaan~\ref{eq:update-duty}, lalu menuliskan nilainya ke
+        \emph{Compare Register} (\emph{CCR}) \emph{timer} STM32 sehingga
+        \emph{duty cycle} PWM yang baru langsung diterapkan pada IGBT.
 \end{enumerate}
 
-Dengan alur ini, \emph{neural network} bertindak
-sebagai \emph{controller} adaptif yang seluruh proses
-\emph{inference}-nya berjalan di dalam STM32 secara
-\emph{real-time}, sementara proses pelatihan tetap
-dilakukan di PC secara \emph{offline}. Pemisahan ini
-memanfaatkan kemampuan PC untuk pelatihan yang intensif
-sumber daya, dan menjaga agar STM32 hanya menjalankan
-komputasi ringan pada setiap siklus kendali.
+Dengan alur ini, \emph{neural network} bertindak sebagai
+\emph{controller} adaptif yang seluruh proses \emph{inference}-nya
+berjalan di dalam STM32 secara \emph{real-time}, sementara proses
+pelatihan yang intensif sumber daya tetap dilakukan di PC secara
+\emph{offline}.
 
 \section{Urutan Pelaksanaan dan Jadwal Penelitian}
 \label{sec:urutan-dan-jadwal}
@@ -992,37 +1155,49 @@ komputasi ringan pada setiap siklus kendali.
 \label{sec:diagram-alir-penelitian}
 
 Urutan pelaksanaan penelitian tugas akhir ini mengikuti
-diagram alir pada Gambar~\ref{fig:urutan}. Penelitian
-dimulai dengan studi literatur, kemudian perancangan
-rangkaian PWM AC \emph{chopper} dan sistem kontrol
-STM32, lalu simulasi dengan PSIM, implementasi perangkat
-keras, akuisisi dataset, pelatihan \emph{neural
-network}, \emph{deployment} ke STM32, pengujian
-terintegrasi, dan diakhiri dengan analisis hasil serta
-penulisan buku tugas akhir. Tempat pelaksanaan
-penelitian dilakukan di Laboratorium Mikroelektronika
-dan Sistem Tertanam Departemen Teknik Elektro Institut
-Teknologi Sepuluh Nopember selama lima bulan.
+diagram alir pada Gambar~\ref{fig:urutan}. 
 
-\begin{figure} [H] \centering
-  \includegraphics[scale=0.50]{gambar/dalirpenelitian.drawio.png}
+\begin{figure}[htbp] \centering
+  \includegraphics[scale=0.80]{gambar/dalirpenelitian.drawio.png}
   \caption{Diagram alir urutan pelaksanaan tugas akhir}
   \label{fig:urutan}
 \end{figure}
 
+Penelitian
+dimulai dengan studi literatur, kemudian perancangan
+rangkaian PWM AC \emph{chopper} dan sistem kontrol
+STM32, lalu simulasi rangkaian daya dengan PSIM, implementasi perangkat
+keras, akuisisi dataset untuk pelatihan, pelatihan \emph{neural
+network}, \emph{deployment} ke STM32, pengujian
+terintegrasi, dan diakhiri dengan analisis hasil serta
+penulisan buku tugas akhir. Setiap tahapan tersebut
+dilaksanakan secara berurutan, di mana hasil pada suatu
+tahap menjadi acuan untuk tahap berikutnya sehingga
+kesalahan perancangan dapat diidentifikasi sejak dini.
+Apabila hasil pengujian pada suatu tahap belum memenuhi
+kriteria yang ditetapkan, maka dilakukan evaluasi dan
+perbaikan dengan kembali ke tahap sebelumnya sebelum
+penelitian dilanjutkan. Tempat pelaksanaan
+penelitian dilakukan di Laboratorium Elektronika
+Industri Departemen Teknik Elektro Institut
+Teknologi Sepuluh Nopember selama lima bulan.
+
 \subsection{Jadwal Pelaksanaan}
 \label{sec:jadwal-pelaksanaan}
 
+Pelaksanaan penelitian tugas akhir ini direncanakan selama 16 minggu
+dengan jadwal seperti pada Tabel~\ref{tbl:timeline}.
+
 \newcommand{\w}{}
-\newcommand{\G}{\cellcolor{blue}}
+\newcommand{\G}{\cellcolor{black!70}}
 \begin{table}[H]
   \captionof{table}{Tabel jadwal pelaksanaan tugas akhir}
   \label{tbl:timeline}
-  \begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}X|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+  \begin{tabularx}{\linewidth}{|p{3.2cm}|*{16}{>{\centering\arraybackslash}X|}}
 
     \hline
     \multirow{2}{*}{Kegiatan} &
-    \multicolumn{16}{|c|}{Minggu} \\
+    \multicolumn{16}{c|}{Minggu} \\
     \cline{2-17}              &
     1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 &
     9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 \\

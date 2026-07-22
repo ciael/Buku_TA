@@ -1,4 +1,4 @@
-\chapter{PENUTUP}
+﻿\chapter{PENUTUP}
 \label{chap:penutup}
 
 % Ubah bagian-bagian berikut dengan isi dari penutup
@@ -6,29 +6,65 @@
 \section{Kesimpulan}
 \label{sec:kesimpulan}
 
-Berdasarkan hasil pengujian yang \lipsum[1][1-3] sebagai berikut:
+Setelah dilakukan proses desain, simulasi, implementasi, pengujian, hingga
+analisis dan pembahasan hasil, didapatkan kesimpulan sebagai berikut.
 
 \begin{enumerate}[nolistsep]
 
-  \item Pembuatan \lipsum[2][1-3]
+  \item Sistem pengendalian tekanan pompa air berhasil dirancang dan
+        direalisasikan menggunakan rangkaian daya PWM AC \emph{chopper}
+        topologi diode \emph{full-bridge} dan dua IGBT dengan \emph{gate driver}
+        HCPL-3120. Penentuan \emph{dead time} 1{,}5~$\mu$s terverifikasi
+        pada pengukuran (1{,}48--1{,}49~$\mu$s) sehingga tidak terjadi
+        \emph{shoot-through}. Rangkaian mampu mengatur tegangan RMS keluaran
+        secara linear terhadap \emph{duty cycle} dengan selisih di bawah 1\%
+        terhadap nilai teoritis, dan bentuk gelombang tegangan maupun arus
+        hasil pengukuran sesuai dengan hasil simulasi PSIM.
 
-  \item \lipsum[2][4-6]
+  \item \emph{Neural network} berhasil diterapkan sebagai pengendali tekanan
+        menggunakan arsitektur \emph{Multi-Layer Perceptron} 3-4-1 dengan
+        masukan galat tekanan, perubahan galat, dan \emph{duty cycle}, serta
+        keluaran berupa perubahan \emph{duty cycle} ($\Delta duty$). Model
+        dilatih dari data operasi \emph{closed-loop} (\emph{behavior cloning})
+        dan mencapai kinerja $R^2 = 0{,}915$ (RMSE $0{,}463$; MAE $0{,}329$)
+        pada data uji, menunjukkan akurasi prediksi aksi kendali yang baik.
 
-  \item \lipsum[2][7-10]
+  \item Sistem kendali mampu menjaga tekanan air pada \emph{setpoint} dengan
+        \emph{error} tunak $\leq$0{,}009~bar untuk variasi 1--4 keran terbuka.
+        Pada pengujian perubahan \emph{setpoint} (0{,}25--0{,}35~bar),
+        \emph{settling time} berkisar 4--7~detik. Pada pengujian rejeksi
+        gangguan perubahan beban keran, kontroler memulihkan tekanan dalam
+        9--15~detik. Keterbatasan terjadi pada kondisi seluruh keran tertutup
+        dan pada gangguan pembukaan 4~keran serentak, ketika tekanan minimum
+        pompa melampaui \emph{setpoint} sehingga aktuator mengalami saturasi
+        (batas fisik pompa), bukan kegagalan kontroler.
 
 \end{enumerate}
 
 \section{Saran}
 \label{chap:saran}
 
-Untuk pengembangan lebih lanjut pada \lipsum[1][1-3] antara lain:
+Untuk pengembangan penelitian lebih lanjut, disarankan hal-hal berikut.
 
 \begin{enumerate}[nolistsep]
 
-  \item Memperbaiki \lipsum[2][1-3]
+  \item Memperbaiki desain rangkaian \emph{snubber} agar mampu meredam
+        lonjakan tegangan (\emph{spike}) dan osilasi (\emph{ringing}) secara
+        lebih baik, serta menambahkan sistem pendingin (\emph{cooling}) pada
+        \emph{snubber} dan komponen daya untuk menjaga kestabilan termal pada
+        operasi kontinu.
 
-  \item \lipsum[2][4-6]
+  \item Mengintegrasikan sistem secara langsung dengan inverter (sumber DC/PLTS)
+        sehingga menjadi satu kesatuan \emph{solar water pump inverter}, tidak
+        hanya berperan sebagai pengatur tegangan AC.
 
-  \item \lipsum[2][7-10]
+  \item Memperbaiki \emph{settling time} kontroler NN agar respons sistem lebih
+        cepat, baik pada pelacakan perubahan \emph{setpoint} (saat ini
+        4--7~detik) maupun pada pemulihan gangguan perubahan beban keran (saat
+        ini 9--15~detik).
+
+  \item Melakukan analisa efisiensi daya dan kerugian daya pada rangkaian daya, serta menambahkan pengukuran arus beban untuk mengetahui
+        karakteristik beban pompa air dan memprediksi konsumsi daya.
 
 \end{enumerate}
+

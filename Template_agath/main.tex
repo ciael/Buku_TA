@@ -16,6 +16,7 @@
 
 % Pengaturan jenis karakter
 \usepackage[utf8]{inputenc}
+\usepackage{textcomp} % simbol kutip lurus untuk listing kode (upquote)
 
 % Pengaturan pewarnaan
 \usepackage[table,xcdraw]{xcolor}
@@ -26,7 +27,13 @@
 % Package lainnya
 \usepackage{amsmath}
 \usepackage{bm}
+\usepackage{microtype}
 \usepackage{subcaption}
+% Hilangkan titik dua pada label caption -> "Gambar 2.5 Keterangan" (bukan "Gambar 2.5: Keterangan")
+% labelfont=bf -> "Gambar 2.5" tebal, keterangan tetap normal, pada caption di bawah gambar/tabel
+\captionsetup{labelsep=space, labelfont=bf}
+% Label sub-gambar (a)/(b)/(c) tetap normal (tidak ikut tebal)
+\captionsetup[subfigure]{labelfont=normalfont}
 \usepackage{changepage}
 \usepackage{enumitem}
 \usepackage{eso-pic}
@@ -40,6 +47,45 @@
 \usepackage{float}
 \usepackage{makecell}
 \usepackage{multirow}
+\usepackage{pdfpages} % untuk menyisipkan lembar pengesahan/orisinalitas hasil scan (PDF)
+
+% ---------------------------------------------------------------------------
+% Kendali penempatan float (gambar/tabel) agar tidak "menyasar" ke sub-bab lain.
+% placeins [section] menahan float agar tidak menyeberang \section; ditambah
+% FloatBarrier otomatis sebelum tiap \subsection sehingga float dituntaskan
+% dalam sub-bab tempat ia dirujuk. Float [H] tidak terpengaruh (tetap di tempat).
+% ---------------------------------------------------------------------------
+\usepackage[section]{placeins}
+\AtBeginDocument{\pretocmd{\subsection}{\FloatBarrier}{}{}}
+
+% Pengaturan daftar isi: judul bab (level chapter) dibuat bold
+\usepackage{tocloft}
+\renewcommand{\cftchapfont}{\bfseries}
+\renewcommand{\cftchappagefont}{\bfseries}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftsecdotsep}}
+\setlength{\cftchapindent}{0em}
+\setlength{\cftbeforechapskip}{0.5em}
+
+% Daftar Gambar/Tabel: tampilkan "Gambar X.Y"/"Tabel X.Y" tebal di setiap
+% entri, keterangan tetap normal. Lebar kolom nomor diperlebar karena kini
+% memuat kata "Gambar "/"Tabel " juga, bukan sekadar angka.
+\renewcommand{\cftfigpresnum}{\bfseries\figurename~}
+\renewcommand{\cftfigaftersnum}{\normalfont}
+\setlength{\cftfignumwidth}{6.2em}
+\renewcommand{\cfttabpresnum}{\bfseries\tablename~}
+\renewcommand{\cfttabaftersnum}{\normalfont}
+\setlength{\cfttabnumwidth}{6.2em}
+
+% Judul daftar isi/gambar/tabel rata tengah
+\renewcommand{\cfttoctitlefont}{\hfill\Large\bfseries}
+\renewcommand{\cftaftertoctitle}{\hfill}
+\setlength{\cftbeforetoctitleskip}{-2em}
+\renewcommand{\cftloftitlefont}{\hfill\Large\bfseries}
+\renewcommand{\cftafterloftitle}{\hfill}
+\setlength{\cftbeforeloftitleskip}{-2em}
+\renewcommand{\cftlottitlefont}{\hfill\Large\bfseries}
+\renewcommand{\cftafterlottitle}{\hfill}
+\setlength{\cftbeforelottitleskip}{-2em}
 
 % Pengaturan format tabel seragam
 \setlength{\tabcolsep}{4pt}
@@ -136,6 +182,13 @@
   tabsize=2,
 }
 \lstset{style=codestyle}
+\lstdefinestyle{lampstyle}{
+  style=codestyle,
+  frame=single,
+  rulecolor=\color{black},
+  xleftmargin=2.5em,
+  framexleftmargin=1.8em,
+}
 
 % \setlength{\abovecaptionskip}{5pt}  % jarak dari gambar ke caption
 % \setlength{\belowcaptionskip}{5pt}  % jarak dari caption ke paragraf sesudahnya
@@ -162,8 +215,18 @@
 \input{sampul/sampul-luar-tipis.tex}
 \cleardoublepage
 
-% Lembar pengesahan hasil scan
-\input{lainnya/lembar-pengesahan-scan.tex}
+% Lembar pengesahan dan pernyataan orisinalitas (hasil scan, sudah ditandatangani)
+% Urutan: Pengesahan ID -> kosong -> Pengesahan EN -> kosong ->
+%         Orisinalitas ID -> kosong -> Orisinalitas EN -> kosong
+% (\cleardoublepage otomatis menyisipkan halaman "sengaja dikosongkan" bila perlu,
+%  sehingga tiap lembar hasil scan selalu jatuh di halaman kanan/ganjil.)
+\includepdf[pages=-, pagecommand={\thispagestyle{empty}}]{gambar/lemsangid.pdf}
+\cleardoublepage
+\includepdf[pages=-, pagecommand={\thispagestyle{empty}}]{gambar/lemsangeng.pdf}
+\cleardoublepage
+\includepdf[pages=-, pagecommand={\thispagestyle{empty}}]{gambar/lembar_orisinalitas_id.pdf}
+\cleardoublepage
+\includepdf[pages=-, pagecommand={\thispagestyle{empty}}]{gambar/lembar_orisinalitas_eng.pdf}
 \cleardoublepage
 
 % Label tabel dan gambar dalam bahasa indonesia
@@ -176,15 +239,14 @@
 % Pengaturan ukuran spasi paragraf
 \setlength{\parskip}{1ex}
 
-% Lembar pengesahan
+% Versi LaTeX typeset (sebelum ditandatangani) -- non-aktif, disimpan sebagai
+% cadangan/referensi. Sudah digantikan hasil scan bertanda tangan di atas.
 % \input{lainnya/lembar-pengesahan.tex}
 % \cleardoublepage
 % \input{lainnya/lembar-pengesahan-en.tex}
 % \cleardoublepage
-
-% Pernyataan keaslian
-\input{lainnya/pernyataan-keaslian.tex}
-\cleardoublepage
+% \input{lainnya/pernyataan-keaslian.tex}
+% \cleardoublepage
 % \input{lainnya/pernyataan-keaslian-en.tex}
 % \cleardoublepage
 
@@ -221,6 +283,10 @@
 \listoftables
 \cleardoublepage
 
+% Daftar simbol
+\input{lainnya/daftar-simbol.tex}
+\cleardoublepage
+
 % Nomor halaman isi dimulai dari sini
 \pagenumbering{arabic}
 
@@ -253,6 +319,10 @@
 \def\chapter*#1{}
 \printbibliography
 \endgroup
+\cleardoublepage
+
+% Lampiran
+\input{lainnya/lampiran.tex}
 \cleardoublepage
 
 % Biografi penulis

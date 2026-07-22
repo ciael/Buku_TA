@@ -1,0 +1,104 @@
+<mxfile host="app.diagrams.net" type="device">
+  <diagram id="flow-ambil-data-rev" name="Flowchart Pengambilan Data">
+    <mxGraphModel dx="900" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="870" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ===== NODE ===== -->
+        <mxCell id="mulai" value="MULAI" style="ellipse;whiteSpace=wrap;html=1;fontStyle=1;fontSize=13;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="170" y="30" width="150" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="atur" value="Atur kondisi keran&#10;(0&#8211;4, bebas dan gangguan)" style="rounded=0;whiteSpace=wrap;html=1;fontStyle=1;fontSize=12;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="145" y="130" width="200" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="baca" value="Baca tekanan air&#10;(sensor)" style="rounded=0;whiteSpace=wrap;html=1;fontStyle=1;fontSize=12;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="145" y="260" width="200" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dec1" value="Tekanan&#10;= SP?" style="rhombus;whiteSpace=wrap;html=1;fontSize=12;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="165" y="368" width="160" height="104" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ubah" value="Ubah duty cycle&#10;naik bila di bawah 0,30 bar&#10;turun bila di atas 0,30 bar&#10;(batas 70&#8211;95%)" style="rounded=0;whiteSpace=wrap;html=1;fontStyle=1;fontSize=12;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="128" y="552" width="234" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="stabil" value="Tekanan stabil&#10;(error, &#916;error, duty)&#10;simpan data" style="rounded=0;whiteSpace=wrap;html=1;fontStyle=1;fontSize=12;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="545" y="373" width="210" height="95" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dec2" value="Coba kondisi&#10;keran lain?" style="rhombus;whiteSpace=wrap;html=1;fontSize=12;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="568" y="556" width="164" height="104" as="geometry" />
+        </mxCell>
+
+        <mxCell id="stop" value="STOP&#10;Pengumpulan Dataset" style="ellipse;whiteSpace=wrap;html=1;fontStyle=1;fontSize=12;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="545" y="730" width="210" height="72" as="geometry" />
+        </mxCell>
+
+        <!-- Konektor A (satu-satunya, hasil rename dari B) -->
+        <mxCell id="aentry" value="A" style="ellipse;whiteSpace=wrap;html=1;fontStyle=1;fontSize=13;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="58" y="143" width="44" height="44" as="geometry" />
+        </mxCell>
+
+        <mxCell id="aexit" value="A" style="ellipse;whiteSpace=wrap;html=1;fontStyle=1;fontSize=13;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="782" y="586" width="44" height="44" as="geometry" />
+        </mxCell>
+
+        <!-- ===== EDGE ===== -->
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#000000;" edge="1" parent="1" source="mulai" target="atur">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#000000;" edge="1" parent="1" source="atur" target="baca">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#000000;" edge="1" parent="1" source="baca" target="dec1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- dec1 Tidak -> ubah -->
+        <mxCell id="e4" value="Tidak" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#000000;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=11;" edge="1" parent="1" source="dec1" target="ubah">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ubah -> baca (loop kiri) -->
+        <mxCell id="e5" value="Ulang setiap 3 dtk" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#000000;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=11;" edge="1" parent="1" source="ubah" target="baca">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="90" y="602" />
+              <mxPoint x="90" y="290" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- dec1 Ya -> stabil (LANGSUNG, tanpa konektor A) -->
+        <mxCell id="e6" value="Ya" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#000000;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=11;" edge="1" parent="1" source="dec1" target="stabil">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- stabil -> dec2 -->
+        <mxCell id="e7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#000000;" edge="1" parent="1" source="stabil" target="dec2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- dec2 Ya -> A (exit) -->
+        <mxCell id="e8" value="Ya" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#000000;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=11;" edge="1" parent="1" source="dec2" target="aexit">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- dec2 Tidak -> stop -->
+        <mxCell id="e9" value="Tidak" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#000000;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=11;" edge="1" parent="1" source="dec2" target="stop">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- A (entry) -> atur -->
+        <mxCell id="e10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#000000;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="aentry" target="atur">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

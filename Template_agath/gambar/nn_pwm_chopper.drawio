@@ -1,0 +1,112 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0" version="24.0.0">
+  <diagram id="nn-pwm-chopper" name="NN-PWM-Chopper">
+    <mxGraphModel dx="1422" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="900" pageHeight="350" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title" value="Diagram Pengendalian Tekanan dengan \emph{Neural Network} pada PWM AC \emph{Chopper}" style="text;html=1;align=center;verticalAlign=middle;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="180" y="10" width="540" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="nn-container" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;dashed=0" vertex="1" parent="1">
+          <mxGeometry x="30" y="50" width="560" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="nn-label" value="\emph{Trained Multi-Layer Perceptron}" style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="180" y="290" width="260" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="in1" value="x_1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6" vertex="1" parent="1">
+          <mxGeometry x="100" y="100" width="36" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="in1-label" value="error&#10;($P_{sp} - P_{act}$)" style="text;html=1;align=center;verticalAlign=middle;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="40" y="105" width="55" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="in2" value="x_2" style="ellipse;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6" vertex="1" parent="1">
+          <mxGeometry x="100" y="170" width="36" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="in2-label" value="$\Delta error$" style="text;html=1;align=center;verticalAlign=middle;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="40" y="175" width="55" height="20" as="geometry" />
+        </mxCell>
+
+        <mxCell id="in3" value="x_3" style="ellipse;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6" vertex="1" parent="1">
+          <mxGeometry x="100" y="240" width="36" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="in3-label" value="$duty_{t}$" style="text;html=1;align=center;verticalAlign=middle;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="40" y="245" width="55" height="20" as="geometry" />
+        </mxCell>
+
+        <mxCell id="h1" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366" vertex="1" parent="1">
+          <mxGeometry x="310" y="80" width="36" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="h2" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366" vertex="1" parent="1">
+          <mxGeometry x="310" y="140" width="36" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="h3" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366" vertex="1" parent="1">
+          <mxGeometry x="310" y="200" width="36" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="h4" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366" vertex="1" parent="1">
+          <mxGeometry x="310" y="260" width="36" height="36" as="geometry" />
+        </mxCell>
+
+        <mxCell id="hidden-bg" value="\emph{Hidden Layer} (4 neuron)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#82b366;dashed=1;fontSize=10" vertex="1" parent="1">
+          <mxGeometry x="290" y="70" width="76" height="240" as="geometry" />
+        </mxCell>
+
+        <mxCell id="out1" value="y" style="ellipse;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6" vertex="1" parent="1">
+          <mxGeometry x="500" y="170" width="36" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="out1-label" value="$\Delta duty$" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="540" y="175" width="50" height="20" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e-in1-h1" style="endArrow=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#666666" edge="1" parent="1" source="in1" target="h1" />
+        <mxCell id="e-in1-h2" style="endArrow=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#666666" edge="1" parent="1" source="in1" target="h2" />
+        <mxCell id="e-in1-h3" style="endArrow=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#666666" edge="1" parent="1" source="in1" target="h3" />
+        <mxCell id="e-in1-h4" style="endArrow=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#666666" edge="1" parent="1" source="in1" target="h4" />
+
+        <mxCell id="e-in2-h1" style="endArrow=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#666666" edge="1" parent="1" source="in2" target="h1" />
+        <mxCell id="e-in2-h2" style="endArrow=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#666666" edge="1" parent="1" source="in2" target="h2" />
+        <mxCell id="e-in2-h3" style="endArrow=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=0;entryDy=0;strokeColor=#666666" edge="1" parent="1" source="in2" target="h3" />
+        <mxCell id="e-in2-h4" style="endArrow=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#666666" edge="1" parent="1" source="in2" target="h4" />
+
+        <mxCell id="e-in3-h1" style="endArrow=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#666666" edge="1" parent="1" source="in3" target="h1" />
+        <mxCell id="e-in3-h2" style="endArrow=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#666666" edge="1" parent="1" source="in3" target="h2" />
+        <mxCell id="e-in3-h3" style="endArrow=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#666666" edge="1" parent="1" source="in3" target="h3" />
+        <mxCell id="e-in3-h4" style="endArrow=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#666666" edge="1" parent="1" source="in3" target="h4" />
+
+        <mxCell id="e-h1-out" style="endArrow=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#666666" edge="1" parent="1" source="h1" target="out1" />
+        <mxCell id="e-h2-out" style="endArrow=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#666666" edge="1" parent="1" source="h2" target="out1" />
+        <mxCell id="e-h3-out" style="endArrow=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#666666" edge="1" parent="1" source="h3" target="out1" />
+        <mxCell id="e-h4-out" style="endArrow=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#666666" edge="1" parent="1" source="h4" target="out1" />
+
+        <mxCell id="chopper-box" value="PWM AC \emph{Chopper}&#10;(Full-Bridge IGBT)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="660" y="130" width="200" height="120" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ac-in" value="AC 220 V / 50 Hz" style="text;html=1;align=center;verticalAlign=middle;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="680" y="80" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ac-arrow" style="endArrow=classic;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.3;entryY=0;entryDx=0;entryDy=0" edge="1" parent="1" source="ac-in" target="chopper-box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ac-out" value="ke motor pompa air" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="680" y="260" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ac-out-arrow" style="endArrow=classic;html=1;exitX=0.3;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0" edge="1" parent="1" source="chopper-box" target="ac-out">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="nn-to-chopper" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;strokeColor=#b85450;strokeWidth=2" edge="1" parent="1" source="out1" target="chopper-box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="nn-to-chopper-label" value="$duty_{t+1}$" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=1;fillColor=#ffffff;strokeColor=#b85450" vertex="1" parent="1">
+          <mxGeometry x="600" y="155" width="50" height="20" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,139 @@
+<mxfile host="app.diagrams.net" agent="ClaudeCode" version="24.0.0">
+  <diagram id="pengambilan-data-poster" name="Pengambilan Data (Landscape)">
+    <mxGraphModel dx="1400" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="826" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Judul -->
+        <mxCell id="title" value="&lt;b&gt;DIAGRAM ALIR PENGAMBILAN DATA CLOSED-LOOP (AUTO-COLLECT)&lt;/b&gt; &#160;&#8212;&#160; Setpoint 0,30 bar &#183; Interval 3 s &#183; Duty 70&#8211;95% &#183; Pompa via PWM AC Chopper" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=14;fontColor=#1f2d3d;" vertex="1" parent="1">
+          <mxGeometry x="40" y="10" width="1090" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- ====== LAJUR A: Persiapan (kiri -> kanan) ====== -->
+        <mxCell id="start" value="MULAI" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="40" y="80" width="110" height="55" as="geometry" />
+        </mxCell>
+
+        <mxCell id="persiapan" value="&lt;b&gt;PERSIAPAN AWAL&lt;/b&gt;&#10;Pompa via chopper, connect &amp;&#10;cek sensor, Start Logging,&#10;set Setpoint 0,30 / Interval 3 s /&#10;Duty min 70%, pemanasan" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;spacingLeft=8;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="185" y="60" width="215" height="95" as="geometry" />
+        </mxCell>
+
+        <mxCell id="karakter" value="&lt;b&gt;KARAKTERISASI&lt;/b&gt;&#10;Auto-collect OFF,&#10;Duty 80%, catat tekanan&#10;tiap keran 0&#8211;4,&#10;petakan arah kendali" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;spacingLeft=8;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="435" y="60" width="190" height="95" as="geometry" />
+        </mxCell>
+
+        <mxCell id="episode" value="&lt;b&gt;SIAPKAN EPISODE BARU&lt;/b&gt;&#10;Duty awal + Apply, pilih&#10;jumlah keran (gangguan),&#10;klik &quot;Episode Baru (+1)&quot;,&#10;opsional ubah setpoint" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d4e1f5;strokeColor=#6c8ebf;align=left;spacingLeft=8;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="660" y="60" width="215" height="95" as="geometry" />
+        </mxCell>
+
+        <mxCell id="startauto" value="&lt;b&gt;START&#10;AUTO-COLLECT&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=center;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="910" y="78" width="150" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ====== LAJUR B: Siklus keputusan (kanan -> kiri) ====== -->
+        <mxCell id="grpLoop" value="&lt;b&gt;SIKLUS KEPUTUSAN KENDALI&lt;/b&gt; &#8212; berulang otomatis tiap 3 detik" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 4;fillColor=#f5f5f5;strokeColor=#999999;verticalAlign=top;align=left;spacingLeft=12;spacingTop=6;fontColor=#666666;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="245" width="1080" height="150" as="geometry" />
+        </mxCell>
+
+        <mxCell id="baca" value="&lt;b&gt;1.&lt;/b&gt; Baca tekanan&#10;sensor (PC1)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=center;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="920" y="280" width="170" height="75" as="geometry" />
+        </mxCell>
+
+        <mxCell id="hitung" value="&lt;b&gt;2.&lt;/b&gt; Hitung error&#10;&amp; &#916;error" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=center;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="720" y="280" width="170" height="75" as="geometry" />
+        </mxCell>
+
+        <mxCell id="deltaduty" value="&lt;b&gt;3.&lt;/b&gt; Tentukan &#916;Duty (aturan)&#10;lalu clamp 70&#8211;95%" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=center;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="500" y="280" width="190" height="75" as="geometry" />
+        </mxCell>
+
+        <mxCell id="simpan" value="&lt;b&gt;4.&lt;/b&gt; Terapkan duty ke chopper&#10;&amp; simpan baris CSV (is_decision=1):&#10;[setpoint, tekanan, error, &#916;error, duty, &#916;Duty, episode_id]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d4e1f5;strokeColor=#6c8ebf;align=center;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="270" y="280" width="200" height="75" as="geometry" />
+        </mxCell>
+
+        <mxCell id="decEpisode" value="Episode&#10;selesai?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="70" y="270" width="170" height="95" as="geometry" />
+        </mxCell>
+
+        <!-- ====== LAJUR C: Penutup (kiri -> kanan) ====== -->
+        <mxCell id="stopauto" value="&lt;b&gt;STOP&#10;AUTO-COLLECT&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=center;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="60" y="470" width="150" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="decTarget" value="&#8805; 500 baris &amp;&#10;&#916;Duty naik &#8776; turun?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="270" y="445" width="190" height="105" as="geometry" />
+        </mxCell>
+
+        <mxCell id="stoplog" value="&lt;b&gt;STOP LOGGING&#10;&amp; BACKUP CSV&lt;/b&gt;&#10;(lanjut hari lain &#8594; file _sesi2)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=center;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="510" y="462" width="200" height="72" as="geometry" />
+        </mxCell>
+
+        <mxCell id="end" value="&lt;b&gt;DATASET SIAP&lt;/b&gt;&#10;(pelatihan Neural Network)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#d5e8d4;strokeColor=#82b366;align=center;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="760" y="465" width="180" height="65" as="geometry" />
+        </mxCell>
+
+        <!-- ====== Catatan / legenda (baris bawah) ====== -->
+        <mxCell id="noteRule" value="&lt;b&gt;ATURAN &#916;Duty&lt;/b&gt; &#160;(err = setpoint &#8722; tekanan)&#10;err &gt; +0,08 &#8594; +3 &#160;&#160; |err| &#8804; 0,02 &#8594; 0&#10;err &gt; +0,05 &#8594; +2 &#160;&#160; err &lt; &#8722;0,02 &#8594; &#8722;1&#10;err &gt; +0,02 &#8594; +1 &#160;&#160; err &lt; &#8722;0,05 &#8594; &#8722;2&#10;err &lt; &#8722;0,08 &#8594; &#8722;3 &#160;&#160; (hasil di-clamp 70&#8211;95%)" style="shape=note;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fontSize=11;size=16;" vertex="1" parent="1">
+          <mxGeometry x="40" y="580" width="330" height="160" as="geometry" />
+        </mxCell>
+
+        <mxCell id="noteScenario" value="&lt;b&gt;SKENARIO EPISODE&lt;/b&gt; (&#8776;24 episode, ~45 mnt, &#8805;500 baris)&#10;A: kejar NAIK (keran 4 &amp; 3) &#160;&#160; B: kejar TURUN (keran 0&#8211;3)&#10;C: sweep TUTUP 4&#8594;0 &#160;&#160; D: sweep BUKA 0&#8594;4&#10;E: gangguan ACAK (paling berharga) &#160;&#160; F: setpoint 0,25 &amp; 0,35&#10;&lt;i&gt;Prinsip: Anda atur KERAN (gangguan), GUI atur DUTY (aktuator).&lt;/i&gt;" style="shape=note;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fontSize=11;size=16;" vertex="1" parent="1">
+          <mxGeometry x="395" y="580" width="430" height="160" as="geometry" />
+        </mxCell>
+
+        <mxCell id="noteSat" value="&lt;b&gt;CATATAN SATURASI&lt;/b&gt; (normal, bukan error)&#10;&#8226; Tekanan &lt; 0,30 walau duty 95% &#8594; mentok ceiling&#10;&#8226; Tekanan &gt; 0,30 walau duty 70% &#8594; mentok floor&#10;Biarkan 3&#8211;4 keputusan di batas &#8594; data batas&#10;fisik untuk Bab 4" style="shape=note;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fontSize=11;size=16;" vertex="1" parent="1">
+          <mxGeometry x="850" y="580" width="290" height="160" as="geometry" />
+        </mxCell>
+
+        <!-- ====== Edges Lajur A ====== -->
+        <mxCell id="a1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" edge="1" parent="1" source="start" target="persiapan"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="a2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" edge="1" parent="1" source="persiapan" target="karakter"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="a3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" edge="1" parent="1" source="karakter" target="episode"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="a4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" edge="1" parent="1" source="episode" target="startauto"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- masuk ke siklus -->
+        <mxCell id="b0" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" edge="1" parent="1" source="startauto" target="baca"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- ====== Edges Lajur B (kanan -> kiri) ====== -->
+        <mxCell id="b1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" edge="1" parent="1" source="baca" target="hitung"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="b2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" edge="1" parent="1" source="hitung" target="deltaduty"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="b3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" edge="1" parent="1" source="deltaduty" target="simpan"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="b4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" edge="1" parent="1" source="simpan" target="decEpisode"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- loop balik: belum selesai -> baca (lewat bawah band) -->
+        <mxCell id="bBelum" value="Belum &#8212; tunggu 3 dtk&#10;(hover / ganggu keran)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=10;fontColor=#b85450;exitX=0.85;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="decEpisode" target="baca">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="215" y="415" />
+              <mxPoint x="1005" y="415" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Ya -> stop auto -->
+        <mxCell id="bYa" value="Ya" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=10;fontColor=#82b366;exitX=0.25;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="decEpisode" target="stopauto"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- ====== Edges Lajur C ====== -->
+        <mxCell id="c1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" edge="1" parent="1" source="stopauto" target="decTarget"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="cYa" value="Ya" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=10;fontColor=#82b366;" edge="1" parent="1" source="decTarget" target="stoplog"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="c2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" edge="1" parent="1" source="stoplog" target="end"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- loop balik: belum cukup -> siapkan episode (lewat kiri & atas) -->
+        <mxCell id="cBelum" value="Belum cukup &#8212; episode berikutnya" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=10;fontColor=#b85450;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="decTarget" target="episode">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="25" y="497" />
+              <mxPoint x="25" y="45" />
+              <mxPoint x="767" y="45" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- konektor catatan -->
+        <mxCell id="lnRule" style="endArrow=none;html=1;dashed=1;strokeColor=#d6b656;" edge="1" parent="1" source="noteRule" target="deltaduty"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

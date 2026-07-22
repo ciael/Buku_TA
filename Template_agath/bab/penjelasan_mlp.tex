@@ -1,0 +1,187 @@
+﻿% ============================================================================
+% Penjelasan fundamental MLP + contoh numerik (untuk skripsi).
+% Cara pakai: \input{bab/penjelasan_mlp} di Bab 2 (teori) / Bab 3 (perancangan).
+% Catatan: desimal di dalam math memakai titik (.) agar spasi rapi; teks biasa
+%          boleh memakai koma. Butuh paket amsmath (umumnya sudah dimuat).
+% ============================================================================
+
+\section{Dasar Jaringan Saraf Tiruan (Multilayer Perceptron)}
+\label{sec:dasar-mlp}
+
+Pengendali pada penelitian ini menggunakan jaringan saraf tiruan jenis
+\emph{Multilayer Perceptron} (MLP), yaitu jaringan \emph{feedforward} di mana data
+mengalir satu arah dari lapisan masukan, melalui lapisan tersembunyi, menuju lapisan
+keluaran. MLP terdiri atas unit-unit hitung (neuron) yang saling terhubung melalui
+\emph{bobot} (\emph{weight}) dan disertai \emph{bias}. Pada tiap neuron, masukan
+berbobot dijumlahkan lalu dilewatkan ke sebuah \emph{fungsi aktivasi} non-linear.
+
+Arsitektur yang dirancang adalah \textbf{3--4--1}, yaitu 3 neuron masukan, 4 neuron
+pada satu lapisan tersembunyi, dan 1 neuron keluaran:
+\begin{itemize}
+  \item \textbf{Masukan} ($\mathbf{x}$): galat tekanan $e$, perubahan galat $\Delta e$,
+        dan \emph{duty cycle} saat ini $u$.
+  \item \textbf{Keluaran} ($y$): perubahan \emph{duty cycle} $\Delta u$ ($\Delta Duty$).
+\end{itemize}
+
+\subsection{Fungsi Aktivasi}
+\label{sub:aktivasi}
+Lapisan tersembunyi memakai fungsi aktivasi \emph{hyperbolic tangent} (tanh):
+\begin{equation}
+\tanh(z) = \frac{e^{z}-e^{-z}}{e^{z}+e^{-z}}, \qquad \tanh(z)\in(-1,1).
+\label{eq:tanh}
+\end{equation}
+Fungsi non-linear ini penting: tanpa aktivasi non-linear, gabungan beberapa lapisan
+linear akan setara dengan satu fungsi linear saja, sehingga jaringan tidak dapat
+memodelkan hubungan melengkung. Lapisan keluaran memakai aktivasi linear (identitas)
+agar nilai $\Delta u$ bebas bernilai positif, nol, maupun negatif.
+
+\subsection{Propagasi Maju (\emph{Forward Propagation})}
+\label{sub:forward}
+Misalkan $\mathbf{x'}$ adalah vektor masukan (setelah dinormalisasi). Keluaran
+lapisan tersembunyi dan lapisan keluaran dihitung sebagai:
+\begin{align}
+\mathbf{z} &= \mathbf{x'}\,W_1 + \mathbf{b}_1, &
+\mathbf{h} &= \tanh(\mathbf{z}), \label{eq:hidden}\\
+y &= \mathbf{h}\,W_2 + b_2, & \Delta u &= y. \label{eq:output}
+\end{align}
+dengan $W_1$ matriks bobot lapisan 1, $\mathbf{b}_1$ vektor bias lapisan 1, $W_2$
+matriks bobot lapisan 2, dan $b_2$ bias keluaran. Persamaan~\eqref{eq:hidden} dan
+\eqref{eq:output} adalah inti perhitungan MLP: perkalian matriks, penjumlahan bias,
+dan fungsi aktivasi.
+
+\subsection{Normalisasi Masukan}
+\label{sub:scaling}
+Karena ketiga masukan memiliki rentang sangat berbeda (misal $e\approx0{,}1$ tetapi
+$u\approx80$), tiap masukan distandardisasi terlebih dahulu menggunakan rata-rata
+$\mu_i$ dan simpangan baku $\sigma_i$ dari data latih:
+\begin{equation}
+x'_i = \frac{x_i - \mu_i}{\sigma_i}.
+\label{eq:scaling}
+\end{equation}
+
+\section{Perancangan dan Model Matematis Pengendali MLP}
+\label{sec:perancangan-mlp}
+
+\subsection{Bobot Terlatih dan Dimensi Matriks}
+\label{sub:bobot}
+Setelah pelatihan, diperoleh nilai bobot dan bias yang tetap. Untuk arsitektur
+3--4--1:
+\begin{equation}
+W_1 =
+\begin{bmatrix}
+-1.1576 & 1.7171 & -3.6581 & -16.9100\\
+0.0077 & 0.1740 & -3.6078 & 7.4493\\
+0.9206 & 0.7704 & -11.9742 & 10.4903
+\end{bmatrix},\quad
+\mathbf{b}_1 =
+\begin{bmatrix}
+0.5008\\ -0.3952\\ -22.8359\\ -7.2012
+\end{bmatrix}^{\!\top}
+\label{eq:W1}
+\end{equation}
+\begin{equation}
+W_2 =
+\begin{bmatrix}
+-1.3646\\ 1.7042\\ 0.9956\\ -0.3038
+\end{bmatrix},\qquad
+b_2 = 1.2567 .
+\label{eq:W2}
+\end{equation}
+Dimensi matriks ditentukan oleh aturan perkalian matriks. Karena 3 masukan menuju 4
+neuron, $W_1$ berukuran $3\times4$ (tiap baris satu fitur, tiap kolom satu neuron).
+Karena 4 neuron menuju 1 keluaran, $W_2$ berukuran $4\times1$. Dengan demikian:
+\begin{equation}
+\underbrace{(1\times3)}_{\mathbf{x'}}\cdot\underbrace{(3\times4)}_{W_1}=(1\times4),
+\qquad
+\underbrace{(1\times4)}_{\mathbf{h}}\cdot\underbrace{(4\times1)}_{W_2}=(1\times1),
+\end{equation}
+yaitu dimensi dalam harus sama ($3=3$ dan $4=4$). Jumlah parameter total adalah
+$(3\times4+4)+(4\times1+1)=21$.
+
+\subsection{Contoh Perhitungan Numerik (Data Nyata)}
+\label{sub:contoh}
+Diambil satu kondisi nyata: $P^{*}=0{,}300$~bar, $P=0{,}2408$~bar, sehingga
+$e=0{,}0592$; $\Delta e=-0{,}0047$; dan $u=82{,}00\%$. Maka
+$\mathbf{x}=[\,0.0592,\,-0.0047,\,82.00\,]$.
+
+\textbf{Langkah 1 --- Normalisasi} (Pers.~\ref{eq:scaling}), dengan
+$\mu=[-0.0159,\,0.0010,\,82.272]$ dan $\sigma=[0.1159,\,0.0616,\,7.1318]$:
+\begin{equation}
+\mathbf{x'} = [\,0.6475,\ -0.0931,\ -0.0382\,].
+\end{equation}
+
+\textbf{Langkah 2 --- Pra-aktivasi lapisan tersembunyi} (Pers.~\ref{eq:hidden}).
+Sebagai contoh, neuron pertama (kolom ke-1 dari $W_1$):
+\begin{equation}
+z_1 = 0.5008 + (0.6475)(-1.1576) + (-0.0931)(0.0077) + (-0.0382)(0.9206) = -0.2845.
+\end{equation}
+Untuk keempat neuron diperoleh:
+\begin{equation}
+\mathbf{z} = [\,-0.2845,\ 0.6710,\ -24.4117,\ -19.2442\,].
+\end{equation}
+
+\textbf{Langkah 3 --- Aktivasi tanh} (Pers.~\ref{eq:tanh}):
+\begin{equation}
+\mathbf{h} = \tanh(\mathbf{z}) = [\,-0.2771,\ 0.5857,\ -1.0000,\ -1.0000\,].
+\end{equation}
+(Dua neuron terakhir jenuh pada $-1$ karena nilai $z$ sangat negatif.)
+
+\textbf{Langkah 4 --- Lapisan keluaran} (Pers.~\ref{eq:output}):
+\begin{align}
+y &= 1.2567 + (-0.2771)(-1.3646) + (0.5857)(1.7042) \notag\\
+  &\quad + (-1.0000)(0.9956) + (-1.0000)(-0.3038) = 1.9411.
+\end{align}
+Jadi keluaran jaringan adalah $\Delta u = +1{,}94\%$. Sebagai pembanding, aksi yang
+direkam dari kebijakan acuan pada kondisi tersebut adalah $+2{,}0\%$, sehingga selisih
+prediksi hanya $0{,}06\%$ --- menunjukkan jaringan berhasil meniru kebijakan kendali.
+
+\subsection{Akumulasi dan Penerapan}
+\label{sub:akumulasi}
+Keluaran jaringan berupa \emph{perubahan} \emph{duty cycle}. Nilai \emph{duty cycle}
+aktual diperoleh dengan mengakumulasi dan membatasi pada rentang operasi
+$[70\%,95\%]$:
+\begin{equation}
+u(k+1) = \mathrm{clip}\big(u(k) + \Delta u(k),\ 70,\ 95\big).
+\label{eq:akumulasi}
+\end{equation}
+Untuk contoh di atas: $u(k+1)=\mathrm{clip}(82{,}00+1{,}94,\,70,\,95)=83{,}94\%$.
+Sifat akumulatif ini memberi karakter integral pada pengendali.
+
+Secara ringkas, seluruh model pengendali dapat ditulis sebagai satu fungsi:
+\begin{equation}
+\Delta u = \tanh\!\big(\mathbf{x'}\,W_1 + \mathbf{b}_1\big)\,W_2 + b_2,
+\qquad \mathbf{x'} = (\mathbf{x}-\mu)/\sigma .
+\label{eq:model-ringkas}
+\end{equation}
+
+\subsection{Pelatihan: Pembentukan Matriks Bobot}
+\label{sub:pelatihan}
+Nilai matriks pada Pers.~\eqref{eq:W1}--\eqref{eq:W2} \emph{tidak} ditetapkan manual,
+melainkan diperoleh melalui pelatihan. Diberikan $N$ pasangan data
+$(\mathbf{x}, \Delta u_{\text{target}})$, didefinisikan fungsi rugi (\emph{loss})
+\emph{Mean Squared Error}:
+\begin{equation}
+L = \frac{1}{N}\sum_{i=1}^{N}\big(\Delta u^{(i)}_{\text{pred}} - \Delta u^{(i)}_{\text{target}}\big)^{2}.
+\label{eq:loss}
+\end{equation}
+Gradien $\partial L/\partial W$ dihitung dengan algoritma \emph{backpropagation}
+(aturan rantai dari keluaran ke masukan), lalu bobot diperbarui dengan
+\emph{gradient descent}:
+\begin{equation}
+W \leftarrow W - \eta\,\frac{\partial L}{\partial W},
+\label{eq:gd}
+\end{equation}
+dengan $\eta$ laju pembelajaran. Proses ini diulang hingga $L$ konvergen, sehingga
+diperoleh nilai bobot akhir.
+
+\subsection{Inferensi (\emph{Inference})}
+\label{sub:inferensi}
+\emph{Inferensi} adalah proses menjalankan jaringan \emph{maju saja}
+(Pers.~\eqref{eq:scaling}, \eqref{eq:hidden}, \eqref{eq:output}, \eqref{eq:akumulasi})
+menggunakan bobot yang telah dibekukan, tanpa menghitung gradien maupun memperbarui
+bobot. Karena hanya melibatkan perkalian matriks, penjumlahan, dan fungsi tanh
+(total 21 parameter), inferensi sangat ringan sehingga dapat dijalankan secara
+\emph{real-time} pada mikrokontroler STM32 setiap selang waktu kendali. Dengan
+demikian, \emph{pelatihan membentuk matriks bobot} (lewat \emph{backpropagation}),
+sedangkan \emph{inferensi menggunakan matriks tersebut} (lewat propagasi maju).
+

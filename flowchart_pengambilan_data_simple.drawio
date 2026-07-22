@@ -1,0 +1,89 @@
+<mxfile host="app.diagrams.net" agent="ClaudeCode" version="24.0.0">
+  <diagram id="pengambilan-data-simple" name="Pengambilan Data (Simple)">
+    <mxGraphModel dx="1000" dy="650" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="800" pageHeight="500" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Judul -->
+        <mxCell id="title" value="&lt;b&gt;ALUR PENGAMBILAN DATA&lt;/b&gt; &#8212; berapa pun kondisi keran, duty cycle diubah hingga tekanan mencapai 0,30 bar" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=13;fontColor=#1f2d3d;" vertex="1" parent="1">
+          <mxGeometry x="16" y="8" width="768" height="36" as="geometry" />
+        </mxCell>
+
+        <!-- ===== Alur utama (kiri -> kanan) ===== -->
+        <mxCell id="start" value="MULAI" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="12" y="104" width="88" height="56" as="geometry" />
+        </mxCell>
+
+        <mxCell id="keran" value="&lt;b&gt;Atur kondisi keran&lt;/b&gt;&#10;(0&#8211;4, bebas)&#10;= gangguan" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d4e1f5;strokeColor=#6c8ebf;align=center;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="120" y="92" width="158" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="baca" value="Baca tekanan air&#10;(sensor)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=center;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="298" y="104" width="128" height="56" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dec1" value="Tekanan&#10;= 0,30 bar?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="446" y="80" width="180" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="duty" value="&lt;b&gt;Ubah duty cycle&lt;/b&gt;&#10;naik bila &lt; 0,30 bar&#10;turun bila &gt; 0,30 bar&#10;(batas 70&#8211;95%)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=center;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="446" y="296" width="185" height="112" as="geometry" />
+        </mxCell>
+
+        <mxCell id="stabil" value="Tekanan stabil&#10;di 0,30 bar&#10;&#8594; simpan data" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d4e1f5;strokeColor=#6c8ebf;align=center;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="646" y="94" width="140" height="76" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dec2" value="Coba kondisi&#10;keran lain?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="636" y="300" width="160" height="92" as="geometry" />
+        </mxCell>
+
+        <mxCell id="end" value="&lt;b&gt;DATASET SIAP&lt;/b&gt;&#10;(pelatihan NN)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=15;align=center;" vertex="1" parent="1">
+          <mxGeometry x="646" y="424" width="140" height="58" as="geometry" />
+        </mxCell>
+
+        <!-- Catatan Blok A-F -->
+        <mxCell id="noteAF" value="&lt;b&gt;Variasi kondisi keran = Blok A&#8211;F&lt;/b&gt;&#10;naik, turun, sweep tutup/buka, acak,&#10;serta setpoint lain (0,25 &amp; 0,35 bar)." style="shape=note;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;fontSize=12;size=16;" vertex="1" parent="1">
+          <mxGeometry x="36" y="296" width="380" height="118" as="geometry" />
+        </mxCell>
+
+        <!-- ===== Edges ===== -->
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" edge="1" parent="1" source="start" target="keran"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" edge="1" parent="1" source="keran" target="baca"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" edge="1" parent="1" source="baca" target="dec1"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- dec1 Tidak -> ubah duty -->
+        <mxCell id="e4" value="Tidak" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=14;fontColor=#b85450;" edge="1" parent="1" source="dec1" target="duty"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- ubah duty -> baca (loop, tiap 3 dtk) -->
+        <mxCell id="e5" value="ulang tiap 3 dtk" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=14;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="duty" target="baca">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="362" y="352" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- dec1 Ya -> stabil -->
+        <mxCell id="e6" value="Ya" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=14;fontColor=#82b366;" edge="1" parent="1" source="dec1" target="stabil"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <mxCell id="e7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" edge="1" parent="1" source="stabil" target="dec2"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- dec2 Ya -> keran (loop atas) -->
+        <mxCell id="e8" value="Ya" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=14;fontColor=#82b366;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="dec2" target="keran">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="797" y="66" />
+              <mxPoint x="199" y="66" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- dec2 Tidak -> end -->
+        <mxCell id="e9" value="Tidak" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=14;fontColor=#b85450;" edge="1" parent="1" source="dec2" target="end"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

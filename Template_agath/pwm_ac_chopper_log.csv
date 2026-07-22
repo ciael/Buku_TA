@@ -1,0 +1,3 @@
+pc_timestamp,stm32_ms,adc_raw,adc_voltage_v,sensor_voltage_v,pressure_bar,duty_percent,frequency_hz,estimated_output_rms_v,jsy_online,jsy_voltage_rms_v,jsy_current_rms_a,jsy_active_power_w,jsy_power_factor,jsy_energy_kwh,jsy_error_count,nn_mode,nn_duty_percent,valve_open_count,valve_state_label,valve_phase,setpoint_bar,episode_id,is_decision,event
+2026-06-16T23:14:04.758,4632404,6,0.0034000000000000002,0.0038666666666666667,0.009,50.0,5000,110.0,0,0.0,0.0,0,0.0,0.0,4594,0,0.0,-,Belum ditandai,unset,0.3,1,0,
+2026-06-16T23:14:05.337,4632994,0,0.0021333333333333334,0.0038666666666666667,0.009,50.0,5000,110.0,0,0.0,0.0,0,0.0,0.0,4595,0,0.0,-,Belum ditandai,unset,0.3,1,0,

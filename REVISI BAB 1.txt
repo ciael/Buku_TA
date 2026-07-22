@@ -1,0 +1,12 @@
+revisi bab 1
+sekarang saya mau bahas bab 1, terlebih dahulu ya, saya merasa bahwa latar belakang saya masih kurang kuat, terlebih alasan mengapa tekanan pada pompa air harus saya pertahanakn konstan, saya blmmenemukan alasan yg kuat  dan literaut yg kuat dalam menganalisanya
+
+revisi
+-persiapakan apabila ditanya dengan PID dan Fuzzy
+-rumus ANN nya gimana?
+-kasih tegangan input di pengujian tegangan di pompa di ppt
+
+
+-block diagram pwm ac chopper
+-diagram pengambilan data set
+-diagram daya 

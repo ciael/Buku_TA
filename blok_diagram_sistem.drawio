@@ -1,0 +1,154 @@
+<mxfile host="app.diagrams.net" type="device">
+  <diagram id="blok-sistem-ta" name="Blok Diagram Sistem">
+    <mxGraphModel dx="900" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="800" pageHeight="820" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Judul -->
+        <mxCell id="judul" value="Diagram Blok Sistem Pengendalian&#10;Tekanan Pompa Air Berbasis Neural Network" style="text;html=1;fontStyle=1;fontSize=15;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="20" y="10" width="560" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Container STM32 -->
+        <mxCell id="mcu" value="Mikrokontroler STM32U545RE" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=none;strokeColor=#6C8EBF;verticalAlign=top;fontStyle=2;fontSize=12;fontColor=#3B5B8C;" vertex="1" parent="1">
+          <mxGeometry x="238" y="135" width="502" height="175" as="geometry" />
+        </mxCell>
+
+        <!-- Sumber AC PLN -->
+        <mxCell id="pln" value="Sumber AC 220 V&#10;(PLN)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="20" y="425" width="180" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- Setpoint -->
+        <mxCell id="sp" value="Setpoint&#10;tekanan (0,30 bar)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="250" y="60" width="190" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- Neural Network -->
+        <mxCell id="nn" value="Neural Network MLP 3-4-1&#10;(hitung error &#8594; &#916;duty)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="250" y="150" width="190" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- PWM Generator -->
+        <mxCell id="pwm" value="Pembangkit PWM&#10;(TIM1 + dead time)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="250" y="240" width="190" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- Gate Driver -->
+        <mxCell id="gd" value="Gate Driver&#10;HCPL-3120" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="250" y="330" width="190" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- PWM AC Chopper -->
+        <mxCell id="ch" value="PWM AC Chopper&#10;(diode bridge + 2 IGBT)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="250" y="420" width="200" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- Motor Pompa -->
+        <mxCell id="mt" value="Motor Pompa Air" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="250" y="515" width="190" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- Plant -->
+        <mxCell id="pl" value="Plant&#10;(4 keran / beban hidraulik)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="250" y="610" width="190" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- Sensor Tekanan -->
+        <mxCell id="sn" value="Sensor Tekanan Air" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="540" y="610" width="190" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- ADC -->
+        <mxCell id="adc" value="ADC STM32&#10;(baca sensor tekanan)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="540" y="150" width="190" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- ================= EDGES ================= -->
+        <!-- Setpoint -> NN -->
+        <mxCell id="e_sp_nn" value="setpoint" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#6C8EBF;strokeWidth=1.5;fontSize=10;" edge="1" parent="1" source="sp" target="nn">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- NN -> PWM -->
+        <mxCell id="e_nn_pwm" value="duty cycle (%)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#6C8EBF;strokeWidth=1.5;fontSize=10;" edge="1" parent="1" source="nn" target="pwm">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- PWM -> Gate Driver -->
+        <mxCell id="e_pwm_gd" value="sinyal PWM 3,3 V&#10;(komplementer)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#6C8EBF;strokeWidth=1.5;fontSize=10;" edge="1" parent="1" source="pwm" target="gd">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Gate Driver -> Chopper -->
+        <mxCell id="e_gd_ch" value="sinyal gate &#177;15 V" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#6C8EBF;strokeWidth=1.5;fontSize=10;" edge="1" parent="1" source="gd" target="ch">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- PLN -> Chopper (daya) -->
+        <mxCell id="e_pln_ch" value="tegangan AC 220 V" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#B85450;strokeWidth=2;fontSize=10;fontColor=#B85450;" edge="1" parent="1" source="pln" target="ch">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Chopper -> Motor (daya) -->
+        <mxCell id="e_ch_mt" value="tegangan AC teratur" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#B85450;strokeWidth=2;fontSize=10;fontColor=#B85450;" edge="1" parent="1" source="ch" target="mt">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Motor -> Plant (aliran air) -->
+        <mxCell id="e_mt_pl" value="putaran &#8594; aliran air" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#B85450;strokeWidth=2;fontSize=10;fontColor=#B85450;" edge="1" parent="1" source="mt" target="pl">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Plant -> Sensor (tekanan) -->
+        <mxCell id="e_pl_sn" value="tekanan air" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#82B366;strokeWidth=1.5;fontSize=10;fontColor=#5D8A3A;" edge="1" parent="1" source="pl" target="sn">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Sensor -> ADC (umpan balik naik) -->
+        <mxCell id="e_sn_adc" value="tegangan 0,5&#8211;4,5 V" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#82B366;strokeWidth=1.5;fontSize=10;fontColor=#5D8A3A;" edge="1" parent="1" source="sn" target="adc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ADC -> NN (tekanan aktual, tutup loop) -->
+        <mxCell id="e_adc_nn" value="tekanan aktual (digital)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#6C8EBF;strokeWidth=1.5;fontSize=10;" edge="1" parent="1" source="adc" target="nn">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ================= LEGENDA ================= -->
+        <mxCell id="leg_box" value="Keterangan" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#999999;verticalAlign=top;fontStyle=1;fontSize=11;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="20" y="560" width="200" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_p" value="Jalur daya" style="text;html=1;align=left;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="95" y="585" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_pl" value="" style="endArrow=block;html=1;strokeColor=#B85450;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="35" y="595" as="sourcePoint" />
+            <mxPoint x="85" y="595" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="leg_s" value="Jalur sinyal / kendali" style="text;html=1;align=left;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="95" y="615" width="180" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_sl" value="" style="endArrow=block;html=1;strokeColor=#6C8EBF;strokeWidth=1.5;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="35" y="625" as="sourcePoint" />
+            <mxPoint x="85" y="625" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="leg_f" value="Umpan balik (sensor)" style="text;html=1;align=left;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="95" y="645" width="180" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_fl" value="" style="endArrow=block;html=1;strokeColor=#82B366;strokeWidth=1.5;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="35" y="655" as="sourcePoint" />
+            <mxPoint x="85" y="655" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

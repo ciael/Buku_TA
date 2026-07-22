@@ -1,0 +1,180 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="MLP-3-4-1" id="mlp341closedloop">
+    <mxGraphModel grid="1" page="1" gridSize="5" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1300" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ====== JUDUL & KOTAK PENGELOMPOK ====== -->
+        <mxCell id="title" parent="1" vertex="1" value="Jaringan Saraf Tiruan (MLP 3-4-1)" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=18;fontStyle=1;">
+          <mxGeometry height="26" width="320" x="240" y="10" as="geometry" />
+        </mxCell>
+
+        <mxCell id="nnbox" parent="1" vertex="1" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;fillColor=none;strokeColor=#999999;dashed=1;">
+          <mxGeometry height="420" width="430" x="180" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="inbox" parent="1" vertex="1" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;fillColor=#dae8fc;strokeColor=#6c8ebf;">
+          <mxGeometry height="300" width="90" x="205" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="hidbox" parent="1" vertex="1" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;fillColor=#d5e8d4;strokeColor=#82b366;">
+          <mxGeometry height="340" width="90" x="345" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="outbox" parent="1" vertex="1" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;fillColor=#ffe6cc;strokeColor=#d79b00;">
+          <mxGeometry height="110" width="90" x="490" y="215" as="geometry" />
+        </mxCell>
+
+        <mxCell id="inlbl" parent="1" vertex="1" value="Lapisan Input (3)" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=13;fontStyle=1;">
+          <mxGeometry height="20" width="100" x="200" y="98" as="geometry" />
+        </mxCell>
+        <mxCell id="hidlbl" parent="1" vertex="1" value="Lapisan Tersembunyi (4, tanh)" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=13;fontStyle=1;">
+          <mxGeometry height="20" width="170" x="305" y="78" as="geometry" />
+        </mxCell>
+        <mxCell id="outlbl" parent="1" vertex="1" value="Lapisan Output (1, linear)" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=13;fontStyle=1;">
+          <mxGeometry height="20" width="150" x="460" y="193" as="geometry" />
+        </mxCell>
+        <mxCell id="w1lbl" parent="1" vertex="1" value="W1, b1&#10;(16 par.)" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=12;fontStyle=2;">
+          <mxGeometry height="30" width="70" x="280" y="55" as="geometry" />
+        </mxCell>
+        <mxCell id="w2lbl" parent="1" vertex="1" value="W2, b2&#10;(5 par.)" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=12;fontStyle=2;">
+          <mxGeometry height="30" width="70" x="430" y="55" as="geometry" />
+        </mxCell>
+
+        <!-- ====== NEURON INPUT ====== -->
+        <mxCell id="n_e" parent="1" vertex="1" value="e(t)&#10;error" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=13;fillColor=#dae8fc;strokeColor=#6c8ebf;">
+          <mxGeometry height="58" width="58" x="221" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="n_de" parent="1" vertex="1" value="&#916;e(t)&#10;d_error" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=13;fillColor=#dae8fc;strokeColor=#6c8ebf;">
+          <mxGeometry height="58" width="58" x="221" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="n_u" parent="1" vertex="1" value="u(t)&#10;duty" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=13;fillColor=#dae8fc;strokeColor=#6c8ebf;">
+          <mxGeometry height="58" width="58" x="221" y="340" as="geometry" />
+        </mxCell>
+
+        <!-- ====== NEURON HIDDEN ====== -->
+        <mxCell id="h1" parent="1" vertex="1" value="h1&#10;tanh" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=12;fillColor=#d5e8d4;strokeColor=#82b366;">
+          <mxGeometry height="56" width="56" x="362" y="112" as="geometry" />
+        </mxCell>
+        <mxCell id="h2" parent="1" vertex="1" value="h2&#10;tanh" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=12;fillColor=#d5e8d4;strokeColor=#82b366;">
+          <mxGeometry height="56" width="56" x="362" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="h3" parent="1" vertex="1" value="h3&#10;tanh" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=12;fillColor=#d5e8d4;strokeColor=#82b366;">
+          <mxGeometry height="56" width="56" x="362" y="268" as="geometry" />
+        </mxCell>
+        <mxCell id="h4" parent="1" vertex="1" value="h4&#10;tanh" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=12;fillColor=#d5e8d4;strokeColor=#82b366;">
+          <mxGeometry height="56" width="56" x="362" y="346" as="geometry" />
+        </mxCell>
+
+        <!-- ====== NEURON OUTPUT ====== -->
+        <mxCell id="out" parent="1" vertex="1" value="&#931;&#10;linear" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=13;fillColor=#ffe6cc;strokeColor=#d79b00;">
+          <mxGeometry height="60" width="60" x="505" y="240" as="geometry" />
+        </mxCell>
+
+        <!-- ====== BLOK LOOP KONTROL ====== -->
+        <mxCell id="rtext" parent="1" vertex="1" value="setpoint&#10;r(t) = 0.30 bar" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=13;">
+          <mxGeometry height="34" width="90" x="20" y="152" as="geometry" />
+        </mxCell>
+        <mxCell id="sum1" parent="1" vertex="1" value="" style="shape=sumEllipse;perimeter=ellipsePerimeter;whiteSpace=wrap;html=1;backgroundOutline=1;fontSize=14;">
+          <mxGeometry height="44" width="44" x="128" y="147" as="geometry" />
+        </mxCell>
+        <mxCell id="sumplus" parent="1" vertex="1" value="+" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;fontSize=14;">
+          <mxGeometry height="18" width="14" x="120" y="135" as="geometry" />
+        </mxCell>
+        <mxCell id="summinus" parent="1" vertex="1" value="&#8722;" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;fontSize=16;">
+          <mxGeometry height="18" width="14" x="120" y="190" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dblock" parent="1" vertex="1" value="&#916; / z&#8315;&#185;&#10;(turunan error)" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;fillColor=#f5f5f5;strokeColor=#666666;">
+          <mxGeometry height="40" width="80" x="110" y="249" as="geometry" />
+        </mxCell>
+
+        <mxCell id="clamp" parent="1" vertex="1" value="Update duty&#10;u(t+1) = clamp(u(t) + &#916;Duty, 70, 95)" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fillColor=#fff2cc;strokeColor=#d6b656;">
+          <mxGeometry height="64" width="190" x="660" y="238" as="geometry" />
+        </mxCell>
+        <mxCell id="pump" parent="1" vertex="1" value="Pompa DC&#10;(driver PWM)" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fillColor=#f8cecc;strokeColor=#b85450;">
+          <mxGeometry height="60" width="120" x="900" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="plant" parent="1" vertex="1" value="Sistem Tekanan Air&#10;(plant)" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fillColor=#e1d5e7;strokeColor=#9673a6;">
+          <mxGeometry height="60" width="130" x="1070" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="ytext" parent="1" vertex="1" value="tekanan&#10;y(t)" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=13;fontStyle=1;">
+          <mxGeometry height="34" width="60" x="1225" y="252" as="geometry" />
+        </mxCell>
+        <mxCell id="sensor" parent="1" vertex="1" value="Sensor Tekanan&#10;(umpan balik)" style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fillColor=#d5e8d4;strokeColor=#82b366;">
+          <mxGeometry height="50" width="140" x="600" y="560" as="geometry" />
+        </mxCell>
+
+        <!-- ====== ANOTASI ====== -->
+        <mxCell id="ddlbl" parent="1" vertex="1" value="&#916;Duty" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=12;fontStyle=1;">
+          <mxGeometry height="18" width="50" x="600" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="dutylbl" parent="1" vertex="1" value="duty u(t) state (umpan balik)" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;">
+          <mxGeometry height="18" width="170" x="350" y="470" as="geometry" />
+        </mxCell>
+
+        <!-- ====== EDGE: LOOP DEPAN ====== -->
+        <mxCell id="e_r_sum" parent="1" edge="1" target="sum1" style="endArrow=classic;html=1;rounded=0;fontSize=14;entryX=0;entryY=0.5;entryDx=0;entryDy=0;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="112" y="169" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_sum_ne" parent="1" edge="1" source="sum1" target="n_e" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=12;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" value="e(t)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_sum_d" parent="1" edge="1" source="sum1" target="dblock" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=12;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_d_nde" parent="1" edge="1" source="dblock" target="n_de" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=12;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ====== EDGE: INPUT -> HIDDEN (12) ====== -->
+        <mxCell id="e_ne_h1" parent="1" edge="1" source="n_e" target="h1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=12;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_ne_h2" parent="1" edge="1" source="n_e" target="h2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=12;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_ne_h3" parent="1" edge="1" source="n_e" target="h3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=12;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_ne_h4" parent="1" edge="1" source="n_e" target="h4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=12;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <mxCell id="e_nde_h1" parent="1" edge="1" source="n_de" target="h1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=12;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_nde_h2" parent="1" edge="1" source="n_de" target="h2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=12;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_nde_h3" parent="1" edge="1" source="n_de" target="h3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=12;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_nde_h4" parent="1" edge="1" source="n_de" target="h4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=12;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <mxCell id="e_nu_h1" parent="1" edge="1" source="n_u" target="h1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=12;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_nu_h2" parent="1" edge="1" source="n_u" target="h2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=12;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_nu_h3" parent="1" edge="1" source="n_u" target="h3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=12;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_nu_h4" parent="1" edge="1" source="n_u" target="h4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=12;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- ====== EDGE: HIDDEN -> OUTPUT (4) ====== -->
+        <mxCell id="e_h1_out" parent="1" edge="1" source="h1" target="out" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=12;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_h2_out" parent="1" edge="1" source="h2" target="out" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=12;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_h3_out" parent="1" edge="1" source="h3" target="out" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=12;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_h4_out" parent="1" edge="1" source="h4" target="out" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=12;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- ====== EDGE: OUTPUT -> AKTUATOR -> PLANT ====== -->
+        <mxCell id="e_out_clamp" parent="1" edge="1" source="out" target="clamp" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=12;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_clamp_pump" parent="1" edge="1" source="clamp" target="pump" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=12;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" value="duty (%)"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_pump_plant" parent="1" edge="1" source="pump" target="plant" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=12;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e_plant_y" parent="1" edge="1" source="plant" target="ytext" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=12;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- ====== EDGE: UMPAN BALIK TEKANAN ====== -->
+        <mxCell id="e_y_sensor" parent="1" edge="1" source="plant" target="sensor" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=12;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="1135" y="585" /></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_sensor_sum" parent="1" edge="1" source="sensor" target="sum1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=12;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" value="y(t)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="150" y="585" /></Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ====== EDGE: UMPAN BALIK DUTY (STATE) ====== -->
+        <mxCell id="e_duty_fb" parent="1" edge="1" source="clamp" target="n_u" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=12;dashed=1;strokeColor=#d6b656;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="755" y="490" /><mxPoint x="250" y="490" /></Array>
+          </mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

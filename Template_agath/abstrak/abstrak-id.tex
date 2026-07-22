@@ -1,48 +1,58 @@
 \begin{center}
-  \large\textbf{ABSTRAK}
+  \fontsize{14}{17}\selectfont\textbf{ABSTRAK}
 \end{center}
 
 \addcontentsline{toc}{chapter}{ABSTRAK}
 
 \vspace{2ex}
 
-\begingroup
-% Menghilangkan padding
-\setlength{\tabcolsep}{0pt}
+\begin{center}
+  \fontsize{12}{15}\selectfont\textbf{\tatitle{}}
+\end{center}
+
+\vspace{2ex}
 
 \noindent
-\begin{tabularx}{\textwidth}{l >{\centering}m{2em} X}
-  Nama Mahasiswa    & : & Yoel Yhokhanan Sianipar         \\
+{\bfseries
+\begin{tabular}{@{}p{4.3cm}l}
+  Nama Mahasiswa / NRP & : \name{} / \nrp{} \\
+  Program Studi           & : \department{} \facultyshort{} -- ITS \\
+  Dosen Pembimbing     & : \advisor{} \\
+  Dosen Ko-pembimbing  & : \coadvisor{} \\
+\end{tabular}
+}
 
-  Judul Tugas Akhir & : & SISTEM PENGENDALIAN TEKANAN POMPA AIR BERBASIS INVERTER DENGAN \emph{NEURAL NETWORK} \\
+\vspace{2ex}
 
-  Pembimbing        & : & 1. Prof. Dr. Muhammad Rivai, S.T., M.T.   \\
-                    &   & 2. Dr. Suwito, S.T., M.T. \\
-                    
-\vspace{1ex}
-\end{tabularx}
-\endgroup
+\noindent\textbf{Abstrak}
 
 % Ubah paragraf berikut dengan abstrak dari tugas akhir
-Tekanan air yang tidak stabil pada pompa air rumah 
-tangga sering menyebabkan ketidakefisienan dalam distribusi air, 
-terutama saat beberapa keran dibuka secara bersamaan. 
-Solusi yang ada saat ini adalah penggunaan alat tambahan di 
-luar pompa, seperti \emph{pressure switch}. 
-Penelitian ini menawarkan solusi alternatif berupa 
-pengaturan kecepatan dan tekanan pompa 
-melalui pengendalian suplai input menggunakan 
-PWM AC \emph{Chopper}. Sistem ini dikembangkan dengan 
-menambahkan teknologi \emph{Neural Network} (NN) sebagai 
-pengontrol utama yang dapat menyesuaikan tegangan keluaran 
-inverter 220 VAC sesuai kondisi beban secara adaptif. \emph{Neural Network} dilatih untuk 
-mengenali pola tekanan air dan menyesuaikan output secara real-time, 
-sehingga mampu menjaga kestabilan tekanan meskipun terjadi 
-perubahan beban pada sistem. Dengan pendekatan ini, 
-sistem diharapkan mampu memberikan performa yang responsif dan presisi. 
-Penelitian ini diharapkan dapat memberikan kontribusi dalam 
-pengembangan sistem kendali cerdas untuk pompa air dengan 
-pendekatan berbasis \emph{Neural Network}.
+Tekanan air pada pompa air rumah tangga cenderung tidak stabil, terutama
+ketika beberapa keran dibuka secara bersamaan, sehingga diperlukan suatu
+sistem yang mampu menjaga tekanan air tetap stabil. Solusi yang umum
+digunakan berupa alat tambahan seperti
+\emph{pressure switch} yang bekerja pada sisi keluaran pompa. Penelitian ini
+menawarkan pendekatan berbeda, yaitu mengendalikan tekanan dari sisi suplai
+daya melalui rangkaian PWM AC \emph{chopper} topologi diode \emph{bridge}
+dengan pengendali berbasis \emph{neural network}. Pengendali yang digunakan
+adalah \emph{Multi-Layer Perceptron} (MLP) 3-4-1 dengan masukan galat
+tekanan, perubahan galat, dan \emph{duty cycle}, serta keluaran berupa
+perubahan \emph{duty cycle}, yang dilatih dari data operasi \emph{closed-loop}
+(\emph{behavior cloning}). Hasil pengujian menunjukkan rangkaian PWM AC \emph{chopper} mampu mengatur
+tegangan RMS keluaran secara linear terhadap \emph{duty cycle} dengan selisih
+di bawah 1\% terhadap nilai teoritis, dengan \emph{dead time} terukur
+1,48--1,49~$\mu$s sesuai rancangan. Model \emph{neural network} mencapai
+koefisien determinasi $R^2 = 0{,}915$ pada data uji, menunjukkan akurasi
+prediksi aksi kendali yang baik. Pada pengujian sistem, pengendali mampu menjaga tekanan pada \emph{setpoint}
+dengan galat tunak $\leq 0{,}009$~bar untuk variasi satu sampai empat keran
+terbuka. Pada pengujian perubahan \emph{setpoint} (0,25--0,35~bar),
+\emph{settling time} berkisar 4--7~detik, sedangkan pada pengujian rejeksi
+gangguan perubahan beban keran, tekanan pulih dalam 9--15~detik. Keterbatasan
+terjadi saat seluruh keran tertutup dan saat gangguan pembukaan empat keran
+serentak, di mana tekanan minimum pompa melampaui \emph{setpoint} sehingga
+aktuator mengalami saturasi fisik. Dengan demikian, sistem pengendalian tekanan
+pompa air berbasis \emph{neural network} dari sisi suplai terbukti bekerja
+terhadap variasi beban.
 
-% Ubah kata-kata berikut dengan kata kunci dari tugas akhir
-Kata Kunci: \emph{PWM AC \emph{Chopper}, \emph{Neural Network}, Tekanan Pompa Air}
+\vspace{1ex}
+\noindent\textbf{Kata kunci: \emph{PWM AC Chopper, Neural Network, Tekanan Pompa Air, Multi-Layer Perceptron}.}

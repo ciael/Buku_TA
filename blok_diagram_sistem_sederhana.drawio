@@ -1,0 +1,71 @@
+<mxfile host="app.diagrams.net" type="device">
+  <diagram id="blok-sistem-sederhana" name="Blok Diagram Sistem">
+    <mxGraphModel dx="1000" dy="600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="960" pageHeight="440" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Judul -->
+        <mxCell id="judul" value="Blok Diagram Sistem" style="text;html=1;fontStyle=1;fontSize=16;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="40" y="10" width="400" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- ===== Rantai utama daya & air (atas) ===== -->
+        <mxCell id="inv" value="Inverter&#10;(sumber tegangan AC)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="40" y="70" width="170" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="chop" value="PWM AC Chopper&#10;(diode bridge + 2 IGBT)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="270" y="70" width="190" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="pompa" value="Pompa Air" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="520" y="70" width="150" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="keran" value="Keran Air&#10;(beban)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="730" y="70" width="150" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- ===== Jalur kendali (bawah) ===== -->
+        <mxCell id="sensor" value="Sensor Tekanan" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="730" y="260" width="150" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="stm" value="STM32&#10;(Neural Network)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="470" y="260" width="200" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="gd" value="Gate Driver" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="270" y="260" width="150" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- ===== Panah rantai utama (daya/air) ===== -->
+        <mxCell id="a_inv_chop" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#B85450;strokeWidth=2.5;" edge="1" parent="1" source="inv" target="chop">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_chop_pompa" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#B85450;strokeWidth=2.5;" edge="1" parent="1" source="chop" target="pompa">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pompa_keran" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#B85450;strokeWidth=2.5;" edge="1" parent="1" source="pompa" target="keran">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ===== Panah jalur kendali ===== -->
+        <mxCell id="a_keran_sensor" value="tekanan air" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#82B366;strokeWidth=1.5;fontSize=11;fontColor=#5D8A3A;" edge="1" parent="1" source="keran" target="sensor">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_sensor_stm" value="sinyal sensor" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#6C8EBF;strokeWidth=1.5;fontSize=11;" edge="1" parent="1" source="sensor" target="stm">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_stm_gd" value="sinyal PWM" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#6C8EBF;strokeWidth=1.5;fontSize=11;" edge="1" parent="1" source="stm" target="gd">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_gd_chop" value="pemicuan IGBT" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;strokeColor=#6C8EBF;strokeWidth=1.5;fontSize=11;" edge="1" parent="1" source="gd" target="chop">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

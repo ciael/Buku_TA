@@ -1,0 +1,44 @@
+\renewcommand{\arraystretch}{1.2}
+
+\begin{center}
+  \large\textbf{DAFTAR SIMBOL}
+\end{center}
+
+\addcontentsline{toc}{chapter}{DAFTAR SIMBOL}
+
+\vspace{2ex}
+
+\noindent
+\begin{tabularx}{\textwidth}{>{\itshape}l l X}
+$D$             & : & \emph{Duty cycle} PWM (\%) \\
+$D_{\min}$      & : & \emph{Duty cycle} minimum (\%) \\
+$f_{sw}$        & : & Frekuensi \emph{switching} (Hz) \\
+$T_{sw}$        & : & Periode \emph{switching} (s) \\
+$t_d$           & : & \emph{Dead time} antar sinyal komplementer (s) \\
+$t_{on,\min}$   & : & Waktu nyala minimum sakelar IGBT (s) \\
+$V_{in}$        & : & Tegangan masukan AC (V) \\
+$V_{out,RMS}$   & : & Tegangan keluaran RMS (V) \\
+$V_{CE,\max}$   & : & Tegangan \emph{collector-emitter} maksimum IGBT (V) \\
+$C_{sn}$        & : & Kapasitor \emph{snubber} (F) \\
+$R_{sn}$        & : & Resistor \emph{snubber} ($\Omega$) \\
+$L_s$           & : & Induktansi parasitik jalur daya (H) \\
+$P$             & : & Tekanan air (bar) \\
+$P_{sp}$        & : & \emph{Setpoint} tekanan (bar) \\
+$e(k)$          & : & Galat tekanan pada waktu ke-$k$: $P_{sp} - P(k)$ (bar) \\
+$\Delta e(k)$   & : & Perubahan galat: $e(k) - e(k-1)$ (bar) \\
+$d(k)$          & : & \emph{Duty cycle} pada waktu ke-$k$ (\%) \\
+$\Delta d(k)$   & : & Perubahan \emph{duty cycle} keluaran kontroler (\%) \\
+$\mathbf{p}$    & : & Vektor masukan \emph{neural network} \\
+$\mathbf{w}^m$  & : & Matriks bobot pada \emph{layer} ke-$m$ \\
+$\mathbf{b}^m$  & : & Vektor bias pada \emph{layer} ke-$m$ \\
+$\mathbf{n}^m$  & : & Vektor \emph{net input} pada \emph{layer} ke-$m$ \\
+$\mathbf{a}^m$  & : & Vektor aktivasi pada \emph{layer} ke-$m$ \\
+$f^m(\cdot)$    & : & Fungsi aktivasi pada \emph{layer} ke-$m$ \\
+$t$             & : & Nilai target (\emph{target output}) \\
+$e$             & : & Galat prediksi: $t - a$ \\
+$\mathbf{s}^m$  & : & Vektor sensitivitas \emph{backpropagation} pada \emph{layer} ke-$m$ \\
+$\alpha$        & : & \emph{Learning rate} algoritma L-BFGS \\
+$R^2$           & : & Koefisien determinasi \\
+\end{tabularx}
+
+\renewcommand{\arraystretch}{1}

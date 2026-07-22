@@ -1,45 +1,54 @@
-\chapter{PENDAHULUAN}
+﻿\chapter{PENDAHULUAN}
 
 \section{Latar Belakang}
 % Ubah paragraf-paragraf berikut sesuai dengan latar belakang dari tugas akhir
-Penggunaan pembangkit listrik tenaga surya untuk kebutuhan rumah tangga
-mengalami tren peningkatan sebesar 2{,}26\% dalam lima tahun terakhir 
-\parencite{article}. Dalam sistem PLTS atap, inverter memegang peran penting 
-karena berfungsi untuk mengubah arus searah (DC) yang dihasilkan oleh panel 
-surya menjadi arus bolak-balik (AC) yang dapat digunakan oleh peralatan 
-rumah tangga. Tanpa inverter, energi dari panel surya tidak dapat 
-dimanfaatkan secara langsung oleh perangkat listrik dalam rumah tangga 
+Kebutuhan energi listrik rumah tangga terus meningkat seiring pertumbuhan
+penduduk dan perubahan gaya hidup, sementara ketergantungan terhadap energi
+fosil mendorong peralihan menuju sumber energi terbarukan yang lebih ramah
+lingkungan. Salah satu solusi yang paling banyak diadopsi pada skala rumah
+tangga adalah pembangkit listrik tenaga surya (PLTS) atap. Penggunaan PLTS
+untuk kebutuhan rumah tangga mengalami tren peningkatan sebesar 2{,}26\% dalam
+lima tahun terakhir \parencite{article}. Dalam sistem PLTS atap, inverter
+memegang peran penting karena berfungsi mengubah arus searah (DC) yang
+dihasilkan oleh panel surya menjadi arus bolak-balik (AC) yang dapat digunakan
+oleh peralatan rumah tangga. Tanpa inverter, energi dari panel surya tidak
+dapat dimanfaatkan secara langsung oleh perangkat listrik dalam rumah tangga
 \parencite{10695139}.
-Pompa air merupakan salah satu perangkat listrik yang umum digunakan 
-di rumah tangga. Pompa ini biasa digunakan untuk mengalirkan air dari 
-tandon atau sumur ke berbagai titik seperti kamar mandi, dapur, 
-dan sistem irigasi \parencite{SENTHILKUMAR2020303}. Dalam sistem 
-instalasi air yang melibatkan banyak titik keran, penggunaan keran 
-secara serentak dapat memengaruhi tekanan dan debit air yang disuplai 
-oleh pompa. Ketika hanya sedikit keran yang dibuka, pompa akan menghasilkan 
-tekanan yang sangat tinggi serta berlaku sebaliknya \parencite{anakub}.
-Beberapa solusi saat ini dalam mengontrol tekanan pompa air secara konstan 
-adalah dengan menggunakan \emph{automatic pressure control} (APC) yang 
-bekerja dengan prinsip buka-tutup aliran berdasarkan tekanan tertentu. 
-Selain itu, ada juga yang menggunakan komponen TRIAC driver berbasis PID 
-untuk mengatur daya yang masuk ke motor pompa, sehingga kecepatan dan 
-tekanan dapat dikontrol \parencite{anakits}. Namun, beberapa solusi 
-tersebut umumnya masih terfokus pada pengendalian dari sisi output pompa. 
-Dalam penelitian ini, pendekatan yang dilakukan berbeda, yaitu 
-dengan mengontrol sistem dari sisi suplai melalui inverter, serta 
-mengintegrasikan kendali tekanan menggunakan metode berbasis \emph{neural network}. 
-Berdasarkan uraian tersebut, diperlukan suatu sistem inverter yang 
-tidak hanya berfungsi mengubah tegangan listrik menjadi AC, tetapi 
-juga mampu mengontrol tekanan pompa air secara otomatis. Sistem kontrol 
-ini dirancang untuk menerima masukan dari sensor tekanan dan menyesuaikan 
-kecepatan motor pompa melalui pengaturan output inverter satu fasa, agar 
-tekanan air tetap stabil meskipun jumlah keran yang dibuka berubah-ubah. 
-Dalam sistem ini, digunakan pendekatan \emph{neural network} sebagai 
-pengendali eksternal yang mengatur output inverter berdasarkan data 
-tekanan yang terbaca. Penelitian ini berfokus pada upaya menjaga 
-kestabilan tekanan air dengan mengendalikan sisi suplai daya pompa. 
-Dengan demikian, sistem ini diharapkan mampu mempertahankan tekanan 
-air pada tingkat yang diinginkan, terlepas dari variasi penggunaan.
+
+Di antara berbagai beban listrik rumah tangga, pompa air merupakan salah satu
+perangkat yang paling umum digunakan. Pompa ini berfungsi mengalirkan air dari
+tandon atau sumur menuju berbagai titik pemakaian seperti kamar mandi, dapur,
+dan sistem irigasi \parencite{SENTHILKUMAR2020303}. Pada instalasi air yang
+melibatkan banyak titik keran, pembukaan keran secara serentak sangat
+memengaruhi tekanan dan debit air yang disuplai oleh pompa. Ketika hanya sedikit
+keran yang dibuka, pompa menghasilkan tekanan yang sangat tinggi, dan sebaliknya
+tekanan akan turun drastis ketika banyak keran dibuka secara bersamaan
+\parencite{anakub}. Ketidakstabilan tekanan ini menyebabkan distribusi air
+menjadi tidak nyaman dan tidak efisien, serta dalam
+jangka panjang dapat mempercepat keausan komponen pompa.
+
+Beberapa solusi telah dikembangkan untuk menjaga tekanan pompa air tetap
+konstan. Salah satunya adalah \emph{automatic pressure control} (APC) yang
+bekerja dengan prinsip buka-tutup aliran berdasarkan ambang tekanan tertentu.
+Selain itu, terdapat pula pendekatan yang menggunakan TRIAC \emph{driver}
+berbasis kendali PID untuk mengatur daya yang masuk ke motor pompa sehingga
+kecepatan dan tekanannya dapat dikontrol \parencite{anakits}.  
+Namun, kendali konvensional seperti PID bersifat \emph{model-based}, yaitu
+memerlukan pemodelan matematis \emph{plant} beserta penyetelan (\emph{tuning})
+parameter secara manual agar diperoleh respons yang baik. Pada sistem tekanan
+pompa yang nonlinier dan berubah-ubah terhadap jumlah keran yang terbuka,
+pemodelan dan penyetelan tersebut memerlukan perhitugan dan model matematis.
+
+Pada penelitian ini akan dilakukan pendekatan yang berbeda yaitu dengan kontrol (\emph{neural network}).
+Dimana, pendekatan berbasis kecerdasan buatan, khususnya jaringan saraf
+tiruan (\emph{neural network}), bersifat \emph{data-driven}. Alih-alih menurunkan
+model matematis \emph{plant}, \emph{neural network} mempelajari pola hubungan
+masukan--keluaran yang kompleks dan nonlinier langsung dari data operasi melalui
+proses pelatihan (\emph{training}). Dengan demikian, kendali dapat diperoleh tanpa
+memerlukan model matematis \emph{plant} secara eksplisit maupun penyetelan
+parameter secara manual. Karakteristik inilah yang membuat \emph{neural network}
+sesuai untuk mengendalikan sistem tekanan pompa sehingga kendali tekanan dapat
+dilakukan lebih adaptif.
 
 \section{Rumusan Masalah}
 % Ubah paragraf berikut sesuai dengan rumusan masalah dari tugas akhir
@@ -59,13 +68,15 @@ Batasan masalah dari penelitian ini adalah sebagai berikut.
     \item Semua simulasi dan perhitungan dilakukan dalam mode ideal dan menggunakan beban dinamis. 
     \item Input dari inverter akan menggunakan baterai 12V ataupun \emph{power supply}
     \item Jenis pompa yang digunakan adalah pompa air 1 fasa
-    \item Keran yang digunakan sebanyak lima buah
+    \item Keran yang digunakan sebanyak empat buah
     \end{enumerate}
 
 \section{Tujuan}
 
 % Ubah paragraf berikut sesuai dengan tujuan penelitian dari tugas akhir
-Tujuan dari penelitian ini adalah merancangan sistem inverter yang dapat mengontrol tekanan pompa air pada beban yang berubah-ubah, sehingga tekanan air yang dihasilkan tetap stabil menggunakan \emph{neural network}.
+Penelitian ini bertujuan untuk merancang sistem inverter 
+yang mampu mengendalikan tekanan pompa air secara stabil 
+terhadap variasi beban dengan menggunakan algoritma \emph{neural network}.
 
 \section{Manfaat}
 
@@ -78,6 +89,7 @@ manfaat sebagai berikut:
     \item Dapat menjadi salah satu solusi bagi pengguna PLTS atap yang memiliki pompa air
     \end{enumerate}
     
+
 
 
 
